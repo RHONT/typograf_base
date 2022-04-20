@@ -1,6 +1,8 @@
 package org.typograf.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -21,6 +23,20 @@ public class Employee {
 
     @Column(name = "phone", length = 20)
     private String phone;
+
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable(
+            name="qualification",
+            joinColumns = @JoinColumn(name="id_employee"),
+            inverseJoinColumns = @JoinColumn(name="id_type_machine"))
+    private List<TypeMachine> machines;
+
+    public void addTypeMachine(TypeMachine typeMachine) {
+        if (machines==null) {
+            machines=new ArrayList<>();
+        }
+        machines.add(typeMachine);
+    }
 
     public Employee() {
     }
