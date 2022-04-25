@@ -8,15 +8,16 @@ public class Qualification {
 
 
 
-    private Employee idEmployee;
-
-
-    private TypeMachine idTypeMachine;
+//    private Employee idEmployee;
+//
+//
+//    private TypeMachine idTypeMachine;
 
     @Column(name = "qualification")
     private Integer qualification;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_employee")
     private Employee employee;
 
     public Employee getEmployee() {

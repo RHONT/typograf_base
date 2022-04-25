@@ -25,14 +25,15 @@ public class Employee {
     @Column(name = "phone", length = 20)
     private String phone;
 
-
-    private List<CompletedOrder> completedOrders;
-
-
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Qualification> qualifications;
+//    private List<CompletedOrder> completedOrders;
 
 
-    private List<Work> works;
+
+
+
+//    private List<Work> works;
 
     public Integer getId() {
         return id;
@@ -74,13 +75,13 @@ public class Employee {
         this.phone = phone;
     }
 
-    public List<CompletedOrder> getCompletedOrders() {
-        return completedOrders;
-    }
-
-    public void setCompletedOrders(List<CompletedOrder> completedOrders) {
-        this.completedOrders = completedOrders;
-    }
+//    public List<CompletedOrder> getCompletedOrders() {
+//        return completedOrders;
+//    }
+//
+//    public void setCompletedOrders(List<CompletedOrder> completedOrders) {
+//        this.completedOrders = completedOrders;
+//    }
 
     public List<Qualification> getQualifications() {
         return qualifications;
@@ -90,12 +91,12 @@ public class Employee {
         this.qualifications = qualifications;
     }
 
-    public List<Work> getWorks() {
-        return works;
-    }
-
-    public void setWorks(List<Work> works) {
-        this.works = works;
-    }
+//    public List<Work> getWorks() {
+//        return works;
+//    }
+//
+//    public void setWorks(List<Work> works) {
+//        this.works = works;
+//    }
 
 }
