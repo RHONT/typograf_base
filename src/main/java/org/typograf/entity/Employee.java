@@ -1,8 +1,9 @@
 package org.typograf.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -24,29 +25,14 @@ public class Employee {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable(
-            name="qualification",
-            joinColumns = @JoinColumn(name="id_employee"),
-            inverseJoinColumns = @JoinColumn(name="id_type_machine"))
-    private List<TypeMachine> machines;
 
-    public void addTypeMachine(TypeMachine typeMachine) {
-        if (machines==null) {
-            machines=new ArrayList<>();
-        }
-        machines.add(typeMachine);
-    }
+    private List<CompletedOrder> completedOrders;
 
-    public Employee() {
-    }
 
-    public Employee(String name, String surname, String email, String phone) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phone = phone;
-    }
+    private List<Qualification> qualifications;
+
+
+    private List<Work> works;
 
     public Integer getId() {
         return id;
@@ -88,5 +74,28 @@ public class Employee {
         this.phone = phone;
     }
 
+    public List<CompletedOrder> getCompletedOrders() {
+        return completedOrders;
+    }
+
+    public void setCompletedOrders(List<CompletedOrder> completedOrders) {
+        this.completedOrders = completedOrders;
+    }
+
+    public List<Qualification> getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(List<Qualification> qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public List<Work> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<Work> works) {
+        this.works = works;
+    }
 
 }

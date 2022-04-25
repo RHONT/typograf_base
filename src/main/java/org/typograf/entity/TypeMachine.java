@@ -1,8 +1,9 @@
 package org.typograf.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "type_machine")
@@ -15,29 +16,15 @@ public class TypeMachine {
     @Column(name = "name_type", length = 15)
     private String nameType;
 
-    @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable(
-            name="qualification",
-            joinColumns = @JoinColumn(name="id_type_machine"),
-            inverseJoinColumns = @JoinColumn(name="id_employee"))
-    private List<Employee> employees;
 
-    public void addEmployees(Employee employee) {
-        if (employees==null) {
-            employees=new ArrayList<>();
-        }
-        employees.add(employee);
-        }
+    private List<CompletedOrder> completedOrders;
 
 
+    private List<Qualification> qualifications;
 
-    public TypeMachine() {
-    }
+    private List<ClientRequest> clientRequests;
 
-    public TypeMachine(Integer id, String nameType) {
-        this.id = id;
-        this.nameType = nameType;
-    }
+    private List<Machine> machines;
 
     public Integer getId() {
         return id;
@@ -53,6 +40,38 @@ public class TypeMachine {
 
     public void setNameType(String nameType) {
         this.nameType = nameType;
+    }
+
+    public List<CompletedOrder> getCompletedOrders() {
+        return completedOrders;
+    }
+
+    public void setCompletedOrders(List<CompletedOrder> completedOrders) {
+        this.completedOrders = completedOrders;
+    }
+
+    public List<Qualification> getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(List<Qualification> qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public List<ClientRequest> getClientRequests() {
+        return clientRequests;
+    }
+
+    public void setClientRequests(List<ClientRequest> clientRequests) {
+        this.clientRequests = clientRequests;
+    }
+
+    public List<Machine> getMachines() {
+        return machines;
+    }
+
+    public void setMachines(List<Machine> machines) {
+        this.machines = machines;
     }
 
 }

@@ -42,4 +42,11 @@ public class MyController {
         model.addAttribute("test",randomQuery.getMyQuery());
         return "forQuery";
     }
+
+    @RequestMapping("/order")
+    String ShowOrder(){
+
+        return "client-order";
+    }
+
 }
