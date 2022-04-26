@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.EmployeeDAO;
+import org.typograf.DAO.QualificationDAO;
 import org.typograf.DAO.RandomQuery;
 import org.typograf.DAO.TypeMachineDAO;
 import org.typograf.entity.*;
@@ -20,8 +21,13 @@ public class MyController {
     TypeMachineDAO typeMachineDAO;
     @Autowired
     RandomQuery randomQuery;
+    @Autowired
+    QualificationDAO qualificationDAO;
 
-
+    @RequestMapping("/")
+    String NavigateMethod(){
+        return "navigate";
+    }
     @RequestMapping("/emp")
     String ShowAllEmps(Model model){
         List<Employee> allEmps=employeeDAO.getAllEmp();
@@ -36,11 +42,11 @@ public class MyController {
         return "ShowAllMachinePlease";
     }
 
-    @RequestMapping("/q")
+    @RequestMapping("/quality")
     String ShowQuery(Model model){
-
-        model.addAttribute("test",randomQuery.getMyQuery());
-        return "forQuery";
+        List<Qualification> qualificationList=qualificationDAO.getQuality();
+        model.addAttribute("qualEmps",qualificationList);
+        return "qualityEmp";
     }
 
     @RequestMapping("/order")

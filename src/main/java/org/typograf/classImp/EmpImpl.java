@@ -17,6 +17,7 @@ public class EmpImpl implements EmployeeDAO {
 
     @Transactional
     @Override
+
     public List<Employee> getAllEmp() {
         Session session=sessionFactory.getCurrentSession();
         List<Employee> emp=session.createQuery("from Employee",Employee.class).getResultList();
