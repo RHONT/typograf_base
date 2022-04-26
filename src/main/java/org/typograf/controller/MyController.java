@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.typograf.DAO.EmployeeDAO;
-import org.typograf.DAO.QualificationDAO;
-import org.typograf.DAO.RandomQuery;
-import org.typograf.DAO.TypeMachineDAO;
+import org.typograf.DAO.*;
 import org.typograf.entity.*;
 
 import java.util.List;
@@ -23,6 +20,8 @@ public class MyController {
     RandomQuery randomQuery;
     @Autowired
     QualificationDAO qualificationDAO;
+    @Autowired
+    ClientOrderDAO clientOrderDAO;
 
     @RequestMapping("/")
     String NavigateMethod(){
@@ -50,8 +49,13 @@ public class MyController {
     }
 
     @RequestMapping("/order")
-    String ShowOrder(){
-
+    String ShowOrder(Model model){
+        List<String> bufferSetTypeMachine=clientOrderDAO.spisokTypeMachines();
+        List<String> bufferSetModel=clientOrderDAO.spisokModel();
+        ClientRequest cr=new ClientRequest();
+        model.addAttribute("objTypeMachine",cr);
+        model.addAttribute("typeMachine",bufferSetTypeMachine);
+        model.addAttribute("modelMachine",bufferSetModel);
         return "client-order";
     }
 

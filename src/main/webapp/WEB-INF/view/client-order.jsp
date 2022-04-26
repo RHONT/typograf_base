@@ -15,13 +15,20 @@
 </head>
 <body>
 
-<form:form modelAttribute="typeMachine">
 
-    <form:select path="name_type_machine">
-        <form:options items="${typeMach.opts}"/>
+<form:form modelAttribute="objTypeMachine">
+
+    <form:select path="idTypeMachine">
+        <form:options items="${typeMachine}"/>
     </form:select>
 
-</form:form>>
+    <form:select path="idMachine">
+        <form:options items="${modelMachine}"/>
+    </form:select>
+
+</form:form>
+
+
 
 <%--<table>--%>
 <%--    <tr>--%>

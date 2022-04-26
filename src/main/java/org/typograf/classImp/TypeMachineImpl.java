@@ -9,6 +9,7 @@ import org.typograf.DAO.TypeMachineDAO;
 import org.typograf.entity.TypeMachine;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class TypeMachineImpl  implements TypeMachineDAO {
@@ -22,5 +23,13 @@ public class TypeMachineImpl  implements TypeMachineDAO {
         List<TypeMachine> list= session.createQuery("from TypeMachine").getResultList();
         return list;
     }
+
+//    @Transactional
+//    @Override
+//    public List<String> spisokMachines() {
+//        Session session=sessionFactory.getCurrentSession();
+//        return (List<String>) session.createQuery("select nameType from TypeMachine").getResultList();
+//    }
+
 }
 
