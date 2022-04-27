@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.typograf.DAO.TypeMachineDAO;
 import org.typograf.entity.TypeMachine;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +22,8 @@ public class TypeMachineImpl  implements TypeMachineDAO {
     public List<TypeMachine> showAllTypeMachines() {
         Session session=sessionFactory.getCurrentSession();
         List<TypeMachine> list= session.createQuery("from TypeMachine").getResultList();
+
+
         return list;
     }
 

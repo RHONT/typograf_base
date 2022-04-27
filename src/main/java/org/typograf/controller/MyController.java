@@ -4,11 +4,15 @@ package org.typograf.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.*;
 import org.typograf.entity.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MyController {
@@ -48,13 +52,26 @@ public class MyController {
 
     @RequestMapping("/order")
     String ShowOrder(Model model){
-        List<String> bufferSetTypeMachine=clientOrderDAO.spisokTypeMachines();
+        List<TypeMachine> bufferSetTypeMachine=clientOrderDAO.spisokTypeMachines();
+        Map<Integer,String> mapForClientOrderView=
+                bufferSetTypeMachine.stream().collect(Collectors.toMap(TypeMachine::getId,TypeMachine::getNameType));
+
+
+
         List<String> bufferSetModel=clientOrderDAO.spisokModel();
         ClientRequest cr=new ClientRequest();
         model.addAttribute("objTypeMachine",cr);
-        model.addAttribute("typeMachine",bufferSetTypeMachine);
-        model.addAttribute("modelMachine",bufferSetModel);
+        model.addAttribute("typeMachine",mapForClientOrderView);
+        //model.addAttribute("modelMachine",bufferSetModel);
         return "client-order";
     }
+
+    @RequestMapping("/testPage")
+    String ShowTestPage(@ModelAttribute("objTypeMachine")
+                                ClientRequest clientRequest){
+
+        return "testPageForClientOrder";
+    }
+
 
 }

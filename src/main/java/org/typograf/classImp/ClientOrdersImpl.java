@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.typograf.DAO.ClientOrderDAO;
+import org.typograf.entity.TypeMachine;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class ClientOrdersImpl implements ClientOrderDAO {
 
     @Transactional
     @Override
-    public List<String> spisokTypeMachines() {
+    public List<TypeMachine> spisokTypeMachines() {
         Session session= sessionFactory.getCurrentSession();
-        List<String> listSpisokTypeMachine=session.createQuery("select nameType from TypeMachine ").getResultList();
+        List<TypeMachine> listSpisokTypeMachine=session.createQuery("from TypeMachine ").getResultList();
         return listSpisokTypeMachine;
     }
 

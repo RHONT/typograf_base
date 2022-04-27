@@ -16,15 +16,17 @@
 <body>
 
 
-<form:form modelAttribute="objTypeMachine">
+<form:form action="testPage" modelAttribute="objTypeMachine">
 
     <form:select path="idTypeMachine">
         <form:options items="${typeMachine}"/>
     </form:select>
 
-    <form:select path="idMachine">
-        <form:options items="${modelMachine}"/>
-    </form:select>
+<%--    <form:select path="idMachine">--%>
+<%--        <form:options items="${modelMachine}"/>--%>
+<%--    </form:select>--%>
+
+    <input type="submit" value="Test">
 
 </form:form>
 
