@@ -17,8 +17,6 @@ public class MyController {
     @Autowired
     TypeMachineDAO typeMachineDAO;
     @Autowired
-    RandomQuery randomQuery;
-    @Autowired
     QualificationDAO qualificationDAO;
     @Autowired
     ClientOrderDAO clientOrderDAO;
