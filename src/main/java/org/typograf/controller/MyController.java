@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.*;
+import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class MyController {
     QualificationDAO qualificationDAO;
     @Autowired
     ClientOrderDAO clientOrderDAO;
+    @Autowired
+    MapsForClientDAO mapsForClientDAO;
 
     @RequestMapping("/")
     String NavigateMethod(){
@@ -52,25 +55,53 @@ public class MyController {
 
     @RequestMapping("/order")
     String ShowOrder(Model model){
-        List<TypeMachine> bufferSetTypeMachine=clientOrderDAO.spisokTypeMachines();
-        Map<Integer,String> mapForClientOrderView=
-                bufferSetTypeMachine.stream().collect(Collectors.toMap(TypeMachine::getId,TypeMachine::getNameType));
-
-
-
-        List<String> bufferSetModel=clientOrderDAO.spisokModel();
+        Map<Integer,String> mapTypeMachine=mapsForClientDAO.GetListTypeMachines();
+        Map<Integer,String> mapMachine=mapsForClientDAO.GetListMachines();
+        List<String> listSerial=mapsForClientDAO.GetSerialNumber();
+        System.out.println(mapTypeMachine);
+        System.out.println(mapMachine);
+        System.out.println(listSerial);
         ClientRequest cr=new ClientRequest();
-        model.addAttribute("objTypeMachine",cr);
-        model.addAttribute("typeMachine",mapForClientOrderView);
-        //model.addAttribute("modelMachine",bufferSetModel);
+        model.addAttribute("objClientOrder",cr);
+        model.addAttribute("typeMachine",mapTypeMachine);
+        model.addAttribute("modelMachine",mapMachine);
+        model.addAttribute("SerialNamberMachine",listSerial);
         return "client-order";
     }
+
+    @RequestMapping("/saveorder")
+    String SaveOrder(@ModelAttribute("objClientOrder") ClientRequest clientRequest){
+        clientOrderDAO.saveOrder(clientRequest);
+
+        return "redirect:/";
+    }
+
+
+
 
     @RequestMapping("/testPage")
     String ShowTestPage(@ModelAttribute("objTypeMachine")
                                 ClientRequest clientRequest){
-
         return "testPageForClientOrder";
+    }
+
+
+    // контролллеры для тестового класса Fight
+    @RequestMapping("/test")
+    String ShowTestPage(Model model){
+        Fighter f=new Fighter();
+        List<String> listSerial=mapsForClientDAO.GetSerialNumber();
+
+//        Map<String,String> mapForClientOrderView=mapsForClientDAO.GetSerialNumber();
+//        System.out.println(mapForClientOrderView);
+        model.addAttribute("typeMachine",listSerial);
+        model.addAttribute("fighter_attr",f);
+        return "TestView";
+    }
+
+    @RequestMapping("/testnow")
+    String ShowTestPa(@ModelAttribute("fighter_attr") Fighter fighter){
+        return "test";
     }
 
 

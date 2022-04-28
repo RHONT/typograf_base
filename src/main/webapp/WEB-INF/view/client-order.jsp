@@ -16,17 +16,39 @@
 <body>
 
 
-<form:form action="testPage" modelAttribute="objTypeMachine">
-
+<form:form action="saveorder" modelAttribute="objClientOrder">
+    <br>
+    Название фирмы:
+    <form:input path="firm"/>
+    <br>
+    ИНН:
+    <form:input path="innFirm"/>
+    <br>
+    Тип станка:
     <form:select path="idTypeMachine">
         <form:options items="${typeMachine}"/>
     </form:select>
+    <br>
+    Модель станка:
+    <form:select path="idMachine">
+        <form:options items="${modelMachine}"/>
+    </form:select>
+    <br>
+    Серийный номер:
+    <form:select path="idSerialNumber">
+        <form:options items="${SerialNamberMachine}"/>
+    </form:select>
+    <br>
+    ФИО:
+    <form:input path="nameClient"/>
+    <br>
+    Номер телефона:
+    <form:input path="phoneClient"/>
+    <br>
+    Описание проблемы
+    <form:input path="descProblem"/>
 
-<%--    <form:select path="idMachine">--%>
-<%--        <form:options items="${modelMachine}"/>--%>
-<%--    </form:select>--%>
-
-    <input type="submit" value="Test">
+    <input type="submit" value="Отправить">
 
 </form:form>
 

@@ -18,7 +18,7 @@
 
 Тип принтера ключ:${objTypeMachine.idTypeMachine}
 <br>
-Модель принтера ключ:
+Модель фирма:${objTypeMachine.firm}
 
 
 

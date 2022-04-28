@@ -21,6 +21,8 @@
     <tr><td><button onclick="window.location.href='emp'">Сотрудники</button></td></tr>
     <tr><td><button onclick="window.location.href='typemachine'">Тип машины</button></td></tr>
     <tr><td><button onclick="window.location.href='quality'">Квалификация</button></td></tr>
+    <tr><td><button onclick="window.location.href='order'">Заказ</button></td></tr>
+    <tr><td><button onclick="window.location.href='test'">Тесты</button></td></tr>
 
 
 
