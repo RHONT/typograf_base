@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.*;
+import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 
 import java.util.HashMap;
@@ -55,8 +56,7 @@ public class MyController {
         List<TypeMachine> bufferSetTypeMachine=clientOrderDAO.spisokTypeMachines();
         Map<Integer,String> mapForClientOrderView=
                 bufferSetTypeMachine.stream().collect(Collectors.toMap(TypeMachine::getId,TypeMachine::getNameType));
-
-
+        System.out.println(mapForClientOrderView);
 
         List<String> bufferSetModel=clientOrderDAO.spisokModel();
         ClientRequest cr=new ClientRequest();
@@ -65,12 +65,28 @@ public class MyController {
         //model.addAttribute("modelMachine",bufferSetModel);
         return "client-order";
     }
-
     @RequestMapping("/testPage")
     String ShowTestPage(@ModelAttribute("objTypeMachine")
                                 ClientRequest clientRequest){
-
         return "testPageForClientOrder";
+    }
+
+
+    // контролллеры для тестового класса Fight
+    @RequestMapping("/test")
+    String ShowTestPage(Model model){
+        Fighter f=new Fighter();
+        List<TypeMachine> bufferSetTypeMachine=clientOrderDAO.spisokTypeMachines();
+        Map<Integer,String> mapForClientOrderView=
+                bufferSetTypeMachine.stream().collect(Collectors.toMap(TypeMachine::getId,TypeMachine::getNameType));
+        model.addAttribute("typeMachine",mapForClientOrderView);
+        model.addAttribute("fighter_attr",f);
+        return "TestView";
+    }
+
+    @RequestMapping("/testnow")
+    String ShowTestPa(@ModelAttribute("fighter_attr") Fighter fighter){
+        return "test";
     }
 
 

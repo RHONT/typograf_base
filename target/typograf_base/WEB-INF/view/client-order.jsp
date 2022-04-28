@@ -18,9 +18,13 @@
 
 <form:form action="testPage" modelAttribute="objTypeMachine">
 
-    <form:select path="idTypeMachine">
-        <form:options items="${typeMachine}"/>
-    </form:select>
+<%--    <form:select path="idTypeMachine">--%>
+<%--        <form:options items="${typeMachine}"/>--%>
+<%--    </form:select>--%>
+
+
+    <form:input path="idTypeMachine"/>
+    <form:input path="firm"/>
 
 <%--    <form:select path="idMachine">--%>
 <%--        <form:options items="${modelMachine}"/>--%>
