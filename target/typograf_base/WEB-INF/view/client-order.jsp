@@ -16,7 +16,7 @@
 <body>
 
 
-<form:form action="saveorder" modelAttribute="objClientOrder">
+<form:form action="saveorder" modelAttribute="ClientRequestId">
     <br>
     Название фирмы:
     <form:input path="firm"/>
@@ -36,7 +36,7 @@
     <br>
     Серийный номер:
     <form:select path="idSerialNumber">
-        <form:options items="${SerialNamberMachine}"/>
+        <form:options items="${SerialNumberMachine}"/>
     </form:select>
     <br>
     ФИО:
@@ -45,9 +45,8 @@
     Номер телефона:
     <form:input path="phoneClient"/>
     <br>
-    Описание проблемы
+    Описание проблемы:
     <form:input path="descProblem"/>
-
     <input type="submit" value="Отправить">
 
 </form:form>

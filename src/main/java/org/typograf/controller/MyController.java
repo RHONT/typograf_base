@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.*;
 import org.typograf.TestPack.Fighter;
+import org.typograf.classImp.GetSimpleListsFromDBImpl;
 import org.typograf.entity.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 public class MyController {
@@ -61,19 +60,34 @@ public class MyController {
         System.out.println(mapTypeMachine);
         System.out.println(mapMachine);
         System.out.println(listSerial);
-        ClientRequest cr=new ClientRequest();
-        model.addAttribute("objClientOrder",cr);
+        ClientRequestId crId=new ClientRequestId();
+        model.addAttribute("ClientRequestId",crId);
         model.addAttribute("typeMachine",mapTypeMachine);
         model.addAttribute("modelMachine",mapMachine);
-        model.addAttribute("SerialNamberMachine",listSerial);
+        model.addAttribute("SerialNumberMachine",listSerial);
         return "client-order";
     }
 
     @RequestMapping("/saveorder")
-    String SaveOrder(@ModelAttribute("objClientOrder") ClientRequest clientRequest){
-        clientOrderDAO.saveOrder(clientRequest);
+    String SaveOrder(@ModelAttribute("ClientRequestId") ClientRequestId clientRequestId){
 
-        return "redirect:/";
+        TypeMachine typeMachine= clientOrderDAO.getTypeMachine(clientRequestId.getIdTypeMachine());
+        Machine machine=clientOrderDAO.getMachine(clientRequestId.getIdMachine());
+        SerialNumber serialNumber=clientOrderDAO.getSerialNumber(clientRequestId.getIdSerialNumber());
+
+        ClientRequest cr=new ClientRequest(
+                clientRequestId.getFirm(),
+                clientRequestId.getInnFirm(),
+                typeMachine,
+                machine,
+                serialNumber,
+                clientRequestId.getNameClient(),
+                clientRequestId.getPhoneClient(),
+                clientRequestId.getDescProblem());
+
+        clientOrderDAO.saveOrder(cr);
+
+        return "redirect:/order";
     }
 
 

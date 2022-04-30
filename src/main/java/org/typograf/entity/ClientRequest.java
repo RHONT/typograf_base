@@ -44,6 +44,19 @@ public class ClientRequest {
     public ClientRequest() {
     }
 
+    public ClientRequest(String firm, String innFirm, TypeMachine idTypeMachine, Machine idMachine,
+                         SerialNumber idSerialNumber, String nameClient, String phoneClient,
+                         String descProblem) {
+        this.firm = firm;
+        this.innFirm = innFirm;
+        this.idTypeMachine = idTypeMachine;
+        this.idMachine = idMachine;
+        this.idSerialNumber = idSerialNumber;
+        this.nameClient = nameClient;
+        this.phoneClient = phoneClient;
+        this.descProblem = descProblem;
+    }
+
     public Integer getId() {
         return id;
     }
