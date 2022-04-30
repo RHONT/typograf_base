@@ -13,44 +13,44 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Client Order</title>
 </head>
-<body>
+<body bgcolor="#d0d0d0">
 
-<h1>Оставьте заявку <br> Мы вас скоро наберем</h1>
-
+<div style="text-align: center;"><h1>Оставьте заявку <br> Мы вас скоро наберем</h1></div>
+<br>
 <form:form action="saveorder" modelAttribute="ClientRequestId" acceptCharset="utf-8">
-    <br>
-    Ваша организация:
-    <form:input path="firm" title="Введите название"/>
-    <br>
-    ИНН:
-    <form:input path="innFirm"/>
-    <br>
-    Тип станка:
-    <form:select path="idTypeMachine">
+    <table>
+        <tr><td>Ваша организация:</td><td><form:input path="firm" title="Введите название"/></td></tr>
+        <tr><td> ИНН:</td><td><form:input path="innFirm"/></td></tr>
+
+        <tr><td>Тип станка:</td><td>
+    <form:select path="idTypeMachine"  >
         <form:options items="${typeMachine}"/>
     </form:select>
-    <br>
-    Модель станка:
-    <form:select path="idMachine">
-        <form:options items="${modelMachine}"/>
-    </form:select>
-    <br>
-    Серийный номер:
-    <form:select path="idSerialNumber">
-        <form:options items="${SerialNumberMachine}"/>
-    </form:select>
-    <br>
-    Имя Фамилия:
-    <form:input path="nameClient"/>
-    <br>
-    Номер телефона:
-    <form:input path="phoneClient"/>
-    <br>
-    Описание проблемы:
-    <form:input path="descProblem"/>
-    <input type="submit" value="Отправить">
+        </td></tr>
 
+        <tr><td>Модель станка:</td><td>
+            <form:select path="idMachine">
+                <form:options items="${modelMachine}"/>
+            </form:select>
+        </td></tr>
+
+        <tr><td>Серийный номер:</td><td>
+            <form:select path="idSerialNumber">
+                <form:options items="${SerialNumberMachine}"/>
+            </form:select>
+        </td></tr>
+        <tr><td> Имя Фамилия:</td><td><form:input path="nameClient"/></td></tr>
+        <tr><td>Номер телефона:</td><td><form:input path="phoneClient"/></td></tr>
+        <tr><td>Описание проблемы:</td><td><form:input path="descProblem"/></td></tr>
+        <tr><td><td><input type="submit" value="Отправить"></td></tr>
+    </table>
 </form:form>
+
+
+
+<footer>
+    <div style="text-align: center;">Доступные инженеры</div>
+</footer>
 
 
 
