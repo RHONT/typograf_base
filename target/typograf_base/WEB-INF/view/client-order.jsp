@@ -15,11 +15,12 @@
 </head>
 <body>
 
+<h1>Оставьте заявку <br> Мы вас скоро наберем</h1>
 
-<form:form action="saveorder" modelAttribute="ClientRequestId">
+<form:form action="saveorder" modelAttribute="ClientRequestId" acceptCharset="utf-8">
     <br>
-    Название фирмы:
-    <form:input path="firm"/>
+    Ваша организация:
+    <form:input path="firm" title="Введите название"/>
     <br>
     ИНН:
     <form:input path="innFirm"/>
