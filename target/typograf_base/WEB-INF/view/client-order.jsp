@@ -41,6 +41,7 @@
         </td></tr>
         <tr><td> Имя Фамилия:</td><td><form:input path="nameClient"/></td></tr>
         <tr><td>Номер телефона:</td><td><form:input path="phoneClient"/></td></tr>
+        <tr><td>Желаема дата:</td><td><form:input path="dataWish"/></td></tr>
         <tr><td>Описание проблемы:</td><td><form:input path="descProblem"/></td></tr>
         <tr><td><td><input type="submit" value="Отправить"></td></tr>
     </table>

@@ -2,6 +2,7 @@ package org.typograf.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Lob;
+import java.time.LocalDate;
 
 public class ClientRequestId {
     private Integer idTypeMachine;
@@ -12,6 +13,7 @@ public class ClientRequestId {
     private String nameClient;
     private String phoneClient;
     private String descProblem;
+    private LocalDate dataWish;
 
     public ClientRequestId() {
     }
@@ -54,6 +56,14 @@ public class ClientRequestId {
 
     public void setDescProblem(String descProblem) {
         this.descProblem = descProblem;
+    }
+
+    public LocalDate getDataWish() {
+        return dataWish;
+    }
+
+    public void setDataWish(LocalDate dataWish) {
+        this.dataWish = dataWish;
     }
 
     public Integer getIdTypeMachine() {

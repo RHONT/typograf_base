@@ -15,26 +15,36 @@
 <body>
 <table>
     <tr>
-        <th>id_client_request</th>
+        <th>id</th>
         <th>firm</th>
-        <th>inn_firm</th>
-        <th>id_type_machine</th>
-        <th>id_machine</th>
-        <th>id_serial_number</th>
-        <th>name_client</th>
-        <th>phone_client</th>
-        <th>desc_problem</th>
+        <th>inn</th>
+        <th>type_machine</th>
+        <th>machine</th>
+        <th>serial</th>
+        <th>name</th>
+        <th>phone</th>
+        <th>problem</th>
         <th>difficilty</th>
         <th>adress</th>
         <th>data_wish</th>
         <th>time_forecast</th>
     </tr>
 
-    <c:forEach var="admin_attr" items="${admin_object}">
+    <c:forEach var="admin_atr" items="${admin_object}">
         <tr>
-            <td>${admin_attr.}</td>
-            <td></td>
-            <td></td>
+            <td>${admin_atr.id}</td>
+            <td>${admin_atr.firm}</td>
+            <td>${admin_atr.innFirm}</td>
+            <td>${admin_atr.idTypeMachine.id}</td>
+            <td>${admin_atr.idMachine.id}</td>
+            <td>${admin_atr.idSerialNumber.id}</td>
+            <td>${admin_atr.nameClient}</td>
+            <td>${admin_atr.phoneClient}</td>
+            <td>${admin_atr.descProblem}</td>
+            <td>${admin_atr.difficilty}</td>
+            <td>${admin_atr.adress}</td>
+            <td>${admin_atr.dataWish}</td>
+            <td>${admin_atr.timeForecast}</td>
         </tr>
     </c:forEach>
 

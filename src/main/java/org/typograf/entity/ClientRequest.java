@@ -1,6 +1,8 @@
 package org.typograf.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "client_request")
@@ -41,12 +43,25 @@ public class ClientRequest {
     @Column(name = "difficilty")
     private Integer difficilty;
 
+    @Column(name = "adress", length = 100)
+    private String adress;
+
+    @Column(name = "data_wish")
+    private LocalDate dataWish;
+
+    @Column(name = "time_forecast")
+    private LocalTime timeForecast;
+
+    public LocalTime getTimeForecast() {
+        return timeForecast;
+    }
+
     public ClientRequest() {
     }
 
     public ClientRequest(String firm, String innFirm, TypeMachine idTypeMachine, Machine idMachine,
                          SerialNumber idSerialNumber, String nameClient, String phoneClient,
-                         String descProblem) {
+                         String descProblem, LocalDate dataWish) {
         this.firm = firm;
         this.innFirm = innFirm;
         this.idTypeMachine = idTypeMachine;
@@ -55,7 +70,30 @@ public class ClientRequest {
         this.nameClient = nameClient;
         this.phoneClient = phoneClient;
         this.descProblem = descProblem;
+        this.dataWish=dataWish;
     }
+
+    public void setTimeForecast(LocalTime timeForecast) {
+        this.timeForecast = timeForecast;
+    }
+
+    public LocalDate getDataWish() {
+        return dataWish;
+    }
+
+    public void setDataWish(LocalDate dataWish) {
+        this.dataWish = dataWish;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+
 
     public Integer getId() {
         return id;

@@ -91,7 +91,8 @@ public class MyController {
                 serialNumber,
                 clientRequestId.getNameClient(),
                 clientRequestId.getPhoneClient(),
-                clientRequestId.getDescProblem());
+                clientRequestId.getDescProblem(),
+                clientRequestId.getDataWish());
 
         clientOrderDAO.saveOrder(cr);
 
