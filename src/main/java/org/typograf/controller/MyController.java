@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.*;
 import org.typograf.TestPack.Fighter;
-import org.typograf.classImp.GetSimpleListsFromDBImpl;
 import org.typograf.entity.*;
 
 import java.util.List;
@@ -42,7 +41,15 @@ public class MyController {
     String ShowAllMachine(Model model){
         List<TypeMachine> allTM= typeMachineDAO.showAllTypeMachines();
         model.addAttribute("allType",allTM);
-        return "ShowAllMachinePlease";
+        model.addAttribute("new_type_machine",new TypeMachine());
+        return "ShowAllMachineType";
+    }
+
+    @RequestMapping("/save_new_type_machine")
+    String SaveNewTypeMachine(@ModelAttribute("new_type_machine")
+                                      TypeMachine typeMachine){
+        typeMachineDAO.saveTypeMachine(typeMachine);
+        return "redirect:/typemachine";
     }
 
     @RequestMapping("/quality")
@@ -89,7 +96,6 @@ public class MyController {
 
         return "redirect:/order";
     }
-
 
 
 

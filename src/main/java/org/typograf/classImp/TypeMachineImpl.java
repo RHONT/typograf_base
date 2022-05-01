@@ -13,21 +13,27 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
+@Transactional
 public class TypeMachineImpl  implements TypeMachineDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
+
     @Override
     public List<TypeMachine> showAllTypeMachines() {
         Session session=sessionFactory.getCurrentSession();
         List<TypeMachine> list= session.createQuery("from TypeMachine").getResultList();
-
-
         return list;
     }
 
-//    @Transactional
+    @Override
+    public void saveTypeMachine(TypeMachine typeMachine) {
+        Session session=sessionFactory.getCurrentSession();
+        session.save(typeMachine);
+
+    }
+
+    //    @Transactional
 //    @Override
 //    public List<String> spisokMachines() {
 //        Session session=sessionFactory.getCurrentSession();

@@ -8,6 +8,7 @@ import java.util.Set;
 public interface TypeMachineDAO {
     public List<TypeMachine> showAllTypeMachines();
 //    public List<String> spisokMachines();
+    public void saveTypeMachine(TypeMachine typeMachine);
 
 
 }
