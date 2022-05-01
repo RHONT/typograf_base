@@ -15,16 +15,30 @@
 <body>
 <table>
     <tr>
-        <th>ID</th>
-        <th>Тип Машины</th>
-
+        <th>id_completed_orders</th>
+        <th>id_client_request</th>
+        <th>id_employee</th>
+        <th>firm</th>
+        <th>inn_firm</th>
+        <th>id_type_machine</th>
+        <th>id_machine</th>
+        <th>id_serial_number</th>
+        <th>name_client</th>
+        <th>phone_client</th>
+        <th>desc_problem</th>
+        <th>difficilty</th>
+        <th>fact_difficilty</th>
+        <th>expert_opinion</th>
+        <th>jadgment_company</th>
+        <th>rating_firm</th>
+        <th>engineer_assessment</th>
     </tr>
 
-
-    <c:forEach var="emp" items="${allType}">
+    <c:forEach var="complet_attr" items="${complete}">
         <tr>
-            <td>${emp.id}</td>
-            <td>${emp.nameType}</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
     </c:forEach>
 

@@ -64,4 +64,11 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
         System.out.println(serialNumber);
         return serialNumber;
     }
+
+    @Override
+    public List<ClientRequest> getAllClientRequest() {
+        Session session= sessionFactory.getCurrentSession();
+        List<ClientRequest> list=session.createQuery("from ClientRequest").getResultList();
+        return list;
+    }
 }

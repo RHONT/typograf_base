@@ -14,4 +14,5 @@ public interface ClientOrderDAO {
     public TypeMachine getTypeMachine(Integer numb);
     public Machine getMachine(Integer numb);
     public SerialNumber getSerialNumber(String str);
+    public List<ClientRequest> getAllClientRequest();
 }

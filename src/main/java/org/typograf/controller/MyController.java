@@ -30,6 +30,7 @@ public class MyController {
     String NavigateMethod(){
         return "navigate";
     }
+
     @RequestMapping("/emp")
     String ShowAllEmps(Model model){
         List<Employee> allEmps=employeeDAO.getAllEmp();
@@ -95,6 +96,14 @@ public class MyController {
         clientOrderDAO.saveOrder(cr);
 
         return "redirect:/order";
+    }
+
+    @RequestMapping("/adminorder")
+    String openListOrder(Model model){
+        List<ClientRequest> list = clientOrderDAO.getAllClientRequest();
+        model.addAttribute("admin_object",list);
+
+        return "adminOrder";
     }
 
 

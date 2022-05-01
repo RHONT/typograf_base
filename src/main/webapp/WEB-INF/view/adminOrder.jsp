@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,18 +15,28 @@
 <body>
 <table>
     <tr>
-        <th><h1>Таблица</h1></th>
+        <th>id_client_request</th>
+        <th>firm</th>
+        <th>inn_firm</th>
+        <th>id_type_machine</th>
+        <th>id_machine</th>
+        <th>id_serial_number</th>
+        <th>name_client</th>
+        <th>phone_client</th>
+        <th>desc_problem</th>
+        <th>difficilty</th>
+        <th>adress</th>
+        <th>data_wish</th>
+        <th>time_forecast</th>
     </tr>
-    <tr><td><button onclick="window.location.href='emp'">Сотрудники</button></td></tr>
-    <tr><td><button onclick="window.location.href='typemachine'">Тип машины</button></td></tr>
-    <tr><td><button onclick="window.location.href='quality'">Квалификация</button></td></tr>
-    <tr><td><button onclick="window.location.href='order'">Заказ</button></td></tr>
-    <tr><td><button onclick="window.location.href='adminorder'">Список работ</button></td></tr>
 
-    <tr><td><button onclick="window.location.href='test'">Тесты</button></td></tr>
-
-
-
+    <c:forEach var="admin_attr" items="${admin_object}">
+        <tr>
+            <td>${admin_attr.}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </c:forEach>
 
 </table>
 
