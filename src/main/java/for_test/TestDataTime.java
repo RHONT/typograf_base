@@ -1,17 +1,58 @@
 package for_test;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.TreeSet;
+import java.time.Month;
+import java.util.*;
 
 public class TestDataTime {
-    static LocalTime start=LocalTime.of(10,00);
-    static LocalTime end=LocalTime.of(20,00);
+//    static LocalTime start=LocalTime.of(10,00);
+//    static LocalTime end=LocalTime.of(20,00);
+
 
 
     public static void main(String[] args) {
-        LocalTime lt1;
-        lt1=LocalTime.of(15,00);
+        int incr=0;
+        LocalDate locDate0=LocalDate.now();
+        LocalDate copylocDate0=locDate0;
+        System.out.println(locDate0);
+        LocalDate locDate1=LocalDate.of(2022, Month.MAY,10);
+        LocalDate locDateFinish;
+        LinkedHashMap<Integer,WorkDay> workSession = new LinkedHashMap<>();
+
+        while (copylocDate0.isBefore(locDate1)){
+            workSession.put(copylocDate0.getDayOfMonth(),new WorkDay());
+            incr+=1;
+            copylocDate0=copylocDate0.plusDays(1);
+            if (incr>20) {
+                locDateFinish=locDate0.plusDays(20);
+                System.out.println("Цикл прервался " + locDateFinish);
+                break;
+            }
+        }
+        System.out.println("Промежуточное значение мапы \n" + workSession);
+        System.out.println(incr);
+
+
+        if (incr<20) {
+            for(int i=incr;i<20;i++){
+                workSession.put(copylocDate0.getDayOfMonth(),new WorkDay());
+                copylocDate0=copylocDate0.plusDays(1);
+            }
+            locDateFinish = copylocDate0;
+            System.out.println("Дата " + locDate1 + " в нужном диапазоне " + locDateFinish);
+        }
+
+        System.out.println("\nФинальное значение мапы \n" + workSession.toString());
+
+
+
+
+
+
+
+
+        LocalTime lt1=LocalTime.of(15,00);
         LocalTime lt2=LocalTime.of(10,00);
         LocalTime lt3=LocalTime.of(13,00);
         LocalTime lt4=LocalTime.of(19,00);
@@ -22,9 +63,15 @@ public class TestDataTime {
         System.out.println(wd);
         wd.byWorkNow(lt3,(byte) 2);
         System.out.println(wd);
-        wd.byWorkNow(lt4,(byte) 1);
-        System.out.println(wd);
-
+//        wd.byWorkNow(lt4,(byte) 1);
+//        System.out.println(wd);
+        workSession.replace(4,wd);
+        System.out.println("==========================");
+        Iterator<Map.Entry<Integer,WorkDay>> iterator=workSession.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<Integer,WorkDay> entry=iterator.next();
+            System.out.println(entry);
+        }
     }
 }
 
@@ -36,7 +83,7 @@ class WorkDay {
         for (int i=0;i<work.length;i++){
             work[i]=1;
         }
-        System.out.println(Arrays.toString(work));
+        //System.out.println(Arrays.toString(work));
     }
 
     void byWorkNow(LocalTime l1, byte b){
