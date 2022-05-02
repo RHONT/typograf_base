@@ -34,20 +34,6 @@ public class WorkImpl implements WorkDAO {
                 "where q.id.idTypeMachine=:type and  q.qualification>=:qual");
         query.setParameter("type", j).setParameter("qual", i);
         List<Employee> list = query.getResultList();
-
-
-//        Query query= (Query) session.createSQLQuery(
-//                "SELECT name,surname,email,phone " +
-//                        "FROM employees join qualification on qualification.id_employee=employees.id_employee" +
-//                " where qualification>:qual and id_type_machine=:type").setParameter("type",j).setParameter("qual",i).addEntity(Employee.class).list();
-//        List<Employee> list= (List<Employee>) query;
-
-
-//        List<Object> list=session.createQuery("select emp.id,emp.name,emp.surname,emp.email,emp.phone " +
-//                "from Employee emp join Qualification q on emp.id=q.id.idEmployee " +
-//                "where q.id.idTypeMachine=:type and  q.qualification>=:qual").setParameter("type",j).
-//                setParameter("qual",i).getResultList();
-
             return list;
         }
 
