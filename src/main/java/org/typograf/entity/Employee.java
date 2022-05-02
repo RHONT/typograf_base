@@ -29,6 +29,13 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String name, String surname, String email, String phone) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -69,4 +76,15 @@ public class Employee {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", qualificationList=" + qualificationList +
+                '}';
+    }
 }

@@ -9,12 +9,12 @@ public class Qualification {
     private QualificationId id;
 
     @MapsId("idEmployee")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_employee", nullable = false)
     private Employee idEmployee;
 
     @MapsId("idTypeMachine")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_type_machine", nullable = false)
     private TypeMachine idTypeMachine;
 

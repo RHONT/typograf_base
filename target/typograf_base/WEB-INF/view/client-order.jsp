@@ -24,6 +24,7 @@
 
         <tr><td>Тип станка:</td><td>
     <form:select path="idTypeMachine"  >
+        <form:option value="1" label="--Please Select"/>
         <form:options items="${typeMachine}"/>
     </form:select>
         </td></tr>

@@ -42,6 +42,13 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
     }
 
     @Override
+    public void updateOrder(ClientRequest clientRequest) {
+        Session session= sessionFactory.getCurrentSession();
+        session.saveOrUpdate(clientRequest);
+
+    }
+
+    @Override
     public TypeMachine getTypeMachine(Integer numb) {
         Session session= sessionFactory.getCurrentSession();
         TypeMachine typeMachine=session.get(TypeMachine.class,numb);
@@ -70,5 +77,12 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
         Session session= sessionFactory.getCurrentSession();
         List<ClientRequest> list=session.createQuery("from ClientRequest").getResultList();
         return list;
+    }
+
+    @Override
+    public ClientRequest getOneClientRequest(Integer i) {
+        Session session= sessionFactory.getCurrentSession();
+        ClientRequest clientRequest=session.get(ClientRequest.class,i);
+        return clientRequest;
     }
 }

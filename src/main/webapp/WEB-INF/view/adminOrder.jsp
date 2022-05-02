@@ -31,6 +31,10 @@
     </tr>
 
     <c:forEach var="admin_atr" items="${admin_object}">
+
+        <c:url var="UpdateButton" value="/updateinfo">
+            <c:param name="ClientOrderPerem" value="${admin_atr.id}"/>
+        </c:url>
         <tr>
             <td>${admin_atr.id}</td>
             <td>${admin_atr.firm}</td>
@@ -45,6 +49,7 @@
             <td>${admin_atr.adress}</td>
             <td>${admin_atr.dataWish}</td>
             <td>${admin_atr.timeForecast}</td>
+            <td><input type="button" value="Обработать" onclick="window.location.href='${UpdateButton}'"/></td>
         </tr>
     </c:forEach>
 

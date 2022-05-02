@@ -15,16 +15,13 @@
 <body>
 <table>
     <tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Почта</th>
-
+        <th>Сотрудник</th>
+        <th>Тип машины</th>
+        <th>Квалификация</th>
     </tr>
-
 
     <c:forEach var="qual" items="${qualEmps}">
         <tr>
-
             <td>${qual.id.idEmployee}</td>
             <td>${qual.id.idTypeMachine}</td>
             <td>${qual.qualification}</td>

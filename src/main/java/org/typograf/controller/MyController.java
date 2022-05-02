@@ -10,6 +10,7 @@ import org.typograf.DAO.*;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ public class MyController {
     ClientOrderDAO clientOrderDAO;
     @Autowired
     MapsForClientDAO mapsForClientDAO;
+    @Autowired
+    WorkDAO workDAO;
 
     @RequestMapping("/")
     String NavigateMethod(){
@@ -103,8 +106,37 @@ public class MyController {
     String openListOrder(Model model){
         List<ClientRequest> list = clientOrderDAO.getAllClientRequest();
         model.addAttribute("admin_object",list);
-
         return "adminOrder";
+    }
+
+
+    @RequestMapping("/updateinfo")
+    String openListEmpForWork(@ModelAttribute("ClientOrderPerem") Integer i, Model model){
+        ClientRequest clientRequest=clientOrderDAO.getOneClientRequest(i);
+        model.addAttribute("ClientOrderUpdate",clientRequest);
+
+        return "updateOrder";
+    }
+
+    @RequestMapping("/updateOrder")
+    String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest clientRequest, Model model){
+        clientOrderDAO.updateOrder(clientRequest);
+        Integer i = clientRequest.getDifficilty();
+        Integer j = clientRequest.getIdTypeMachine().getId();
+        List<Employee> listEmps= workDAO.GetListEmployee(i,j);
+//        List<Employee> newList = null;
+//        for (Employee e:listEmps) {
+//            newList.add(e);
+//        }
+//
+//        System.out.println(newList);
+
+        System.out.println(listEmps.toString());
+        model.addAttribute("ClientOrderUpdate",clientRequest);
+        model.addAttribute("Employee",listEmps);
+
+
+        return "updateOrderWork";
     }
 
 
