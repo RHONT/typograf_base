@@ -82,18 +82,29 @@
         <th>Фамилия</th>
         <th>Почта</th>
         <th>Телефон</th>
+        <c:forEach var="keys" items="${test_key}">
+            <th>${keys.key}</th>
+        </c:forEach>
     </tr>
-
-
-    <c:forEach var="emp" items="${Employee}">
+    <c:forEach var="emp" items="${Employee}" >
         <tr>
-
             <td>${emp.name}</td>
             <td>${emp.surname}</td>
             <td>${emp.email}</td>
             <td>${emp.phone}</td>
+<%--            <td>${test_key.next().key}</td>--%>
+<%--            <td>${test_value.next().value}</td>--%>
         </tr>
     </c:forEach>
+</table>
+
+<table>
+    <tr>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+    </tr>
 
 </table>
 

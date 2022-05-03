@@ -45,13 +45,6 @@ public class TestDataTime {
 
         System.out.println("\nФинальное значение мапы \n" + workSession.toString());
 
-
-
-
-
-
-
-
         LocalTime lt1=LocalTime.of(15,00);
         LocalTime lt2=LocalTime.of(10,00);
         LocalTime lt3=LocalTime.of(13,00);
@@ -67,9 +60,18 @@ public class TestDataTime {
 //        System.out.println(wd);
         workSession.replace(4,wd);
         System.out.println("==========================");
+
         Iterator<Map.Entry<Integer,WorkDay>> iterator=workSession.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<Integer,WorkDay> entry=iterator.next();
+            System.out.println(entry);
+        }
+
+        workSession.get(4).byWorkNow(lt4,(byte) 1);
+
+        Iterator<Map.Entry<Integer,WorkDay>> iterator2=workSession.entrySet().iterator();
+        while (iterator2.hasNext()){
+            Map.Entry<Integer,WorkDay> entry=iterator2.next();
             System.out.println(entry);
         }
     }
@@ -77,9 +79,7 @@ public class TestDataTime {
 
 class WorkDay {
     byte[] work=new byte[10];
-
     WorkDay (){
-
         for (int i=0;i<work.length;i++){
             work[i]=1;
         }
@@ -88,11 +88,7 @@ class WorkDay {
 
     void byWorkNow(LocalTime l1, byte b){
         byte buffer=(byte)l1.getHour();
-
-
         buffer-=10;
-//        if (buffer>0) buffer-=1;
-
         if ((buffer+b)>10) System.out.println("Рабочий день до 20:00! Переносим работу на завтра");
         else{
             if ((work[buffer]==0) || (work[buffer+b-1]==0)) System.out.println("Время занято!");

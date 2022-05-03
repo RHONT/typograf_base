@@ -11,6 +11,7 @@ import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -130,10 +131,19 @@ public class MyController {
 //        }
 //
 //        System.out.println(newList);
+        Map<Integer,String> test=new LinkedHashMap<>();
+        test.put(1,"str1");
+        test.put(2,"str2");
+        test.put(3,"str3");
+        test.put(4,"str4");
+        test.put(5,"str5");
 
         System.out.println(listEmps.toString());
         model.addAttribute("ClientOrderUpdate",clientRequest);
         model.addAttribute("Employee",listEmps);
+        model.addAttribute("test_key",test);
+//        model.addAttribute("test_key",test.entrySet().iterator());
+//        model.addAttribute("test_value",test.entrySet().iterator());
 
 
         return "updateOrderWork";

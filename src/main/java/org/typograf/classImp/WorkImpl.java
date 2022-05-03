@@ -29,7 +29,7 @@ public class WorkImpl implements WorkDAO {
         Session session = sessionFactory.getCurrentSession();
 
         TypedQuery query;
-        query = session.createQuery("select new Employee(emp.name,emp.surname,emp.email,emp.phone) " +
+        query = session.createQuery("select new Employee(emp.id,emp.name,emp.surname,emp.email,emp.phone) " +
                 "from Employee emp join Qualification q on emp.id=q.id.idEmployee " +
                 "where q.id.idTypeMachine=:type and  q.qualification>=:qual");
         query.setParameter("type", j).setParameter("qual", i);
