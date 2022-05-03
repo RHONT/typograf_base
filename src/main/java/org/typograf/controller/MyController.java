@@ -10,7 +10,9 @@ import org.typograf.DAO.*;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
+import org.typograf.functionPack.WorkDay;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -133,11 +135,20 @@ public class MyController {
             List<Work> listEmp=workDAO.getWorkTabelForOneEmp(e.getId());
             linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
              for(Work w:listEmp) {
-//                 if (w.getDateVisit()==linkedHashMaps.get(inc).workSession.containsKey(w.getDateVisit()))
-//                     linkedHashMaps.get(inc).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
+                 if (linkedHashMaps.get(inc).workSession.containsKey(w.getDateVisit()))
+                     linkedHashMaps.get(inc).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
              }
-            linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
         }
+
+        Iterator<Map.Entry<LocalDate, WorkDay>> iterator2=linkedHashMaps.get(0).workSession.entrySet().iterator();
+        while (iterator2.hasNext()) {
+            Map.Entry<LocalDate, WorkDay> entry = iterator2.next();
+            System.out.println(entry);
+        }
+
+        System.out.println(linkedHashMaps.get(1).workSession);
+        System.out.println("===========");
+        System.out.println(linkedHashMaps.get(2));
 
 
 

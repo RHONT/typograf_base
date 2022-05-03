@@ -7,7 +7,7 @@ public class EmployeeLinkedHashMap {
     //для вычисления количества дней до желаемой даты
     public int incrSearch = 0;
 
-    public LinkedHashMap<Integer, WorkDay> workSession = new LinkedHashMap<>();
+    public LinkedHashMap<LocalDate, WorkDay> workSession = new LinkedHashMap<>();
     LocalDate now = LocalDate.now();
 
 
@@ -26,7 +26,7 @@ public class EmployeeLinkedHashMap {
         if (incrSearch <= 10) {
             copyNow = now;
             for (int i = 0; i < 20; i++) {
-                workSession.put(copyNow.getDayOfMonth(), new WorkDay(copyNow.getDayOfMonth()));
+                workSession.put(copyNow, new WorkDay(copyNow.getDayOfMonth()));
                 copyNow = copyNow.plusDays(1);
             }
         }
@@ -35,7 +35,7 @@ public class EmployeeLinkedHashMap {
             copyNow = wishDate.minusDays(10);
 
             for (int i = 0; i < 20; i++) {
-                workSession.put(copyNow.getDayOfMonth(), new WorkDay(copyNow.getDayOfMonth()));
+                workSession.put(copyNow, new WorkDay(copyNow.getDayOfMonth()));
                 copyNow = copyNow.plusDays(1);
             }
         }

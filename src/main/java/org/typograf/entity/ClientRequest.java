@@ -50,9 +50,9 @@ public class ClientRequest {
     private LocalDate dataWish;
 
     @Column(name = "time_forecast")
-    private LocalTime timeForecast;
+    private Integer timeForecast;
 
-    public LocalTime getTimeForecast() {
+    public Integer getTimeForecast() {
         return timeForecast;
     }
 
@@ -73,7 +73,7 @@ public class ClientRequest {
         this.dataWish=dataWish;
     }
 
-    public void setTimeForecast(LocalTime timeForecast) {
+    public void setTimeForecast(Integer timeForecast) {
         this.timeForecast = timeForecast;
     }
 

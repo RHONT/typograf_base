@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class WorkDay {
     int index = 0;
-    byte[] work = new byte[10];
+    int[] work = new int[10];
 
     public WorkDay(Integer index) {
         this.index = index;
@@ -14,9 +14,9 @@ public class WorkDay {
         }
     }
 
-    public void byWorkNow(LocalTime l1, byte b) {
+    public void byWorkNow(LocalTime l1, int b) {
         try {
-            byte buffer = (byte) l1.getHour();
+            int buffer = l1.getHour();
             buffer -= 10;
             if (b + buffer <= 10) {
                 for (int i = buffer; i < (buffer + b); i++) {
@@ -34,7 +34,7 @@ public class WorkDay {
 
     }
 
-    public Boolean checkDayForWork(byte b) {
+    public Boolean checkDayForWork(int b) {
         byte attr = 0;
         for (int i = 0; i < 10; i++) {
             if (work[i] == 1) {

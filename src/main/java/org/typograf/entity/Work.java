@@ -27,7 +27,7 @@ public class Work {
     private LocalTime timeStart;
 
     @Column(name = "laid_down_time")
-    private Double laidDownTime;
+    private Integer laidDownTime;
 
     public Integer getId() {
         return id;
@@ -69,11 +69,11 @@ public class Work {
         this.timeStart = timeStart;
     }
 
-    public Double getLaidDownTime() {
+    public Integer getLaidDownTime() {
         return laidDownTime;
     }
 
-    public void setLaidDownTime(Double laidDownTime) {
+    public void setLaidDownTime(Integer laidDownTime) {
         this.laidDownTime = laidDownTime;
     }
 

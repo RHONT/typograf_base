@@ -1,5 +1,6 @@
 package for_test;
 
+
 import org.typograf.functionPack.EmployeeLinkedHashMap;
 import org.typograf.functionPack.WorkDay;
 
@@ -17,10 +18,7 @@ public class TestDataTime {
     public static void main(String[] args) {
         LocalDate locDate1=LocalDate.of(2022, Month.MAY,10);
         EmployeeLinkedHashMap EmpMap=new EmployeeLinkedHashMap(locDate1);
-        List<Integer> tl=new ArrayList<>();
-        tl.add(11);
-        tl.add(22);
-        System.out.println(tl.get(0));
+
 
 
         LocalTime lt1=LocalTime.of(15,00);
@@ -37,18 +35,23 @@ public class TestDataTime {
 //        System.out.println(wd);
 //        wd.byWorkNow(lt4,(byte) 1);
 //        System.out.println(wd);
-        EmpMap.workSession.replace(4,wd);
-        EmpMap.workSession.get(4).byWorkNow(lt2,(byte) 3);
-        EmpMap.workSession.get(10).byWorkNow(lt4,(byte) 3);
-        EmpMap.workSession.get(10).byWorkNow(lt4,(byte) 1);
+//        EmpMap.workSession.replace(4,wd);
+//        EmpMap.workSession.get(4).byWorkNow(lt2,(byte) 3);
+//        EmpMap.workSession.get(10).byWorkNow(lt4,(byte) 3);
+//        EmpMap.workSession.get(10).byWorkNow(lt4,(byte) 1);
 
 
-        System.out.println(EmpMap.workSession.get(4).checkDayForWork((byte) 2));
+//        System.out.println(EmpMap.workSession.get(4).checkDayForWork((byte) 2));
 
-        Iterator<Map.Entry<Integer,WorkDay>> iterator2=EmpMap.workSession.entrySet().iterator();
+        Iterator<Map.Entry<LocalDate,WorkDay>> iterator2=EmpMap.workSession.entrySet().iterator();
         while (iterator2.hasNext()){
-            Map.Entry<Integer,WorkDay> entry=iterator2.next();
+            Map.Entry<LocalDate,WorkDay> entry=iterator2.next();
             System.out.println(entry);
+
+//        Iterator<Map.Entry<Integer,WorkDay>> iterator2=EmpMap.workSession.entrySet().iterator();
+//        while (iterator2.hasNext()){
+//            Map.Entry<Integer,WorkDay> entry=iterator2.next();
+//            System.out.println(entry);
         }
     }
 }
