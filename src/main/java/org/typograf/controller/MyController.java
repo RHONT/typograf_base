@@ -11,10 +11,7 @@ import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MyController {
@@ -122,17 +119,25 @@ public class MyController {
 
     @RequestMapping("/updateOrder")
     String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest clientRequest, Model model){
-        List<EmployeeLinkedHashMap> linkedHashMaps=null;
+        int inc=-1;
+        List<EmployeeLinkedHashMap> linkedHashMaps=new ArrayList<>();
 
         clientOrderDAO.updateOrder(clientRequest);
         Integer i = clientRequest.getDifficilty();
         Integer j = clientRequest.getIdTypeMachine().getId();
         List<Employee> listEmps= workDAO.GetListEmployee(i,j);
-        List<Work> list=workDAO.getWorkTabelForOneEmp(1);
+//        List<Work> list=workDAO.getWorkTabelForOneEmp(1);
 
-//        for (Employee e:listEmps) {
-//            linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
-//        }
+        for (Employee e:listEmps) {
+            inc+=1;
+            List<Work> listEmp=workDAO.getWorkTabelForOneEmp(e.getId());
+            linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
+             for(Work w:listEmp) {
+//                 if (w.getDateVisit()==linkedHashMaps.get(inc).workSession.containsKey(w.getDateVisit()))
+//                     linkedHashMaps.get(inc).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
+             }
+            linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
+        }
 
 
 
@@ -147,7 +152,7 @@ public class MyController {
         model.addAttribute("ClientOrderUpdate",clientRequest);
         model.addAttribute("Employee",listEmps);
         model.addAttribute("test_key",test);
-        model.addAttribute("test_list",list);
+//        model.addAttribute("test_list",list);
 //        model.addAttribute("test_key",test.entrySet().iterator());
 //        model.addAttribute("test_value",test.entrySet().iterator());
 
