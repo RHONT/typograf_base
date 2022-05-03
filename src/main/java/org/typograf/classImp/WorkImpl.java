@@ -37,4 +37,12 @@ public class WorkImpl implements WorkDAO {
             return list;
         }
 
+    @Override
+    public List getWorkTabelForOneEmp(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        TypedQuery query;
+        query=session.createQuery("from Work where idEmployee.id=:id").setParameter("id",id);
+        List<Work> list=query.getResultList();
+        return list;
+    }
 }

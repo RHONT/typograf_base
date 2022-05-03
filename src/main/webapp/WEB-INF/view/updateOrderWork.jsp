@@ -100,6 +100,23 @@
 
 <table>
     <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Почта</th>
+        <th>Телефон</th>
+    </tr>
+    <c:forEach var="tr" items="${test_list}" >
+        <tr>
+            <td>${tr.dateVisit}</td>
+
+                <%--            <td>${test_key.next().key}</td>--%>
+                <%--            <td>${test_value.next().value}</td>--%>
+        </tr>
+    </c:forEach>
+</table>
+
+<table>
+    <tr>
         <th>1</th>
         <th>2</th>
         <th>3</th>

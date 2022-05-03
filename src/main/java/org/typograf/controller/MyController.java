@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.typograf.DAO.*;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
+import org.typograf.functionPack.EmployeeLinkedHashMap;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -121,16 +122,20 @@ public class MyController {
 
     @RequestMapping("/updateOrder")
     String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest clientRequest, Model model){
+        List<EmployeeLinkedHashMap> linkedHashMaps=null;
+
         clientOrderDAO.updateOrder(clientRequest);
         Integer i = clientRequest.getDifficilty();
         Integer j = clientRequest.getIdTypeMachine().getId();
         List<Employee> listEmps= workDAO.GetListEmployee(i,j);
-//        List<Employee> newList = null;
+        List<Work> list=workDAO.getWorkTabelForOneEmp(1);
+
 //        for (Employee e:listEmps) {
-//            newList.add(e);
+//            linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
 //        }
-//
-//        System.out.println(newList);
+
+
+
         Map<Integer,String> test=new LinkedHashMap<>();
         test.put(1,"str1");
         test.put(2,"str2");
@@ -142,6 +147,7 @@ public class MyController {
         model.addAttribute("ClientOrderUpdate",clientRequest);
         model.addAttribute("Employee",listEmps);
         model.addAttribute("test_key",test);
+        model.addAttribute("test_list",list);
 //        model.addAttribute("test_key",test.entrySet().iterator());
 //        model.addAttribute("test_value",test.entrySet().iterator());
 
