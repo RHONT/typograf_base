@@ -29,6 +29,16 @@ public class Work {
     @Column(name = "laid_down_time")
     private Integer laidDownTime;
 
+    public Work() {
+    }
+
+    public Work(Integer id, LocalDate dateVisit, LocalTime timeStart, Integer laidDownTime) {
+        this.id = id;
+        this.dateVisit = dateVisit;
+        this.timeStart = timeStart;
+        this.laidDownTime = laidDownTime;
+    }
+
     public Integer getId() {
         return id;
     }

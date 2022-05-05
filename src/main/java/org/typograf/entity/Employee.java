@@ -26,6 +26,13 @@ public class Employee {
     @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL)
     private List<Qualification> qualificationList;
 
+    @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL)
+    private List<Work> WorkList;
+
+
+
+
+
     public Employee() {
     }
 
@@ -75,6 +82,22 @@ public class Employee {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Qualification> getQualificationList() {
+        return qualificationList;
+    }
+
+    public void setQualificationList(List<Qualification> qualificationList) {
+        this.qualificationList = qualificationList;
+    }
+
+    public List<Work> getWorkList() {
+        return WorkList;
+    }
+
+    public void setWorkList(List<Work> workList) {
+        WorkList = workList;
     }
 
     @Override

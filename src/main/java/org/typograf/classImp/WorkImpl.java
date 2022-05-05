@@ -13,6 +13,7 @@ import org.typograf.entity.Work;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -44,5 +45,17 @@ public class WorkImpl implements WorkDAO {
         query=session.createQuery("from Work where idEmployee.id=:id").setParameter("id",id);
         List<Work> list=query.getResultList();
         return list;
+    }
+
+    @Override
+    public List<Work> getOneTabelDay(Integer i, LocalDate localDate) {
+        Session session = sessionFactory.getCurrentSession();
+
+        TypedQuery query;
+        query = session.createQuery("select new Work(Work .id,Work.dateVisit,Work.timeStart,Work .laidDownTime)from Work where idEmployee.id=:id_emp and dateVisit=:dv");
+        query.setParameter("id_emp", i).setParameter("dv", localDate);
+        List<Work> work= query.getResultList();
+
+        return work;
     }
 }

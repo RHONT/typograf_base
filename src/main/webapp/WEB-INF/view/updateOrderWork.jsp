@@ -76,30 +76,34 @@
 
 <br>
 
-<table>
-    <tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Почта</th>
-        <th>Телефон</th>
-    </tr>
     <c:forEach var="emp" items="${Employee}" >
+        <table>
         <tr>
             <td>${emp.name}</td>
             <td>${emp.surname}</td>
-            <td>${emp.email}</td>
-            <td>${emp.phone}</td>
+            <td> [ ${emp.phone} ] </td>
+        </tr>
+        </table>
+        <table>
 
             <c:forEach var="tr" items="${linked_list.next().workSession}" >
+
+                <c:url var="TabelButton" value="/tableinfo">
+                    <c:param name="id_empl" value="${emp.id}"/>
+                    <c:param name="data_work" value="${tr.key}"/>
+                </c:url>
+
                 <td>${tr.value.index}</td>
                 <td>${tr.value.ReturnDayForWorkStatus(ClientOrderUpdate.timeForecast)}</td>
+                <td><td><input type="button" value="go" onclick="window.location.href='${TabelButton}'"/></td></td>
             </c:forEach>
+        </table>
 
 
 
 <%--            <td>${test_key.next().key}</td>--%>
 <%--            <td>${test_value.next().value}</td>--%>
-        </tr>
+
     </c:forEach>
 </table>
 

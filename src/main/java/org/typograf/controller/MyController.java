@@ -171,6 +171,16 @@ public class MyController {
 
         return "updateOrderWork";
     }
+    @RequestMapping("/tableinfo")
+    String ShowOneDayTabelEmpl(@ModelAttribute("id_empl") Integer id_emp,
+                               @ModelAttribute("data_work") String dataWorkStr,
+                               Model model){
+        LocalDate dataWork= LocalDate.parse(dataWorkStr);
+        List<Work> workList=workDAO.getOneTabelDay(id_emp,dataWork);
+        model.addAttribute("listWork",workList);
+
+        return "SelectedTabelDay";
+    }
 
 
 
