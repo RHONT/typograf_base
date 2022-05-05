@@ -12,11 +12,11 @@ public class Work {
     @Column(name = "id_work", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_employee", nullable = false)
     private Employee idEmployee;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_client_request")
     private ClientRequest idClientRequest;
 
@@ -30,13 +30,6 @@ public class Work {
     private Integer laidDownTime;
 
     public Work() {
-    }
-
-    public Work(Integer id, LocalDate dateVisit, LocalTime timeStart, Integer laidDownTime) {
-        this.id = id;
-        this.dateVisit = dateVisit;
-        this.timeStart = timeStart;
-        this.laidDownTime = laidDownTime;
     }
 
     public Integer getId() {

@@ -194,14 +194,16 @@ public class MyController {
     // контролллеры для тестового класса Fight
     @RequestMapping("/test")
     String ShowTestPage(Model model){
-        Fighter f=new Fighter();
-        List<String> listSerial=mapsForClientDAO.GetSerialNumber();
-
-//        Map<String,String> mapForClientOrderView=mapsForClientDAO.GetSerialNumber();
-//        System.out.println(mapForClientOrderView);
-        model.addAttribute("typeMachine",listSerial);
-        model.addAttribute("fighter_attr",f);
-        return "TestView";
+        List<Work> workList=workDAO.getAllTabel();
+        model.addAttribute("listWork",workList);
+//        Fighter f=new Fighter();
+//        List<String> listSerial=mapsForClientDAO.GetSerialNumber();
+//
+////        Map<String,String> mapForClientOrderView=mapsForClientDAO.GetSerialNumber();
+////        System.out.println(mapForClientOrderView);
+//        model.addAttribute("typeMachine",listSerial);
+//        model.addAttribute("fighter_attr",f);
+        return "SelectedTabelDay";
     }
 
     @RequestMapping("/testnow")

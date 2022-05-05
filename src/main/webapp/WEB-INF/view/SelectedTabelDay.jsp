@@ -16,6 +16,7 @@
 <table>
     <tr>
         <th>Номер заказа</th>
+        <th>Имя</th>
         <th>Дата визита</th>
         <th>Старт работы</th>
         <th>Время работы</th>
@@ -24,7 +25,8 @@
 
     <c:forEach var="listTabel" items="${listWork}">
         <tr>
-            <td>${listTabel.idClientRequest}</td>
+            <td>${listTabel.idClientRequest.firm}</td>
+            <td>${listTabel.idEmployee.name}</td>
             <td>${listTabel.dateVisit}</td>
             <td>${listTabel.timeStart}</td>
             <td>${listTabel.laidDownTime}</td>

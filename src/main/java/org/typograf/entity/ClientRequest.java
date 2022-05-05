@@ -18,11 +18,11 @@ public class ClientRequest {
     @Column(name = "inn_firm", length = 30)
     private String innFirm;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_type_machine")
     private TypeMachine idTypeMachine;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_machine")
     private Machine idMachine;
 

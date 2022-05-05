@@ -52,10 +52,18 @@ public class WorkImpl implements WorkDAO {
         Session session = sessionFactory.getCurrentSession();
 
         TypedQuery query;
-        query = session.createQuery("select new Work(Work .id,Work.dateVisit,Work.timeStart,Work .laidDownTime)from Work where idEmployee.id=:id_emp and dateVisit=:dv");
+        query = session.createQuery("from Work where idEmployee.id=:id_emp and dateVisit=:dv");
         query.setParameter("id_emp", i).setParameter("dv", localDate);
         List<Work> work= query.getResultList();
 
         return work;
+    }
+
+    @Override
+    public List<Work> getAllTabel() {
+        Session session = sessionFactory.getCurrentSession();
+        List<Work> list=session.createQuery("from Work").getResultList();
+
+        return list;
     }
 }

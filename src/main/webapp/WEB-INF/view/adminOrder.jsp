@@ -39,8 +39,8 @@
             <td>${admin_atr.id}</td>
             <td>${admin_atr.firm}</td>
             <td>${admin_atr.innFirm}</td>
-            <td>${admin_atr.idTypeMachine.id}</td>
-            <td>${admin_atr.idMachine.id}</td>
+            <td>${admin_atr.idTypeMachine.nameType}</td>
+            <td>${admin_atr.idMachine.modelMachine}</td>
             <td>${admin_atr.idSerialNumber.id}</td>
             <td>${admin_atr.nameClient}</td>
             <td>${admin_atr.phoneClient}</td>
