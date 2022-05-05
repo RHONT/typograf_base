@@ -1,5 +1,6 @@
 package org.typograf.functionPack;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
@@ -45,10 +46,26 @@ public class WorkDay {
         return false;
     }
 
+    public String ReturnDayForWorkStatus(int b) {
+
+        byte attr = 0;
+        for (int i = 0; i < 10; i++) {
+            if (work[i] == 1) {
+                attr += 1;
+                if (attr == b) return "(+)";
+            } else attr = 0;
+        }
+        return "(-)";
+    }
+
     @Override
     public String toString() {
         return "WorkDay{" +
                 "work=" + Arrays.toString(work) +
                 '}';
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

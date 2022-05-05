@@ -82,9 +82,6 @@
         <th>Фамилия</th>
         <th>Почта</th>
         <th>Телефон</th>
-        <c:forEach var="keys" items="${test_key}">
-            <th>${keys.key}</th>
-        </c:forEach>
     </tr>
     <c:forEach var="emp" items="${Employee}" >
         <tr>
@@ -92,38 +89,31 @@
             <td>${emp.surname}</td>
             <td>${emp.email}</td>
             <td>${emp.phone}</td>
+
+            <c:forEach var="tr" items="${linked_list.next().workSession}" >
+                <td>${tr.value.index}</td>
+                <td>${tr.value.ReturnDayForWorkStatus(ClientOrderUpdate.timeForecast)}</td>
+            </c:forEach>
+
+
+
 <%--            <td>${test_key.next().key}</td>--%>
 <%--            <td>${test_value.next().value}</td>--%>
         </tr>
     </c:forEach>
 </table>
 
-<table>
-    <tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Почта</th>
-        <th>Телефон</th>
-    </tr>
-    <c:forEach var="tr" items="${test_list}" >
-        <tr>
-            <td>${tr.dateVisit}</td>
+<%--<table>--%>
 
-                <%--            <td>${test_key.next().key}</td>--%>
-                <%--            <td>${test_value.next().value}</td>--%>
-        </tr>
-    </c:forEach>
-</table>
+<%--    <c:forEach var="tr" items="${linked_list.next().workSession}" >--%>
+<%--        <tr>--%>
+<%--            <td>${tr.value.index}</td>--%>
 
-<table>
-    <tr>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-    </tr>
-
-</table>
+<%--                &lt;%&ndash;            <td>${test_key.next().key}</td>&ndash;%&gt;--%>
+<%--                &lt;%&ndash;            <td>${test_value.next().value}</td>&ndash;%&gt;--%>
+<%--        </tr>--%>
+<%--    </c:forEach>--%>
+<%--</table>--%>
 
 </body>
 </html>

@@ -40,5 +40,8 @@ public class EmployeeLinkedHashMap {
             }
         }
     }
-
+// геттер, чтобы во view можно было вытащить
+    public LinkedHashMap<LocalDate, WorkDay> getWorkSession() {
+        return workSession;
+    }
 }

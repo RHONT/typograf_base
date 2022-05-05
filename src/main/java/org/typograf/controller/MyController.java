@@ -162,7 +162,8 @@ public class MyController {
         System.out.println(listEmps.toString());
         model.addAttribute("ClientOrderUpdate",clientRequest);
         model.addAttribute("Employee",listEmps);
-        model.addAttribute("test_key",test);
+        model.addAttribute("linked_list",linkedHashMaps.iterator());
+//        model.addAttribute("test_key",test);
 //        model.addAttribute("test_list",list);
 //        model.addAttribute("test_key",test.entrySet().iterator());
 //        model.addAttribute("test_value",test.entrySet().iterator());
