@@ -140,26 +140,14 @@ public class MyController {
              }
         }
 
-        Iterator<Map.Entry<LocalDate, WorkDay>> iterator2=linkedHashMaps.get(0).workSession.entrySet().iterator();
-        while (iterator2.hasNext()) {
-            Map.Entry<LocalDate, WorkDay> entry = iterator2.next();
-            System.out.println(entry);
-        }
-
-        System.out.println(linkedHashMaps.get(1).workSession);
-        System.out.println("===========");
-        System.out.println(linkedHashMaps.get(2));
+//        Iterator<Map.Entry<LocalDate, WorkDay>> iterator2=linkedHashMaps.get(0).workSession.entrySet().iterator();
+//        while (iterator2.hasNext()) {
+//            Map.Entry<LocalDate, WorkDay> entry = iterator2.next();
+//            System.out.println(entry);
+//        }
 
 
 
-        Map<Integer,String> test=new LinkedHashMap<>();
-        test.put(1,"str1");
-        test.put(2,"str2");
-        test.put(3,"str3");
-        test.put(4,"str4");
-        test.put(5,"str5");
-
-        System.out.println(listEmps.toString());
         model.addAttribute("ClientOrderUpdate",clientRequest);
         model.addAttribute("Employee",listEmps);
         model.addAttribute("linked_list",linkedHashMaps.iterator());
