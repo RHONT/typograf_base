@@ -13,8 +13,8 @@
     <title>Document</title>
 </head>
 <body>
-<table>
-    <tr>
+<table border="1" cellspacing="0" bgcolor="#fff8dc">
+    <tr align="left" valign="middle" bgcolor="#add8e6">
         <th>Номер заказа</th>
         <th>Имя</th>
         <th>Дата визита</th>
@@ -24,7 +24,7 @@
 
 
     <c:forEach var="listTabel" items="${listWork}">
-        <tr>
+        <tr align="left">
             <td>${listTabel.idClientRequest.firm}</td>
             <td>${listTabel.idEmployee.name}</td>
             <td>${listTabel.dateVisit}</td>

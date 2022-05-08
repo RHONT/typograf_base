@@ -112,8 +112,8 @@ public class MyController {
 
 
     @RequestMapping("/updateinfo")
-    String openListEmpForWork(@ModelAttribute("ClientOrderPerem") Integer i, Model model){
-        ClientRequest clientRequest=clientOrderDAO.getOneClientRequest(i);
+    String openListEmpForWork(@ModelAttribute("ClientOrderPerem") Integer indexClientRequest, Model model){
+        ClientRequest clientRequest=clientOrderDAO.getOneClientRequest(indexClientRequest);
         model.addAttribute("ClientOrderUpdate",clientRequest);
 
         return "updateOrder";
