@@ -28,7 +28,7 @@
     <c:forEach var="admin_atr" items="${admin_object}">
 
         <c:url var="UpdateButton" value="/updateinfo">
-            <c:param name="ClientOrderPerem" value="${admin_atr.id}"/>
+            <c:param name="ClientOrderID" value="${admin_atr.id}"/>
         </c:url>
         <tr align="left" valign="top">
 

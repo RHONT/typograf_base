@@ -16,6 +16,7 @@
 
 <body>
 <form:form modelAttribute="ClientOrderUpdate" action="updateOrder">
+    <form:hidden path="id"/>
 
        type_machine:<form:input size="7" path="idTypeMachine.id"/>
 

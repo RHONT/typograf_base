@@ -17,19 +17,13 @@
 
 <form:form modelAttribute="ClientOrderUpdate" action="updateOrder">
 
-    type_machine
+    <form:hidden path="id"/>
+
+    type_machine:<form:input size="7" path="idTypeMachine.id"/>
+
+    machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
     <br>
-    <form:input path="idTypeMachine.id"/>
-    <br>
-    machine
-    <br>
-    <form:input path="idMachine.id"/>
-    <br>
-    serial
-    <br>
-    <form:input path="idSerialNumber.id"/>
-    <br>
-    problem
+    problem:
     <br>
     <form:textarea path="descProblem"/>
     <br>
