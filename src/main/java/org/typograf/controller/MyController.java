@@ -105,38 +105,40 @@ public class MyController {
 
     @RequestMapping("/adminorder")
     String openListOrder(Model model){
-        List<ClientRequest> list = clientOrderDAO.getAllClientRequest();
-        model.addAttribute("admin_object",list);
+        List<ClientRequest> allClientRequest = clientOrderDAO.getAllClientRequest();
+        model.addAttribute("admin_object",allClientRequest);
         return "adminOrder";
     }
 
 
     @RequestMapping("/updateinfo")
-    String openListEmpForWork(@ModelAttribute("ClientOrderPerem") Integer indexClientRequest, Model model){
-        ClientRequest clientRequest=clientOrderDAO.getOneClientRequest(indexClientRequest);
-        model.addAttribute("ClientOrderUpdate",clientRequest);
+    String openListEmpForWork(@ModelAttribute("ClientOrderPerem") Integer idClientRequest, Model model){
+        ClientRequest singleClientRequest=clientOrderDAO.getOneClientRequest(idClientRequest);
+        model.addAttribute("ClientOrderUpdate",singleClientRequest);
 
         return "updateOrder";
     }
 
     @RequestMapping("/updateOrder")
-    String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest clientRequest, Model model){
-        int inc=-1;
-        List<EmployeeLinkedHashMap> linkedHashMaps=new ArrayList<>();
+    String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest singleClientRequest, Model model){
+        clientOrderDAO.updateOrder(singleClientRequest);
+        
+        
+        Integer levelDifficulty = singleClientRequest.getDifficilty();
+        Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
+        List<Employee> SuitableEmployees= workDAO.GetListEmployee(levelDifficulty,idTypeMachine);
 
-        clientOrderDAO.updateOrder(clientRequest);
-        Integer i = clientRequest.getDifficilty();
-        Integer j = clientRequest.getIdTypeMachine().getId();
-        List<Employee> listEmps= workDAO.GetListEmployee(i,j);
-//        List<Work> list=workDAO.getWorkTabelForOneEmp(1);
+        int incrementFor=-1;
+        List<EmployeeLinkedHashMap> workingCoverageofDates=new ArrayList<>();
+        
 
-        for (Employee e:listEmps) {
-            inc+=1;
+        for (Employee e:SuitableEmployees) {
+            incrementFor+=1;
             List<Work> listEmp=workDAO.getWorkTabelForOneEmp(e.getId());
-            linkedHashMaps.add(new EmployeeLinkedHashMap(clientRequest.getDataWish()));
+            workingCoverageofDates.add(new EmployeeLinkedHashMap(singleClientRequest.getDataWish()));
              for(Work w:listEmp) {
-                 if (linkedHashMaps.get(inc).workSession.containsKey(w.getDateVisit()))
-                     linkedHashMaps.get(inc).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
+                 if (workingCoverageofDates.get(incrementFor).workSession.containsKey(w.getDateVisit()))
+                     workingCoverageofDates.get(incrementFor).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
              }
         }
 
@@ -148,9 +150,9 @@ public class MyController {
 
 
 
-        model.addAttribute("ClientOrderUpdate",clientRequest);
-        model.addAttribute("Employee",listEmps);
-        model.addAttribute("linked_list",linkedHashMaps.iterator());
+        model.addAttribute("ClientOrderUpdate",singleClientRequest);
+        model.addAttribute("Employee",SuitableEmployees);
+        model.addAttribute("linked_list",workingCoverageofDates.iterator());
 //        model.addAttribute("test_key",test);
 //        model.addAttribute("test_list",list);
 //        model.addAttribute("test_key",test.entrySet().iterator());

@@ -16,5 +16,5 @@ public interface ClientOrderDAO {
     public Machine getMachine(Integer numb);
     public SerialNumber getSerialNumber(String str);
     public List<ClientRequest> getAllClientRequest();
-    public ClientRequest getOneClientRequest(Integer i);
+    public ClientRequest getOneClientRequest(Integer idClientRequest);
 }

@@ -75,14 +75,14 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
     @Override
     public List<ClientRequest> getAllClientRequest() {
         Session session= sessionFactory.getCurrentSession();
-        List<ClientRequest> list=session.createQuery("from ClientRequest").getResultList();
-        return list;
+        List<ClientRequest> allClientRequests=session.createQuery("from ClientRequest").getResultList();
+        return allClientRequests;
     }
 
     @Override
-    public ClientRequest getOneClientRequest(Integer i) {
+    public ClientRequest getOneClientRequest(Integer idClientRequest) {
         Session session= sessionFactory.getCurrentSession();
-        ClientRequest clientRequest=session.get(ClientRequest.class,i);
-        return clientRequest;
+        ClientRequest singleClientRequest=session.get(ClientRequest.class,idClientRequest);
+        return singleClientRequest;
     }
 }
