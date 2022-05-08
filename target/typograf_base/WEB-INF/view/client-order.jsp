@@ -18,7 +18,7 @@
 <div style="text-align: center;"><h1>Оставьте заявку <br> Мы вас скоро наберем</h1></div>
 <br>
 <form:form action="saveorder" modelAttribute="ClientRequestId" acceptCharset="utf-8">
-    <table>
+    <table align="center">
         <tr><td>Ваша организация:</td><td><form:input path="firm" title="Введите название"/></td></tr>
         <tr><td> ИНН:</td><td><form:input path="innFirm"/></td></tr>
 
@@ -43,6 +43,7 @@
         <tr><td> Имя Фамилия:</td><td><form:input path="nameClient"/></td></tr>
         <tr><td>Номер телефона:</td><td><form:input path="phoneClient"/></td></tr>
         <tr><td>Желаема дата:</td><td><form:input path="dataWish"/></td></tr>
+        <tr><td>Адрес:</td><td><form:input path="adress"/></td></tr>
         <tr><td>Описание проблемы:</td><td><form:input path="descProblem"/></td></tr>
         <tr><td><td><input type="submit" value="Отправить"></td></tr>
     </table>
