@@ -16,29 +16,20 @@
 
 <body>
 <form:form modelAttribute="ClientOrderUpdate" action="updateOrder">
+    <form:hidden path="id"/>
 
-       type_machine:<form:input size="7" path="idTypeMachine.id"/>
-
-         machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
+    type_machine: <form:input size="7" path="idTypeMachine.id"/>
+    machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
     <br>
-        problem:
+    problem:
     <br>
-    <form:textarea path="descProblem"/>
+    <form:textarea path="descProblem" cols="60" rows="10"/>
     <br>
-        difficilty
+    difficulty: <form:input path="difficilty" size="2"/> time_forecast: <form:input path="timeForecast" size="2"/>
+    data_wish: <form:input path="dataWish" size="11"/>
     <br>
-    <form:input path="difficilty"/>
-    <br>
-        data_wish
-    <br>
-    <form:input path="dataWish"/>
-    <br>
-      time_forecast
-    <br>
-    <form:input path="timeForecast"/>
-    <br>
-    <input type="submit" value="Обновить">
-        </tr>
+    <input type="submit" value="Update">
+    </tr>
 
 </form:form>
 </body>

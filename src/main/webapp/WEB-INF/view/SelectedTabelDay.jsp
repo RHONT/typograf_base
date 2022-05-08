@@ -15,7 +15,7 @@
 <body>
 <table border="1" cellspacing="0" bgcolor="#fff8dc">
     <tr align="left" valign="middle" bgcolor="#add8e6">
-        <th>Номер заказа</th>
+        <th>Фирма</th>
         <th>Имя</th>
         <th>Дата визита</th>
         <th>Старт работы</th>

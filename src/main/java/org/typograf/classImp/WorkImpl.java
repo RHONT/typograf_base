@@ -10,13 +10,12 @@ import org.typograf.entity.Employee;
 import org.typograf.entity.Machine;
 import org.typograf.entity.Qualification;
 import org.typograf.entity.Work;
+import org.typograf.functionPack.EmployeeLinkedHashMap;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -65,5 +64,32 @@ public class WorkImpl implements WorkDAO {
         List<Work> list=session.createQuery("from Work").getResultList();
 
         return list;
+    }
+
+    @Override
+    public List<EmployeeLinkedHashMap> fillWorkingCoverageofDates(List<Employee> SuitableEmployees, LocalDate wishDate) {
+
+        int incrementFor=-1;
+        List<EmployeeLinkedHashMap> workingCoverageOfDates=new ArrayList<>();
+
+        for (Employee e:SuitableEmployees) {
+            incrementFor+=1;
+            //Заполняем tabelWorkForOneSuitableEmp всеми записями табелей для текущего сотрудника из SuitableEmployees
+            List<Work> tabelWorkForOneSuitableEmp=getWorkTabelForOneEmp(e.getId());
+            //После, сразу синхронно добавляем в workingCoverageOfDates новый экземпляр со значением желанной даты
+            workingCoverageOfDates.add(new EmployeeLinkedHashMap(wishDate));
+            // Так как теперь внутри мапы у нас есть 20 записей, где значение(WorkDay) заполнено еденицами, нам
+            // нужно обновить их, чтобы рабочие часы заполнились нолями, символизируя занятый рабочий час
+            for(Work w:tabelWorkForOneSuitableEmp) {
+                //так как мы еще не успели сделать новую итерацию, переменная incrementFor будет соответствовать нашему
+                //списку если ключ-дата есть в нашей мапе, значит будем ее изменять
+                if (workingCoverageOfDates.get(incrementFor).workSession.containsKey(w.getDateVisit()))
+                //Достаем из списка мапу по incrementFor, ищем ключ-дату, теперь обращаемся к значению лежащего экземпляра WorkDay
+                    //И функция byWorkNow изменяет внутренний массив. Если раньше массив был 1 1 1 1 1 1 1 1 1 1, то после
+                    // он станет 0 0 1 1 1 1 1 1 1 1, если старт работы был в 10:00 и на работу отвели 2 часа.
+                {workingCoverageOfDates.get(incrementFor).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());}
+            }
+        }
+        return workingCoverageOfDates;
     }
 }

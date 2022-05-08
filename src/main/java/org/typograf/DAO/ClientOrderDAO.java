@@ -12,8 +12,8 @@ public interface ClientOrderDAO {
     public List<String> spisokModel();
     public void saveOrder(ClientRequest clientRequest);
     public void updateOrder(ClientRequest clientRequest);
-    public TypeMachine getTypeMachine(Integer numb);
-    public Machine getMachine(Integer numb);
+    public TypeMachine getTypeMachine(Integer idTypeMachine);
+    public Machine getMachine(Integer idMachine);
     public SerialNumber getSerialNumber(String str);
     public List<ClientRequest> getAllClientRequest();
     public ClientRequest getOneClientRequest(Integer idClientRequest);

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.typograf.DAO.*;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
-import org.typograf.functionPack.WorkDay;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -112,52 +112,27 @@ public class MyController {
 
 
     @RequestMapping("/updateinfo")
-    String openListEmpForWork(@ModelAttribute("ClientOrderPerem") Integer idClientRequest, Model model){
+    String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest, Model model){
         ClientRequest singleClientRequest=clientOrderDAO.getOneClientRequest(idClientRequest);
         model.addAttribute("ClientOrderUpdate",singleClientRequest);
 
-        return "updateOrder";
+        return "updateOrderPage";
     }
 
     @RequestMapping("/updateOrder")
     String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest singleClientRequest, Model model){
         clientOrderDAO.updateOrder(singleClientRequest);
-        
-        
+
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
+
         List<Employee> SuitableEmployees= workDAO.GetListEmployee(levelDifficulty,idTypeMachine);
-
-        int incrementFor=-1;
-        List<EmployeeLinkedHashMap> workingCoverageofDates=new ArrayList<>();
-        
-
-        for (Employee e:SuitableEmployees) {
-            incrementFor+=1;
-            List<Work> listEmp=workDAO.getWorkTabelForOneEmp(e.getId());
-            workingCoverageofDates.add(new EmployeeLinkedHashMap(singleClientRequest.getDataWish()));
-             for(Work w:listEmp) {
-                 if (workingCoverageofDates.get(incrementFor).workSession.containsKey(w.getDateVisit()))
-                     workingCoverageofDates.get(incrementFor).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
-             }
-        }
-
-//        Iterator<Map.Entry<LocalDate, WorkDay>> iterator2=linkedHashMaps.get(0).workSession.entrySet().iterator();
-//        while (iterator2.hasNext()) {
-//            Map.Entry<LocalDate, WorkDay> entry = iterator2.next();
-//            System.out.println(entry);
-//        }
-
-
+        List<EmployeeLinkedHashMap> workingCoverageOfDates=
+                workDAO.fillWorkingCoverageofDates(SuitableEmployees,singleClientRequest.getDataWish());
 
         model.addAttribute("ClientOrderUpdate",singleClientRequest);
         model.addAttribute("Employee",SuitableEmployees);
-        model.addAttribute("linked_list",workingCoverageofDates.iterator());
-//        model.addAttribute("test_key",test);
-//        model.addAttribute("test_list",list);
-//        model.addAttribute("test_key",test.entrySet().iterator());
-//        model.addAttribute("test_value",test.entrySet().iterator());
-
+        model.addAttribute("linked_list",workingCoverageOfDates.iterator());
 
         return "updateOrderWork";
     }

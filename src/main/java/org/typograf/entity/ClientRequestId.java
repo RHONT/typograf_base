@@ -14,8 +14,17 @@ public class ClientRequestId {
     private String phoneClient;
     private String descProblem;
     private LocalDate dataWish;
+    private String adress;
 
     public ClientRequestId() {
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     public String getFirm() {
