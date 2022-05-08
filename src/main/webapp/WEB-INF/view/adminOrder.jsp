@@ -12,22 +12,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-<table>
-    <tr>
-        <th>id</th>
-        <th>firm</th>
-        <th>inn</th>
-        <th>type_machine</th>
-        <th>machine</th>
-        <th>serial</th>
-        <th>name</th>
-        <th>phone</th>
-        <th>problem</th>
-        <th>difficilty</th>
-        <th>adress</th>
-        <th>data_wish</th>
-        <th>time_forecast</th>
+
+<table border="1" cellspacing="0" bgcolor="#fff8dc">
+    <tr align="left" valign="middle" bgcolor="#add8e6">
+        <th width=10%>Machine</th>
+        <th width=20%>Client</th>
+        <th width=58%>Description of the problem</th>
+        <th width=4%>Dfclt</th>
+        <th width=4%>TFST</th>
+        <th width=4%></th>
     </tr>
 
     <c:forEach var="admin_atr" items="${admin_object}">
@@ -35,21 +30,19 @@
         <c:url var="UpdateButton" value="/updateinfo">
             <c:param name="ClientOrderPerem" value="${admin_atr.id}"/>
         </c:url>
-        <tr>
-            <td>${admin_atr.id}</td>
-            <td>${admin_atr.firm}</td>
-            <td>${admin_atr.innFirm}</td>
-            <td>${admin_atr.idTypeMachine.nameType}</td>
-            <td>${admin_atr.idMachine.modelMachine}</td>
-            <td>${admin_atr.idSerialNumber.id}</td>
-            <td>${admin_atr.nameClient}</td>
-            <td>${admin_atr.phoneClient}</td>
+        <tr align="left" valign="top">
+
+            <td>${admin_atr.idTypeMachine.nameType}<br>${admin_atr.idMachine.modelMachine}
+                <br>${admin_atr.idSerialNumber.id}</td>
+
+            <td>${admin_atr.id}<br>${admin_atr.firm}<br>${admin_atr.innFirm}<br>${admin_atr.nameClient}<br>
+                    ${admin_atr.phoneClient}<br>${admin_atr.adress}<br>${admin_atr.dataWish}</td>
+
             <td>${admin_atr.descProblem}</td>
-            <td>${admin_atr.difficilty}</td>
-            <td>${admin_atr.adress}</td>
-            <td>${admin_atr.dataWish}</td>
-            <td>${admin_atr.timeForecast}</td>
-            <td><input type="button" value="Обработать" onclick="window.location.href='${UpdateButton}'"/></td>
+            <td align="center" valign="middle">${admin_atr.difficilty}</td>
+            <td align="center" valign="middle">${admin_atr.timeForecast}</td>
+
+            <td align="center" valign="middle"><input type="button" value="Render" onclick="window.location.href='${UpdateButton}'"/></td>
         </tr>
     </c:forEach>
 

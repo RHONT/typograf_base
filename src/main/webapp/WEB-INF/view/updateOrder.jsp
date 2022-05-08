@@ -13,18 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
 
+<body>
 <form:form modelAttribute="ClientOrderUpdate" action="updateOrder">
-    <br>
-        id
-    <br>
-   <form:input path="id"/>
-    <br>
-       firm
-    <br>
-    <form:input path="firm"/>
-    <br>
+
        type_machine
     <br>
     <form:input path="idTypeMachine.id"/>
@@ -37,25 +29,13 @@
     <br>
     <form:input path="idSerialNumber.id"/>
     <br>
-        name
-    <br>
-    <form:input path="nameClient"/>
-    <br>
-        phone
-    <br>
-    <form:input path="phoneClient"/>
-    <br>
         problem
     <br>
-    <form:input path="descProblem"/>
+    <form:textarea path="descProblem"/>
     <br>
         difficilty
     <br>
     <form:input path="difficilty"/>
-    <br>
-        adress
-    <br>
-    <form:input path="adress"/>
     <br>
         data_wish
     <br>
@@ -66,14 +46,9 @@
     <form:input path="timeForecast"/>
     <br>
     <input type="submit" value="Обновить">
-
-
-
-<%--            <td><button onclick="window.location.href='updateinfo'">Добавить</button></td>--%>
         </tr>
 
-</form:form>>
-
-
+</form:form>
 </body>
+
 </html>
