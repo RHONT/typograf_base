@@ -19,50 +19,33 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-
     @Override
-    public List<TypeMachine> spisokTypeMachines() {
+    public List<TypeMachine> getAllTypeMachines() {
         Session session= sessionFactory.getCurrentSession();
-        List<TypeMachine> listSpisokTypeMachine=session.createQuery("from TypeMachine ").getResultList();
-        return listSpisokTypeMachine;
-    }
-
-
-    @Override
-    public List<String> getAllModel() {
-        Session session= sessionFactory.getCurrentSession();
-        List<String> listSpisokModel=session.createQuery("select modelMachine from Machine ").getResultList();
-        return listSpisokModel;
+        return session.createQuery("from TypeMachine ").getResultList();
     }
 
     @Override
-    public void saveClientRequest(ClientRequest clientRequest) {
+    public List<String> getAllModelName() {
         Session session= sessionFactory.getCurrentSession();
-        session.save(clientRequest);
+        return session.createQuery("select modelMachine from Machine ").getResultList();
     }
 
     @Override
-    public void updateClientRequest(ClientRequest clientRequest) {
-        Session session= sessionFactory.getCurrentSession();
-        session.saveOrUpdate(clientRequest);
-
-    }
-
-    @Override
-    public TypeMachine getTypeMachine(Integer numb) {
+    public TypeMachine getSingleTypeMachine(Integer numb) {
         Session session= sessionFactory.getCurrentSession();
         return session.get(TypeMachine.class,numb);
     }
 
     @Override
-    public Machine getMachine(Integer numb) {
+    public Machine getSingleMachine(Integer numb) {
         Session session= sessionFactory.getCurrentSession();
         Machine machine=session.get(Machine.class,numb);
         return machine;
     }
 
     @Override
-    public SerialNumber getSerialNumber(String str) {
+    public SerialNumber getSingleSerialNumber(String str) {
         Session session= sessionFactory.getCurrentSession();
         SerialNumber serialNumber=session.get(SerialNumber.class,str);
         return serialNumber;
@@ -75,7 +58,7 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
     }
 
     @Override
-    public ClientRequest getOneClientRequest(Integer idClientRequest) {
+    public ClientRequest getSingleClientRequest(Integer idClientRequest) {
         Session session= sessionFactory.getCurrentSession();
         return session.get(ClientRequest.class,idClientRequest);
     }

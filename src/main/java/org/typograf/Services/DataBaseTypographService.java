@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface DataBaseTypographService {
-    public List<Employee> getAllEmp();
+    List<Employee> getAllEmp();
 
     List<Employee> getListEmployeeForReportWork(Integer qualification, Integer idTypeMachine);
     List getWorkReportForOneEmp(int id_employee);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.typograf.DAO.*;
 import org.typograf.Services.DataBaseTypographService;
 import org.typograf.Services.MapsFromDBService;
+import org.typograf.Services.SaveOrUpdateService;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
@@ -21,8 +22,14 @@ import java.util.*;
 public class MyController {
     @Autowired
     private DataBaseTypographService dataBaseTypographService;
+
+    @Autowired
+    private SaveOrUpdateService saveOrUpdateService;
+
     @Autowired
     private MapsFromDBService mapsFromDBService;
+
+
 
     @Autowired
     TypeMachineDAO typeMachineDAO;
@@ -85,9 +92,9 @@ public class MyController {
     @RequestMapping("/saveorder")
     String SaveOrder(@ModelAttribute("ClientRequestId") ClientRequestId clientRequestId){
 
-        TypeMachine typeMachine= clientOrderDAO.getTypeMachine(clientRequestId.getIdTypeMachine());
-        Machine machine=clientOrderDAO.getMachine(clientRequestId.getIdMachine());
-        SerialNumber serialNumber=clientOrderDAO.getSerialNumber(clientRequestId.getIdSerialNumber());
+        TypeMachine typeMachine= clientOrderDAO.getSingleTypeMachine(clientRequestId.getIdTypeMachine());
+        Machine machine=clientOrderDAO.getSingleMachine(clientRequestId.getIdMachine());
+        SerialNumber serialNumber=clientOrderDAO.getSingleSerialNumber(clientRequestId.getIdSerialNumber());
 
         ClientRequest cr=new ClientRequest(
                 clientRequestId.getFirm(),
@@ -100,7 +107,7 @@ public class MyController {
                 clientRequestId.getDescProblem(),
                 clientRequestId.getDataWish());
 
-        clientOrderDAO.saveClientRequest(cr);
+        saveOrUpdateService.saveClientRequest(cr);
 
         return "redirect:/order";
     }
@@ -115,7 +122,7 @@ public class MyController {
 
     @RequestMapping("/updateinfo")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest, Model model){
-        ClientRequest singleClientRequest=clientOrderDAO.getOneClientRequest(idClientRequest);
+        ClientRequest singleClientRequest=clientOrderDAO.getSingleClientRequest(idClientRequest);
         model.addAttribute("ClientOrderUpdate",singleClientRequest);
 
         return "updateOrderPage";
@@ -123,7 +130,7 @@ public class MyController {
 
     @RequestMapping("/updateOrder")
     String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest singleClientRequest, Model model){
-        clientOrderDAO.updateClientRequest(singleClientRequest);
+        saveOrUpdateService.updateClientRequest(singleClientRequest);
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();

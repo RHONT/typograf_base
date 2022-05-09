@@ -8,13 +8,12 @@ import org.typograf.entity.TypeMachine;
 import java.util.List;
 
 public interface ClientOrderDAO {
-    public List<TypeMachine> spisokTypeMachines();
-    public List<String> getAllModel();
-    public void saveClientRequest(ClientRequest clientRequest);
-    public void updateClientRequest(ClientRequest clientRequest);
-    public TypeMachine getTypeMachine(Integer idTypeMachine);
-    public Machine getMachine(Integer idMachine);
-    public SerialNumber getSerialNumber(String str);
-    public List<ClientRequest> getAllClientRequest();
-    public ClientRequest getOneClientRequest(Integer idClientRequest);
+
+    List<TypeMachine> getAllTypeMachines();
+    List<String> getAllModelName();
+    TypeMachine getSingleTypeMachine(Integer idTypeMachine);
+    Machine getSingleMachine(Integer idMachine);
+    SerialNumber getSingleSerialNumber(String str);
+    List<ClientRequest> getAllClientRequest();
+    ClientRequest getSingleClientRequest(Integer idClientRequest);
 }
