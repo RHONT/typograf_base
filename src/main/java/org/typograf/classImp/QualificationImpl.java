@@ -15,9 +15,8 @@ public class QualificationImpl  implements QualificationDAO {
     @Autowired
     SessionFactory sessionFactory;
 
-    @Transactional
     @Override
-    public List<Qualification> getQuality() {
+    public List<Qualification> getAllQualities() {
         Session session= sessionFactory.getCurrentSession();
         return (List<Qualification>) session.createQuery("from Qualification").getResultList();
     }

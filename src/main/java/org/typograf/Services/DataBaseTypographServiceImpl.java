@@ -3,10 +3,8 @@ package org.typograf.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.typograf.DAO.EmployeeDAO;
-import org.typograf.DAO.WorkDAO;
-import org.typograf.entity.Employee;
-import org.typograf.entity.Work;
+import org.typograf.DAO.*;
+import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
 
 import java.time.LocalDate;
@@ -21,6 +19,15 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
 
     @Autowired
     private WorkDAO workDAO;
+
+    @Autowired
+    private TypeMachineAndModelDAO typeMachineDAO;
+
+    @Autowired
+    private ClientOrderDAO clientOrderDAO;
+
+    @Autowired
+    private QualificationDAO qualificationDAO;
 
     @Override
     public List<Employee> getAllEmp() {
@@ -51,5 +58,45 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
     @Override
     public List<EmployeeLinkedHashMap> fillWorkingCoverageOfDates(List<Employee> suitableEmployees, LocalDate wishDate) {
         return workDAO.fillWorkingCoverageOfDates(suitableEmployees, wishDate);
+    }
+
+    @Override
+    public List<TypeMachine> getAllTypeMachines() {
+        return typeMachineDAO.getAllTypeMachines();
+    }
+
+    @Override
+    public TypeMachine getSingleTypeMachine(Integer idTypeMachine) {
+        return typeMachineDAO.getSingleTypeMachine(idTypeMachine);
+    }
+
+    @Override
+    public List<String> getAllModelName() {
+        return typeMachineDAO.getAllModelName();
+    }
+
+    @Override
+    public Machine getSingleMachine(Integer idMachine) {
+        return typeMachineDAO.getSingleMachine(idMachine);
+    }
+
+    @Override
+    public SerialNumber getSingleSerialNumber(String idSerialNumber) {
+        return typeMachineDAO.getSingleSerialNumber(idSerialNumber);
+    }
+
+    @Override
+    public List<ClientRequest> getAllClientRequest() {
+        return clientOrderDAO.getAllClientRequest();
+    }
+
+    @Override
+    public ClientRequest getSingleClientRequest(Integer idClientRequest) {
+        return clientOrderDAO.getSingleClientRequest(idClientRequest);
+    }
+
+    @Override
+    public List<Qualification> getAllQualities() {
+        return qualificationDAO.getAllQualities();
     }
 }

@@ -29,16 +29,6 @@ public class MyController {
     @Autowired
     private MapsFromDBService mapsFromDBService;
 
-
-
-    @Autowired
-    TypeMachineDAO typeMachineDAO;
-    @Autowired
-    QualificationDAO qualificationDAO;
-    @Autowired
-    ClientOrderDAO clientOrderDAO;
-
-
     @RequestMapping("/")
     String NavigateMethod(){
         return "navigatePage";
@@ -53,7 +43,7 @@ public class MyController {
 
     @RequestMapping("/typemachine")
     String ShowAllMachine(Model model){
-        List<TypeMachine> allTM= typeMachineDAO.showAllTypeMachines();
+        List<TypeMachine> allTM= dataBaseTypographService.getAllTypeMachines();
         model.addAttribute("allType",allTM);
         model.addAttribute("new_type_machine",new TypeMachine());
         return "ShowAllMachineTypePage";
@@ -62,13 +52,13 @@ public class MyController {
     @RequestMapping("/save_new_type_machine")
     String SaveNewTypeMachine(@ModelAttribute("new_type_machine")
                                       TypeMachine typeMachine){
-        typeMachineDAO.saveTypeMachine(typeMachine);
+        saveOrUpdateService.saveTypeMachine(typeMachine);
         return "redirect:/typemachine";
     }
 
     @RequestMapping("/quality")
     String ShowQuery(Model model){
-        List<Qualification> qualificationList=qualificationDAO.getQuality();
+        List<Qualification> qualificationList=dataBaseTypographService.getAllQualities();
         model.addAttribute("qualEmps",qualificationList);
         return "qualityEmployeesPage";
     }
@@ -78,9 +68,7 @@ public class MyController {
         Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
         Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
         List<String> listSerial=mapsFromDBService.getSerialNumber();
-        System.out.println(mapTypeMachine);
-        System.out.println(mapMachine);
-        System.out.println(listSerial);
+
         ClientRequestId crId=new ClientRequestId();
         model.addAttribute("ClientRequestId",crId);
         model.addAttribute("typeMachine",mapTypeMachine);
@@ -92,9 +80,9 @@ public class MyController {
     @RequestMapping("/saveorder")
     String SaveOrder(@ModelAttribute("ClientRequestId") ClientRequestId clientRequestId){
 
-        TypeMachine typeMachine= clientOrderDAO.getSingleTypeMachine(clientRequestId.getIdTypeMachine());
-        Machine machine=clientOrderDAO.getSingleMachine(clientRequestId.getIdMachine());
-        SerialNumber serialNumber=clientOrderDAO.getSingleSerialNumber(clientRequestId.getIdSerialNumber());
+        TypeMachine typeMachine= dataBaseTypographService.getSingleTypeMachine(clientRequestId.getIdTypeMachine());
+        Machine machine=dataBaseTypographService.getSingleMachine(clientRequestId.getIdMachine());
+        SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequestId.getIdSerialNumber());
 
         ClientRequest cr=new ClientRequest(
                 clientRequestId.getFirm(),
@@ -114,7 +102,7 @@ public class MyController {
 
     @RequestMapping("/adminorder")
     String openListOrder(Model model){
-        List<ClientRequest> allClientRequest = clientOrderDAO.getAllClientRequest();
+        List<ClientRequest> allClientRequest = dataBaseTypographService.getAllClientRequest();
         model.addAttribute("admin_object",allClientRequest);
         return "adminOrderPage";
     }
@@ -122,7 +110,7 @@ public class MyController {
 
     @RequestMapping("/updateinfo")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest, Model model){
-        ClientRequest singleClientRequest=clientOrderDAO.getSingleClientRequest(idClientRequest);
+        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(idClientRequest);
         model.addAttribute("ClientOrderUpdate",singleClientRequest);
 
         return "updateOrderPage";
