@@ -41,14 +41,14 @@ public class MyController {
 
     @RequestMapping("/")
     String NavigateMethod(){
-        return "navigate";
+        return "navigatePage";
     }
 
     @RequestMapping("/emp")
     String ShowAllEmps(Model model){
         List<Employee> allEmps=dataBaseTypographService.getAllEmp();
         model.addAttribute("allEmps",allEmps);
-        return "showAllEmpsPlease";
+        return "showAllEmpsPage";
     }
 
     @RequestMapping("/typemachine")
@@ -56,7 +56,7 @@ public class MyController {
         List<TypeMachine> allTM= typeMachineDAO.showAllTypeMachines();
         model.addAttribute("allType",allTM);
         model.addAttribute("new_type_machine",new TypeMachine());
-        return "ShowAllMachineType";
+        return "ShowAllMachineTypePage";
     }
 
     @RequestMapping("/save_new_type_machine")
@@ -70,7 +70,7 @@ public class MyController {
     String ShowQuery(Model model){
         List<Qualification> qualificationList=qualificationDAO.getQuality();
         model.addAttribute("qualEmps",qualificationList);
-        return "qualityEmp";
+        return "qualityEmployeesPage";
     }
 
     @RequestMapping("/order")
@@ -86,7 +86,7 @@ public class MyController {
         model.addAttribute("typeMachine",mapTypeMachine);
         model.addAttribute("modelMachine",mapMachine);
         model.addAttribute("SerialNumberMachine",listSerial);
-        return "client-order";
+        return "clientOrderPage";
     }
 
     @RequestMapping("/saveorder")
@@ -116,7 +116,7 @@ public class MyController {
     String openListOrder(Model model){
         List<ClientRequest> allClientRequest = clientOrderDAO.getAllClientRequest();
         model.addAttribute("admin_object",allClientRequest);
-        return "adminOrder";
+        return "adminOrderPage";
     }
 
 
@@ -143,7 +143,7 @@ public class MyController {
         model.addAttribute("Employee",SuitableEmployees);
         model.addAttribute("linked_list",workingCoverageOfDates.iterator());
 
-        return "updateOrderWork";
+        return "updateOrderWorkPage";
     }
     @RequestMapping("/tableinfo")
     String ShowOneDayTabelEmpl(@ModelAttribute("id_empl") Integer id_emp,
@@ -153,7 +153,7 @@ public class MyController {
         List<Work> workList=dataBaseTypographService.getOneReportDay(id_emp,dataWork);
         model.addAttribute("listWork",workList);
 
-        return "SelectedTabelDay";
+        return "SelectedTabelDayPage";
     }
 
 
@@ -177,7 +177,7 @@ public class MyController {
 ////        System.out.println(mapForClientOrderView);
 //        model.addAttribute("typeMachine",listSerial);
 //        model.addAttribute("fighter_attr",f);
-        return "SelectedTabelDay";
+        return "SelectedTabelDayPage";
     }
 
     @RequestMapping("/testnow")
