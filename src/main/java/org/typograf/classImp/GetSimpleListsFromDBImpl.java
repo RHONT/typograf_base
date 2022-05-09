@@ -29,20 +29,20 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
 
 
     @Override
-    public List<String> spisokModel() {
+    public List<String> getAllModel() {
         Session session= sessionFactory.getCurrentSession();
         List<String> listSpisokModel=session.createQuery("select modelMachine from Machine ").getResultList();
         return listSpisokModel;
     }
 
     @Override
-    public void saveOrder(ClientRequest clientRequest) {
+    public void saveClientRequest(ClientRequest clientRequest) {
         Session session= sessionFactory.getCurrentSession();
         session.save(clientRequest);
     }
 
     @Override
-    public void updateOrder(ClientRequest clientRequest) {
+    public void updateClientRequest(ClientRequest clientRequest) {
         Session session= sessionFactory.getCurrentSession();
         session.saveOrUpdate(clientRequest);
 
@@ -51,16 +51,13 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
     @Override
     public TypeMachine getTypeMachine(Integer numb) {
         Session session= sessionFactory.getCurrentSession();
-        TypeMachine typeMachine=session.get(TypeMachine.class,numb);
-        System.out.println(typeMachine);
-        return typeMachine;
+        return session.get(TypeMachine.class,numb);
     }
 
     @Override
     public Machine getMachine(Integer numb) {
         Session session= sessionFactory.getCurrentSession();
         Machine machine=session.get(Machine.class,numb);
-        System.out.println(machine);
         return machine;
     }
 
@@ -68,21 +65,18 @@ public class GetSimpleListsFromDBImpl implements ClientOrderDAO {
     public SerialNumber getSerialNumber(String str) {
         Session session= sessionFactory.getCurrentSession();
         SerialNumber serialNumber=session.get(SerialNumber.class,str);
-        System.out.println(serialNumber);
         return serialNumber;
     }
 
     @Override
     public List<ClientRequest> getAllClientRequest() {
         Session session= sessionFactory.getCurrentSession();
-        List<ClientRequest> allClientRequests=session.createQuery("from ClientRequest").getResultList();
-        return allClientRequests;
+        return session.createQuery("from ClientRequest").getResultList();
     }
 
     @Override
     public ClientRequest getOneClientRequest(Integer idClientRequest) {
         Session session= sessionFactory.getCurrentSession();
-        ClientRequest singleClientRequest=session.get(ClientRequest.class,idClientRequest);
-        return singleClientRequest;
+        return session.get(ClientRequest.class,idClientRequest);
     }
 }

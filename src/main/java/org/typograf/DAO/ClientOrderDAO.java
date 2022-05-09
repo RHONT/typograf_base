@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ClientOrderDAO {
     public List<TypeMachine> spisokTypeMachines();
-    public List<String> spisokModel();
-    public void saveOrder(ClientRequest clientRequest);
-    public void updateOrder(ClientRequest clientRequest);
+    public List<String> getAllModel();
+    public void saveClientRequest(ClientRequest clientRequest);
+    public void updateClientRequest(ClientRequest clientRequest);
     public TypeMachine getTypeMachine(Integer idTypeMachine);
     public Machine getMachine(Integer idMachine);
     public SerialNumber getSerialNumber(String str);

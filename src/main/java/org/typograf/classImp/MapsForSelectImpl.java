@@ -21,27 +21,26 @@ public class MapsForSelectImpl implements MapsForClientDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
     @Override
-    public Map<Integer, String> GetListTypeMachines() {
+    public Map<Integer, String> getListTypeMachines() {
         Session session= sessionFactory.getCurrentSession();
         List<TypeMachine> listBuffer=session.createQuery("from TypeMachine ").getResultList();
         Map<Integer,String> mapBuffer=
                 listBuffer.stream().collect(Collectors.toMap(TypeMachine::getId,TypeMachine::getNameType));
         return mapBuffer;
     }
-    @Transactional
+
     @Override
-    public Map<Integer, String> GetListMachines() {
+    public Map<Integer, String> getListMachines() {
         Session session= sessionFactory.getCurrentSession();
         List<Machine> listBuffer=session.createQuery("from Machine ").getResultList();
         Map<Integer,String> mapBuffer=
                 listBuffer.stream().collect(Collectors.toMap(Machine::getId,Machine::getModelMachine));
         return mapBuffer;
     }
-    @Transactional
+
     @Override
-    public List<String> GetSerialNumber() {
+    public List<String> getSerialNumber() {
         Session session= sessionFactory.getCurrentSession();
         List<String> listbuffer=session.createQuery("select id from SerialNumber").getResultList();
 

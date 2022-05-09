@@ -42,40 +42,15 @@
         </td></tr>
         <tr><td> Имя Фамилия:</td><td><form:input path="nameClient"/></td></tr>
         <tr><td>Номер телефона:</td><td><form:input path="phoneClient"/></td></tr>
-        <tr><td>Желаема дата:</td><td><form:input path="dataWish"/></td></tr>
+        <tr><td>Желаемая дата:</td><td><form:input path="dataWish"/></td></tr>
         <tr><td>Адрес:</td><td><form:input path="adress"/></td></tr>
         <tr><td>Описание проблемы:</td><td><form:input path="descProblem"/></td></tr>
         <tr><td><td><input type="submit" value="Отправить"></td></tr>
     </table>
 </form:form>
-
-
-
+<br>
 <footer>
     <div style="text-align: center;">Доступные инженеры</div>
 </footer>
-
-
-
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <th>Имя</th>--%>
-<%--        <th>Фамилия</th>--%>
-<%--        <th>Почта</th>--%>
-<%--        <th>Телефон</th>--%>
-<%--    </tr>--%>
-
-
-<%--    <c:forEach var="emp" items="${allEmps}">--%>
-<%--        <tr>--%>
-<%--            <td>${emp.name}</td>--%>
-<%--            <td>${emp.surname}</td>--%>
-<%--            <td>${emp.email}</td>--%>
-<%--            <td>${emp.phone}</td>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
-
-<%--</table>--%>
-
 </body>
 </html>

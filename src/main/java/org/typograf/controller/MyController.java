@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.typograf.DAO.*;
+import org.typograf.Services.DataBaseTypographService;
+import org.typograf.Services.MapsFromDBService;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
@@ -18,17 +20,17 @@ import java.util.*;
 @Controller
 public class MyController {
     @Autowired
-    EmployeeDAO employeeDAO;
+    private DataBaseTypographService dataBaseTypographService;
+    @Autowired
+    private MapsFromDBService mapsFromDBService;
+
     @Autowired
     TypeMachineDAO typeMachineDAO;
     @Autowired
     QualificationDAO qualificationDAO;
     @Autowired
     ClientOrderDAO clientOrderDAO;
-    @Autowired
-    MapsForClientDAO mapsForClientDAO;
-    @Autowired
-    WorkDAO workDAO;
+
 
     @RequestMapping("/")
     String NavigateMethod(){
@@ -37,7 +39,7 @@ public class MyController {
 
     @RequestMapping("/emp")
     String ShowAllEmps(Model model){
-        List<Employee> allEmps=employeeDAO.getAllEmp();
+        List<Employee> allEmps=dataBaseTypographService.getAllEmp();
         model.addAttribute("allEmps",allEmps);
         return "showAllEmpsPlease";
     }
@@ -66,9 +68,9 @@ public class MyController {
 
     @RequestMapping("/order")
     String ShowOrder(Model model){
-        Map<Integer,String> mapTypeMachine=mapsForClientDAO.GetListTypeMachines();
-        Map<Integer,String> mapMachine=mapsForClientDAO.GetListMachines();
-        List<String> listSerial=mapsForClientDAO.GetSerialNumber();
+        Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
+        Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
+        List<String> listSerial=mapsFromDBService.getSerialNumber();
         System.out.println(mapTypeMachine);
         System.out.println(mapMachine);
         System.out.println(listSerial);
@@ -98,7 +100,7 @@ public class MyController {
                 clientRequestId.getDescProblem(),
                 clientRequestId.getDataWish());
 
-        clientOrderDAO.saveOrder(cr);
+        clientOrderDAO.saveClientRequest(cr);
 
         return "redirect:/order";
     }
@@ -121,14 +123,14 @@ public class MyController {
 
     @RequestMapping("/updateOrder")
     String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest singleClientRequest, Model model){
-        clientOrderDAO.updateOrder(singleClientRequest);
+        clientOrderDAO.updateClientRequest(singleClientRequest);
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
 
-        List<Employee> SuitableEmployees= workDAO.GetListEmployee(levelDifficulty,idTypeMachine);
+        List<Employee> SuitableEmployees= dataBaseTypographService.getListEmployeeForReportWork(levelDifficulty,idTypeMachine);
         List<EmployeeLinkedHashMap> workingCoverageOfDates=
-                workDAO.fillWorkingCoverageofDates(SuitableEmployees,singleClientRequest.getDataWish());
+                dataBaseTypographService.fillWorkingCoverageOfDates(SuitableEmployees,singleClientRequest.getDataWish());
 
         model.addAttribute("ClientOrderUpdate",singleClientRequest);
         model.addAttribute("Employee",SuitableEmployees);
@@ -141,7 +143,7 @@ public class MyController {
                                @ModelAttribute("data_work") String dataWorkStr,
                                Model model){
         LocalDate dataWork= LocalDate.parse(dataWorkStr);
-        List<Work> workList=workDAO.getOneTabelDay(id_emp,dataWork);
+        List<Work> workList=dataBaseTypographService.getOneReportDay(id_emp,dataWork);
         model.addAttribute("listWork",workList);
 
         return "SelectedTabelDay";
@@ -159,7 +161,7 @@ public class MyController {
     // контролллеры для тестового класса Fight
     @RequestMapping("/test")
     String ShowTestPage(Model model){
-        List<Work> workList=workDAO.getAllTabel();
+        List<Work> workList=dataBaseTypographService.getAllReportEmployees();
         model.addAttribute("listWork",workList);
 //        Fighter f=new Fighter();
 //        List<String> listSerial=mapsForClientDAO.GetSerialNumber();
