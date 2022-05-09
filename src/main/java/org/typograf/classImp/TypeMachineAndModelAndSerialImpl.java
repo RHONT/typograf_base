@@ -12,7 +12,7 @@ import org.typograf.entity.TypeMachine;
 import java.util.List;
 
 @Repository
-public class TypeMachineAndModelImpl implements TypeMachineAndModelDAO {
+public class TypeMachineAndModelAndSerialImpl implements TypeMachineAndModelDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
