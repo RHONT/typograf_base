@@ -13,6 +13,8 @@ import org.typograf.Services.SaveOrUpdateService;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
+import org.typograf.functionPack.WorkDay;
+import org.typograf.functionPack.WorkHours;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -137,8 +139,13 @@ public class MyController {
     @RequestMapping("/tableinfo")
     String ShowOneDayTabelEmpl(@ModelAttribute("clientOrderUpdate") ClientRequest clientRequest,
                                @RequestParam("id_empl") Integer id_emp,
-                               @RequestParam("SelectedDate") String SelectedDate,
+                               @RequestParam("data_work") String selectedDate,
+                               @RequestParam("workDay") int[] workDay,
                                Model model){
+        WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
+        workDay1.setWork(workDay);
+        WorkHours hours=new WorkHours();
+//        LocalDate selectedSingleDate=LocalDate.parse(selectedDate);
 
         Work newWork=new Work();
         Employee singleEmployee=dataBaseTypographService.getSingleEmployee(id_emp);
@@ -147,9 +154,12 @@ public class MyController {
         newWork.setLaidDownTime(clientRequest.getTimeForecast());
         newWork.setDateVisit(clientRequest.getDataWish());
 
-        List<Work> reportDay=dataBaseTypographService.getOneReportDay(id_emp,LocalDate.parse(SelectedDate));
+
+        List<Work> reportDay=dataBaseTypographService.getOneReportDay(id_emp,LocalDate.parse(selectedDate));
         model.addAttribute("listWork",reportDay);
         model.addAttribute("newWorkDay",newWork);
+        model.addAttribute("hours",hours.fillHours(workDay1));
+
 
         return "SelectedTabelDayPage";
     }

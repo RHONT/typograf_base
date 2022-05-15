@@ -8,8 +8,8 @@ public class WorkDay {
     int index = 0;
     int[] work = new int[10];
 
-    public WorkDay(Integer index) {
-        this.index = index;
+    public WorkDay(Integer dayOfMonth) {
+        this.index = dayOfMonth;
         for (int i = 0; i < work.length; i++) {
             work[i] = 1;
         }
@@ -67,5 +67,17 @@ public class WorkDay {
 
     public int getIndex() {
         return index;
+    }
+
+    public int[] getWork() {
+        return work;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public void setWork(int[] work) {
+        this.work = work;
     }
 }

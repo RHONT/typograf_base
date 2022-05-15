@@ -29,9 +29,7 @@
     <br>
     difficulty: <form:input path="difficilty" size="2"/> time_forecast: <form:input path="timeForecast" size="2"/>
     data_wish: <form:input path="dataWish" size="11"/>
-<%--    <c:url>--%>
-<%--        <c:param name="idClientOrder" value="${clientOrderUpdate}"/>--%>
-<%--    </c:url>--%>
+
     <br>
     <input type="submit" value="Update">
     </tr>
@@ -55,7 +53,7 @@
                 <c:url var="TabelButton" value="/tableinfo">
                     <c:param name="id_empl" value="${emp.id}"/>
                     <c:param name="data_work" value="${tr.key}"/>
-
+                    <c:param name="workDay" value="${tr.value.work}"/>
                 </c:url>
 
                 <td>${tr.value.index}</td>

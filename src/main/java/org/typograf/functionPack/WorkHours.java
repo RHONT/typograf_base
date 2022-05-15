@@ -1,17 +1,20 @@
 package org.typograf.functionPack;
 
-public enum WorkHours {
+import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-        SHIELD(1, 200),
-        POITIO_OF_HEALTH(2, 100),
-        MOLOTOV(3, 150);
+public class WorkHours {
 
-        private int numb_for_tovar;
-        private int coast;
+    public LinkedHashMap<Integer,String> fillHours(WorkDay selectHourseDay){
+        LinkedHashMap<Integer,String> hours=new LinkedHashMap<>();
 
-        market(int buf_number, int buf_coast) {
-
-            this.numb_for_tovar = buf_number;
-            this.coast = buf_coast;
-
+        for (int i=0;i<10;i++){
+            if (selectHourseDay.work[i]==1) {
+                hours.put(10+i,String.valueOf(10+i)+":00");
+            }
+        }
+        return hours;
+    }
 }

@@ -3,6 +3,7 @@ package for_test;
 
 import org.typograf.functionPack.EmployeeLinkedHashMap;
 import org.typograf.functionPack.WorkDay;
+import org.typograf.functionPack.WorkHours;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,8 +17,9 @@ public class TestDataTime {
 
 
     public static void main(String[] args) {
-        LocalDate locDate1=LocalDate.of(2022, Month.MAY,10);
-        EmployeeLinkedHashMap EmpMap=new EmployeeLinkedHashMap(locDate1);
+        LocalDate locDate1=LocalDate.of(2022, Month.MAY,16);
+        EmployeeLinkedHashMap empMap=new EmployeeLinkedHashMap(locDate1);
+        WorkHours hours=new WorkHours();
 
 
 
@@ -26,24 +28,27 @@ public class TestDataTime {
         LocalTime lt3=LocalTime.of(13,00);
         LocalTime lt4=LocalTime.of(19,00);
 
-        WorkDay wd=new WorkDay(50);
-        wd.byWorkNow(lt1,(byte) 4);
+        WorkDay wd=new WorkDay(locDate1.getDayOfMonth());
+        wd.byWorkNow(lt1,4);
         System.out.println(wd);
-        wd.byWorkNow(lt2,(byte) 3);
+        wd.byWorkNow(lt2,3);
         System.out.println(wd);
-//        wd.byWorkNow(lt3,(byte) 2);
+//
+//        wd.byWorkNow(lt3,2);
 //        System.out.println(wd);
-//        wd.byWorkNow(lt4,(byte) 1);
+//        wd.byWorkNow(lt4,1);
 //        System.out.println(wd);
-//        EmpMap.workSession.replace(4,wd);
-//        EmpMap.workSession.get(4).byWorkNow(lt2,(byte) 3);
-//        EmpMap.workSession.get(10).byWorkNow(lt4,(byte) 3);
-//        EmpMap.workSession.get(10).byWorkNow(lt4,(byte) 1);
+
+        empMap.workSession.replace(locDate1,wd);
+        System.out.println(hours.fillHours(wd));
 
 
-//        System.out.println(EmpMap.workSession.get(4).checkDayForWork((byte) 2));
 
-        Iterator<Map.Entry<LocalDate,WorkDay>> iterator2=EmpMap.workSession.entrySet().iterator();
+
+
+
+
+        Iterator<Map.Entry<LocalDate,WorkDay>> iterator2=empMap.workSession.entrySet().iterator();
         while (iterator2.hasNext()){
             Map.Entry<LocalDate,WorkDay> entry=iterator2.next();
             System.out.println(entry);
