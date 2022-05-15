@@ -36,7 +36,7 @@ public class ClientRequest {
     @Column(name = "phone_client", length = 30)
     private String phoneClient;
 
-    @Lob
+
     @Column(name = "desc_problem")
     private String descProblem;
 
