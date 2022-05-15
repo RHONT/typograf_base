@@ -140,10 +140,9 @@ public class MyController {
     String ShowOneDayTabelEmpl(@ModelAttribute("clientOrderUpdate") ClientRequest clientRequest,
                                @RequestParam("id_empl") Integer id_emp,
                                @RequestParam("data_work") String selectedDate,
-                               @RequestParam("workDay") int[] workDay,
                                Model model){
-        WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
-        workDay1.setWork(workDay);
+//        WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
+//        workDay1.setWork(workDay);
         WorkHours hours=new WorkHours();
 //        LocalDate selectedSingleDate=LocalDate.parse(selectedDate);
 
@@ -158,7 +157,7 @@ public class MyController {
         List<Work> reportDay=dataBaseTypographService.getOneReportDay(id_emp,LocalDate.parse(selectedDate));
         model.addAttribute("listWork",reportDay);
         model.addAttribute("newWorkDay",newWork);
-        model.addAttribute("hours",hours.fillHours(workDay1));
+//        model.addAttribute("hours",hours.fillHours(workDay1));
 
 
         return "SelectedTabelDayPage";
