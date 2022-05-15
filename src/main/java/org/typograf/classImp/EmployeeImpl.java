@@ -21,4 +21,10 @@ public class EmployeeImpl implements EmployeeDAO {
         List<Employee> emp=session.createQuery("from Employee",Employee.class).getResultList();
         return emp;
     }
+
+    @Override
+    public Employee getSingleEmployee(Integer id_Employee) {
+        Session session=sessionFactory.getCurrentSession();
+        return session.get(Employee.class,id_Employee);
+    }
 }

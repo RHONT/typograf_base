@@ -102,7 +102,7 @@ public class MyController {
     @RequestMapping("/adminorder")
     String openListOrder(Model model){
         List<ClientRequest> allClientRequest = dataBaseTypographService.getAllClientRequest();
-        model.addAttribute("admin_object",allClientRequest);
+        model.addAttribute("allClientRequests",allClientRequest);
         return "adminOrderPage";
     }
 
@@ -116,7 +116,7 @@ public class MyController {
     }
 
     @RequestMapping("/updateOrder")
-    String updateClientResult(@ModelAttribute("ClientOrderUpdate") ClientRequest singleClientRequest, Model model){
+    String updateClientResult(@ModelAttribute("clientOrderUpdate") ClientRequest singleClientRequest, Model model){
         saveOrUpdateService.updateClientRequest(singleClientRequest);
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
@@ -128,17 +128,28 @@ public class MyController {
 
         model.addAttribute("ClientOrderUpdate",singleClientRequest);
         model.addAttribute("Employee",SuitableEmployees);
-        model.addAttribute("linked_list",workingCoverageOfDates.iterator());
+        model.addAttribute("WorkingCoverage",workingCoverageOfDates.iterator());
 
         return "updateOrderWorkPage";
     }
+
+
     @RequestMapping("/tableinfo")
-    String ShowOneDayTabelEmpl(@ModelAttribute("id_empl") Integer id_emp,
-                               @ModelAttribute("data_work") String dataWorkStr,
+    String ShowOneDayTabelEmpl(@ModelAttribute("clientOrderUpdate") ClientRequest clientRequest,
+                               @RequestParam("id_empl") Integer id_emp,
+                               @RequestParam("SelectedDate") String SelectedDate,
                                Model model){
-        LocalDate dataWork= LocalDate.parse(dataWorkStr);
-        List<Work> workList=dataBaseTypographService.getOneReportDay(id_emp,dataWork);
-        model.addAttribute("listWork",workList);
+
+        Work newWork=new Work();
+        Employee singleEmployee=dataBaseTypographService.getSingleEmployee(id_emp);
+        newWork.setIdClientRequest(clientRequest);
+        newWork.setIdEmployee(singleEmployee);
+        newWork.setLaidDownTime(clientRequest.getTimeForecast());
+        newWork.setDateVisit(clientRequest.getDataWish());
+
+        List<Work> reportDay=dataBaseTypographService.getOneReportDay(id_emp,LocalDate.parse(SelectedDate));
+        model.addAttribute("listWork",reportDay);
+        model.addAttribute("newWorkDay",newWork);
 
         return "SelectedTabelDayPage";
     }

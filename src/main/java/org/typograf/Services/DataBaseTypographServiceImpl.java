@@ -34,6 +34,10 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
         return employeeDAO.getAllEmp();
     }
 
+    @Override
+    public Employee getSingleEmployee(Integer id_Employee) {
+        return employeeDAO.getSingleEmployee(id_Employee);
+    }
 
     @Override
     public List<Employee> getListEmployeeForReportWork(Integer qualification, Integer idTypeMachine) {

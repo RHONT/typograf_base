@@ -5,5 +5,6 @@ import org.typograf.entity.Employee;
 import java.util.List;
 
 public interface EmployeeDAO {
-    public List<Employee> getAllEmp();
+    List<Employee> getAllEmp();
+    Employee getSingleEmployee(Integer id_Employee);
 }

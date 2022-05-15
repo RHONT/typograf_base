@@ -9,6 +9,7 @@ import java.util.List;
 public interface DataBaseTypographService {
 
     List<Employee> getAllEmp();
+    Employee getSingleEmployee(Integer id_Employee);
 
     List<Employee> getListEmployeeForReportWork(Integer qualification, Integer idTypeMachine);
     List getWorkReportForOneEmp(int id_employee);

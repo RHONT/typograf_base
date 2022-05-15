@@ -15,9 +15,10 @@
 </head>
 <body>
 
-<form:form modelAttribute="ClientOrderUpdate" action="updateOrder">
+<form:form modelAttribute="clientOrderUpdate" action="updateOrder">
 
     <form:hidden path="id"/>
+
 
     type_machine: <form:input size="7" path="idTypeMachine.id"/>
     machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
@@ -28,6 +29,9 @@
     <br>
     difficulty: <form:input path="difficilty" size="2"/> time_forecast: <form:input path="timeForecast" size="2"/>
     data_wish: <form:input path="dataWish" size="11"/>
+<%--    <c:url>--%>
+<%--        <c:param name="idClientOrder" value="${clientOrderUpdate}"/>--%>
+<%--    </c:url>--%>
     <br>
     <input type="submit" value="Update">
     </tr>
@@ -46,15 +50,16 @@
         </table>
         <table>
 
-            <c:forEach var="tr" items="${linked_list.next().workSession}" >
+            <c:forEach var="tr" items="${WorkingCoverage.next().workSession}" >
 
                 <c:url var="TabelButton" value="/tableinfo">
                     <c:param name="id_empl" value="${emp.id}"/>
                     <c:param name="data_work" value="${tr.key}"/>
+
                 </c:url>
 
                 <td>${tr.value.index}</td>
-                <td>${tr.value.ReturnDayForWorkStatus(ClientOrderUpdate.timeForecast)}</td>
+                <td>${tr.value.ReturnDayForWorkStatus(clientOrderUpdate.timeForecast)}</td>
                 <td><td><input type="button" value="go" onclick="window.location.href='${TabelButton}'"/></td></td>
             </c:forEach>
         </table>

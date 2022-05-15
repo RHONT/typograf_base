@@ -55,6 +55,7 @@ public class Work {
     public void setIdClientRequest(ClientRequest idClientRequest) {
         this.idClientRequest = idClientRequest;
     }
+    
 
     public LocalDate getDateVisit() {
         return dateVisit;

@@ -25,22 +25,22 @@
         <th width=4%></th>
     </tr>
 
-    <c:forEach var="admin_atr" items="${admin_object}">
+    <c:forEach var="allClentRequestPage" items="${allClientRequests}">
 
         <c:url var="UpdateButton" value="/updateinfo">
-            <c:param name="ClientOrderID" value="${admin_atr.id}"/>
+            <c:param name="ClientOrderID" value="${allClentRequestPage.id}"/>
         </c:url>
         <tr align="left" valign="top">
 
-            <td>${admin_atr.idTypeMachine.nameType}<br>${admin_atr.idMachine.modelMachine}
-                <br>${admin_atr.idSerialNumber.id}</td>
+            <td>${allClentRequestPage.idTypeMachine.nameType}<br>${allClentRequestPage.idMachine.modelMachine}
+                <br>${allClentRequestPage.idSerialNumber.id}</td>
 
-            <td>${admin_atr.id}<br>${admin_atr.firm}<br>${admin_atr.innFirm}<br>${admin_atr.nameClient}<br>
-                    ${admin_atr.phoneClient}<br>${admin_atr.adress}<br>${admin_atr.dataWish}</td>
+            <td>${allClentRequestPage.id}<br>${allClentRequestPage.firm}<br>${allClentRequestPage.innFirm}<br>${allClentRequestPage.nameClient}<br>
+                    ${allClentRequestPage.phoneClient}<br>${allClentRequestPage.adress}<br>${allClentRequestPage.dataWish}</td>
 
-            <td>${admin_atr.descProblem}</td>
-            <td align="center" valign="middle">${admin_atr.difficilty}</td>
-            <td align="center" valign="middle">${admin_atr.timeForecast}</td>
+            <td>${allClentRequestPage.descProblem}</td>
+            <td align="center" valign="middle">${allClentRequestPage.difficilty}</td>
+            <td align="center" valign="middle">${allClentRequestPage.timeForecast}</td>
 
             <td align="center" valign="middle"><input type="button" value="Render" onclick="window.location.href='${UpdateButton}'"/></td>
         </tr>
