@@ -38,10 +38,21 @@
 
 <br>
     <form:form modelAttribute="newWorkDay" action="/updateWorkDay">
-        Time_Start: <form:input size="7" path="timeStart"/>
+        <form:hidden path="id"/>
+        Time for start:
+        <form:select path="timeStart">
+            <form:options items="${hours}"/>
+        </form:select>
+
+          LaidDownTime: ${newWorkDay.laidDownTime}
         <br>
         <input type="submit" value="Update">
     </form:form>
+
+    <c:forEach var="elementMaps" items="${hours}">
+        <${elementMaps.value}>
+        <br>
+    </c:forEach>
 
 </body>
 </html>

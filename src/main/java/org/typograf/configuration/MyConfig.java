@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.typograf.functionPack.WorkDay;
 
 
 import javax.sql.DataSource;
@@ -40,7 +42,7 @@ public class MyConfig implements WebMvcConfigurer {
         ComboPooledDataSource dataSource=new ComboPooledDataSource();
         try {
             dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/typographical");
+            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/typographical?useSSL=false");
             dataSource.setUser("root");
             dataSource.setPassword("springcourse");
         } catch (PropertyVetoException e) {

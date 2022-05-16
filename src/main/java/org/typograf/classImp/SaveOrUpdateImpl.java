@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.typograf.DAO.SaveOrUpdateDAO;
 import org.typograf.entity.ClientRequest;
 import org.typograf.entity.TypeMachine;
+import org.typograf.entity.Work;
 
 @Repository
 public class SaveOrUpdateImpl implements SaveOrUpdateDAO {
@@ -30,5 +31,12 @@ public class SaveOrUpdateImpl implements SaveOrUpdateDAO {
     public void saveTypeMachine(TypeMachine typeMachine) {
         Session session=sessionFactory.getCurrentSession();
         session.save(typeMachine);
+    }
+
+    @Override
+    public void saveWork(Work work) {
+        Session session=sessionFactory.getCurrentSession();
+        session.save(work);
+
     }
 }

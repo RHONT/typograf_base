@@ -41,6 +41,13 @@ public class TestDataTime {
 
         empMap.workSession.replace(locDate1,wd);
         System.out.println(hours.fillHours(wd));
+        System.out.println("str");
+        System.out.println(wd.returnArrayString());
+        WorkDay wdTest=new WorkDay(1);
+        wdTest.returnArrayInteger(wd.returnArrayString());
+        System.out.println("Новый день");
+        System.out.println(Arrays.toString(wdTest.getWork()));
+
 
 
 

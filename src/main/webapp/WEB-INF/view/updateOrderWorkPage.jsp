@@ -20,6 +20,7 @@
     <form:hidden path="id"/>
 
 
+
     type_machine: <form:input size="7" path="idTypeMachine.id"/>
     machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
     <br>
@@ -33,18 +34,13 @@
     <br>
     <input type="submit" value="Update">
     </tr>
-
-</form:form>
-
-<br>
-
     <c:forEach var="emp" items="${Employee}" >
         <table>
-        <tr>
-            <td>${emp.name}</td>
-            <td>${emp.surname}</td>
-            <td> [ ${emp.phone} ] </td>
-        </tr>
+            <tr>
+                <td>${emp.name}</td>
+                <td>${emp.surname}</td>
+                <td> [ ${emp.phone} ] </td>
+            </tr>
         </table>
         <table>
 
@@ -53,7 +49,9 @@
                 <c:url var="TabelButton" value="/tableinfo">
                     <c:param name="id_empl" value="${emp.id}"/>
                     <c:param name="data_work" value="${tr.key}"/>
-                    <c:param name="workDay" value="${tr.value.work}"/>
+                    <c:param name="arrayHours" value="${tr.value.returnArrayString()}"/>
+                    <c:param name="id_clientOrder" value="${clientOrderUpdate.id}"/>
+
                 </c:url>
 
                 <td>${tr.value.index}</td>
@@ -64,7 +62,13 @@
 
     </c:forEach>
 
-</table>
+    </table>
+
+</form:form>
+
+<br>
+
+
 
 </body>
 </html>

@@ -80,4 +80,23 @@ public class WorkDay {
     public void setWork(int[] work) {
         this.work = work;
     }
+
+    public String returnArrayString(){
+        String hoursArray = new String();
+
+        for(int i=0;i<work.length;i++){
+            hoursArray=hoursArray.concat(String.valueOf(work[i])).concat(" ");
+        }
+
+        return hoursArray;
+    }
+    public void returnArrayInteger(String returnedStringArray){
+        String[] arrayHours=new String[10];
+        arrayHours=returnedStringArray.split(" ");
+
+        for(int i=0;i<work.length;i++){
+            work[i]=Integer.valueOf(arrayHours[i]);
+        }
+
+    }
 }
