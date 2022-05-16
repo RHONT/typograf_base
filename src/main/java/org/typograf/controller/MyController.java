@@ -145,18 +145,17 @@ public class MyController {
                                Model model){
 
         ClientRequest singleRequest=dataBaseTypographService.getSingleClientRequest(id_clientOrderUpdate);
+        Employee singleEmployee=dataBaseTypographService.getSingleEmployee(id_emp);
         WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
         workDay1.returnArrayInteger(arrayHours);
          WorkHours hours=new WorkHours();
-//        LocalDate selectedSingleDate=LocalDate.parse(selectedDate);
+//        попробовать без дергания ключа, раз уж находимся в нужном scope
 
         Work newWork=new Work();
-        Employee singleEmployee=dataBaseTypographService.getSingleEmployee(id_emp);
 
         newWork.setIdClientRequest(singleRequest);
         newWork.setIdEmployee(singleEmployee);
         newWork.setLaidDownTime(singleRequest.getTimeForecast());
-//        newWork.setLaidDownTime(clientRequest.getTimeForecast());
         newWork.setDateVisit(singleRequest.getDataWish());
 
 
@@ -165,15 +164,13 @@ public class MyController {
         model.addAttribute("newWorkDay",newWork);
         model.addAttribute("hours",hours.fillHours(workDay1));
 
-
         return "selectedTabelDayPage";
     }
 
     @RequestMapping("/updateWorkDay")
     String updateNewWorkDay(@ModelAttribute("newWorkDay") Work work){
         saveOrUpdateService.saveWork(work);
-
-        return "redirect:/updateWorkDay";
+        return "redirect:/";
     }
 
 

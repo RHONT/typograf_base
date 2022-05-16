@@ -1,5 +1,7 @@
 package org.typograf.entity;
 
+import net.bytebuddy.agent.builder.AgentBuilder;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Employee {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Qualification> qualificationList;
 
     @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL)

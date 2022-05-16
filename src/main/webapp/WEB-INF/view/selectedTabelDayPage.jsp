@@ -37,7 +37,7 @@
 </table>
 
 <br>
-    <form:form modelAttribute="newWorkDay" action="/updateWorkDay">
+    <form:form modelAttribute="newWorkDay" action="updateWorkDay">
         <form:hidden path="id"/>
         Time for start:
         <form:select path="timeStart">
@@ -50,9 +50,13 @@
     </form:form>
 
     <c:forEach var="elementMaps" items="${hours}">
-        <${elementMaps.value}>
+        <${elementMaps.key}>
         <br>
+        <${elementMaps.value}>
     </c:forEach>
+
+<br>
+${newWorkDay.idEmployee.id}
 
 </body>
 </html>

@@ -10,11 +10,11 @@ public class SerialNumber {
     @Column(name = "id_serial_number", nullable = false, length = 30)
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_machine", nullable = false)
     private Machine machine;
 
-    @OneToMany(mappedBy = "idSerialNumber")
+    @OneToMany(mappedBy = "idSerialNumber", fetch = FetchType.EAGER)
     private List<ClientRequest> ClientSerialNumber;
 
     public List<ClientRequest> getClientSerialNumber() {

@@ -26,7 +26,7 @@ public class ClientRequest {
     @JoinColumn(name = "id_machine")
     private Machine idMachine;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_serial_number")
     private SerialNumber idSerialNumber;
 
