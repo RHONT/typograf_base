@@ -19,8 +19,6 @@
 
     <form:hidden path="id"/>
 
-
-
     type_machine: <form:input size="7" path="idTypeMachine.id"/>
     machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
     <br>
@@ -51,6 +49,7 @@
                     <c:param name="data_work" value="${tr.key}"/>
                     <c:param name="arrayHours" value="${tr.value.returnArrayString()}"/>
                     <c:param name="id_clientOrder" value="${clientOrderUpdate.id}"/>
+                    <c:param name="time_forecast" value="${clientOrderUpdate.timeForecast}"/>
 
                 </c:url>
 

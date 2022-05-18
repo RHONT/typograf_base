@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.typograf.functionPack.MyData;
 import org.typograf.functionPack.WorkDay;
 
 
@@ -80,6 +81,11 @@ public class MyConfig implements WebMvcConfigurer {
         messageSource.setDefaultEncoding("UTF-8");
 
         return messageSource;
+    }
+
+    @Bean
+    public MyData myDataBean(){
+        return new MyData();
     }
 
 

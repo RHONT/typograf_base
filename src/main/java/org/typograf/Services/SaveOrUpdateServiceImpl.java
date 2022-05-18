@@ -8,6 +8,8 @@ import org.typograf.entity.ClientRequest;
 import org.typograf.entity.TypeMachine;
 import org.typograf.entity.Work;
 
+import java.time.LocalDate;
+
 @Service
 @Transactional
 public class SaveOrUpdateServiceImpl implements SaveOrUpdateService{
@@ -30,7 +32,8 @@ public class SaveOrUpdateServiceImpl implements SaveOrUpdateService{
     }
 
     @Override
-    public void saveWork(Work work) {
-        saveOrUpdate.saveWork(work);
+    public void saveWork(Work work, Integer id_employee, Integer id_clientRequest, LocalDate dateWork, Integer timeForecast) {
+
+        saveOrUpdate.saveWork(work,id_employee,id_clientRequest, dateWork,timeForecast);
     }
 }

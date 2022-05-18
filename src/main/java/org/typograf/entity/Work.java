@@ -16,8 +16,8 @@ public class Work {
     @JoinColumn(name = "id_employee", nullable = false)
     private Employee idEmployee;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_client_request")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_client_request", nullable = false)
     private ClientRequest idClientRequest;
 
     @Column(name = "date_visit")
@@ -81,4 +81,15 @@ public class Work {
         this.laidDownTime = laidDownTime;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Work )) return false;
+        return id != null && id.equals(((Work) o).getId());
+    }
 }

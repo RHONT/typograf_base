@@ -1,8 +1,7 @@
 package org.typograf.entity;
 
-import net.bytebuddy.agent.builder.AgentBuilder;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,15 +24,21 @@ public class Employee {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "idEmployee",
+            cascade = CascadeType.ALL
+    )
     private List<Qualification> qualificationList;
 
-    @OneToMany(mappedBy = "idEmployee", cascade = CascadeType.ALL)
-    private List<Work> WorkList;
+    @OneToMany(
+            mappedBy = "idEmployee",
+            cascade = CascadeType.ALL)
+    private List<Work> workReports = new ArrayList<>();
 
-
-
-
+    public void addWork(Work work){
+        workReports.add(work);
+        work.setIdEmployee(this);
+    }
 
     public Employee() {
     }
@@ -94,12 +99,12 @@ public class Employee {
         this.qualificationList = qualificationList;
     }
 
-    public List<Work> getWorkList() {
-        return WorkList;
+    public List<Work> getWorkReports() {
+        return workReports;
     }
 
-    public void setWorkList(List<Work> workList) {
-        WorkList = workList;
+    public void setWorkReports(List<Work> workReprorts) {
+        this.workReports = workReprorts;
     }
 
     @Override

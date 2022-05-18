@@ -43,11 +43,14 @@
         <form:select path="timeStart">
             <form:options items="${hours}"/>
         </form:select>
+        ${clientOrderUpdate.timeForecast}
 
-          LaidDownTime: ${newWorkDay.laidDownTime}
+<%--          LaidDownTime: ${newWorkDay.laidDownTime}--%>
         <br>
+
         <input type="submit" value="Update">
     </form:form>
+<br>
 
     <c:forEach var="elementMaps" items="${hours}">
         <${elementMaps.key}>
@@ -56,7 +59,10 @@
     </c:forEach>
 
 <br>
-${newWorkDay.idEmployee.id}
+<%--${newWorkDay.idEmployee.id}--%>
+<%--${newWorkDay.idEmployee.name}--%>
+<%--${newWorkDay.idClientRequest.id}--%>
+<%--${newWorkDay.idClientRequest.dataWish}--%>
 
 </body>
 </html>

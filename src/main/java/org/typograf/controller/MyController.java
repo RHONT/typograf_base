@@ -1,6 +1,7 @@
 package org.typograf.controller;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.typograf.Services.SaveOrUpdateService;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
+import org.typograf.functionPack.MyData;
 import org.typograf.functionPack.WorkDay;
 import org.typograf.functionPack.WorkHours;
 
@@ -29,6 +31,9 @@ public class MyController {
 
     @Autowired
     private MapsFromDBService mapsFromDBService;
+
+    @Autowired
+    private MyData myDataBean;
 
     @RequestMapping("/")
     String NavigateMethod(){
@@ -142,24 +147,22 @@ public class MyController {
                                @RequestParam("data_work") String selectedDate,
                                @RequestParam("arrayHours") String arrayHours,
                                @RequestParam("id_clientOrder") Integer id_clientOrderUpdate,
+                               @RequestParam("time_forecast") Integer timeForecast,
+
                                Model model){
 
-        ClientRequest singleRequest=dataBaseTypographService.getSingleClientRequest(id_clientOrderUpdate);
-        Employee singleEmployee=dataBaseTypographService.getSingleEmployee(id_emp);
         WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
         workDay1.returnArrayInteger(arrayHours);
          WorkHours hours=new WorkHours();
-//        попробовать без дергания ключа, раз уж находимся в нужном scope
+         myDataBean.setId_employee(id_emp);
+         myDataBean.setId_clientRequest(id_clientOrderUpdate);
+         myDataBean.setDataTemp(LocalDate.parse(selectedDate));
+         myDataBean.setTimeForecast(timeForecast);
 
         Work newWork=new Work();
 
-        newWork.setIdClientRequest(singleRequest);
-        newWork.setIdEmployee(singleEmployee);
-        newWork.setLaidDownTime(singleRequest.getTimeForecast());
-        newWork.setDateVisit(singleRequest.getDataWish());
-
-
         List<Work> reportDay=dataBaseTypographService.getOneReportDay(id_emp,LocalDate.parse(selectedDate));
+
         model.addAttribute("listWork",reportDay);
         model.addAttribute("newWorkDay",newWork);
         model.addAttribute("hours",hours.fillHours(workDay1));
@@ -169,11 +172,16 @@ public class MyController {
 
     @RequestMapping("/updateWorkDay")
     String updateNewWorkDay(@ModelAttribute("newWorkDay") Work work){
-        saveOrUpdateService.saveWork(work);
-        return "redirect:/";
+        saveOrUpdateService.saveWork(
+                                    work,
+                                    myDataBean.getId_employee(),
+                                    myDataBean.getId_clientRequest(),
+                                    myDataBean.getDataTemp(),
+                                    myDataBean.getTimeForecast()
+                            );
+
+        return "redirect:/adminorder";
     }
-
-
 
     @RequestMapping("/testPage")
     String ShowTestPage(@ModelAttribute("objTypeMachine")
