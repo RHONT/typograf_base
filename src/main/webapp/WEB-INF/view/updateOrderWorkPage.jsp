@@ -18,6 +18,11 @@
 <form:form modelAttribute="clientOrderUpdate" action="updateOrder">
 
     <form:hidden path="id"/>
+    <form:hidden path="innFirm"/>
+    <form:hidden path="firm"/>
+    <form:hidden path="nameClient"/>
+    <form:hidden path="phoneClient"/>
+    <form:hidden path="adress"/>
 
     type_machine: <form:input size="7" path="idTypeMachine.id"/>
     machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
