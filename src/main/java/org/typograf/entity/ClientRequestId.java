@@ -1,7 +1,5 @@
 package org.typograf.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
 import java.time.LocalDate;
 
 public class ClientRequestId {

@@ -1,7 +1,5 @@
 package org.typograf.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.typograf.Services.DataBaseTypographService;
 import org.typograf.Services.MapsFromDBService;
 import org.typograf.Services.SaveOrUpdateService;
-import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
 import org.typograf.functionPack.*;
 
@@ -116,14 +113,14 @@ public class MyController {
 
     @RequestMapping("/interlayerlink")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest){
-
         clientOrder.setId(idClientRequest);
-
         return "redirect:/updateinfo";
     }
 
     @RequestMapping("/updateinfo")
     String updateClientResult(@ModelAttribute ClientRequest singleClientRequest, Model model){
+        //Если бин заходит сюда впревый раз, то он передает id, если повторно(а значит ModelAttribute уже не пустая)
+        //то обновляет значение поля
         if (clientOrder.isLock()==true){
             singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
             clientOrder.setLock(false);
@@ -134,8 +131,9 @@ public class MyController {
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
+        List<Employee> SuitableEmployees= dataBaseTypographService.
+                getListEmployeeForReportWork(levelDifficulty,idTypeMachine);
 
-        List<Employee> SuitableEmployees= dataBaseTypographService.getListEmployeeForReportWork(levelDifficulty,idTypeMachine);
         List<EmployeeLinkedHashMap> workingCoverageOfDates=
                 dataBaseTypographService.fillWorkingCoverageOfDates(SuitableEmployees,singleClientRequest.getDataWish());
 
@@ -154,12 +152,17 @@ public class MyController {
                                @RequestParam("arrayHours") String arrayHours,
                                @RequestParam("id_clientOrder") Integer id_clientOrderUpdate,
                                @RequestParam("time_forecast") Integer timeForecast,
-
                                Model model){
+        // создаю пустой экземпляр рабочего дня
+         WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
 
-        WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
-        workDay1.returnArrayInteger(arrayHours);
-         WorkHours hours=new WorkHours();
+        // вношу в него изменения соответствующие выбранному дню, вынужден гонять числа в строки,
+        // так как RequestParam не может передавать массивы чисел.
+         workDay1.returnArrayInteger(arrayHours);
+
+         //создаю мапу для хранения доступных часов для начала работы
+         WorkHours workHours=new WorkHours();
+
          myDataBean.setId_employee(id_emp);
          myDataBean.setId_clientRequest(id_clientOrderUpdate);
          myDataBean.setDataTemp(LocalDate.parse(selectedDate));
@@ -171,7 +174,8 @@ public class MyController {
 
         model.addAttribute("listWork",reportDay);
         model.addAttribute("newWorkDay",newWork);
-        model.addAttribute("hours",hours.fillHours(workDay1));
+        // заполняю пустую мапу на основании рабочего дня
+        model.addAttribute("hours",workHours.fillHours(workDay1));
 
         return "selectedTabelDayPage";
     }
@@ -188,27 +192,5 @@ public class MyController {
 
         return "redirect:/adminorder";
     }
-
-    @RequestMapping("/testPage")
-    String ShowTestPage(@ModelAttribute("objTypeMachine")
-                                ClientRequest clientRequest){
-        return "testPageForClientOrder";
-    }
-
-
-    // контролллеры для тестового класса Fight
-    @RequestMapping("/test")
-    String ShowTestPage(Model model){
-        List<Work> workList=dataBaseTypographService.getAllReportEmployees();
-        model.addAttribute("listWork",workList);
-
-        return "SelectedTabelDayPage";
-    }
-
-    @RequestMapping("/testnow")
-    String ShowTestPa(@ModelAttribute("fighter_attr") Fighter fighter){
-        return "test";
-    }
-
 
 }
