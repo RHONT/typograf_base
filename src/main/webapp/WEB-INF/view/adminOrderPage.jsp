@@ -27,7 +27,7 @@
 
     <c:forEach var="allClentRequestPage" items="${allClientRequests}">
 
-        <c:url var="UpdateButton" value="/updateinfo">
+        <c:url var="UpdateButton" value="/interlayerlink">
             <c:param name="ClientOrderID" value="${allClentRequestPage.id}"/>
         </c:url>
         <tr align="left" valign="top">

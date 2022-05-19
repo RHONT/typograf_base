@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form:form modelAttribute="clientOrderUpdate" action="updateOrder">
+<form:form modelAttribute="сlientOrderUpdate" action="updateinfo">
 
     <form:hidden path="id"/>
     <form:hidden path="innFirm"/>
@@ -53,13 +53,13 @@
                     <c:param name="id_empl" value="${emp.id}"/>
                     <c:param name="data_work" value="${tr.key}"/>
                     <c:param name="arrayHours" value="${tr.value.returnArrayString()}"/>
-                    <c:param name="id_clientOrder" value="${clientOrderUpdate.id}"/>
-                    <c:param name="time_forecast" value="${clientOrderUpdate.timeForecast}"/>
+                    <c:param name="id_clientOrder" value="${сlientOrderUpdate.id}"/>
+                    <c:param name="time_forecast" value="${сlientOrderUpdate.timeForecast}"/>
 
                 </c:url>
 
                 <td>${tr.value.index}</td>
-                <td>${tr.value.ReturnDayForWorkStatus(clientOrderUpdate.timeForecast)}</td>
+                <td>${tr.value.ReturnDayForWorkStatus(сlientOrderUpdate.timeForecast)}</td>
                 <td><td><input type="button" value="go" onclick="window.location.href='${TabelButton}'"/></td></td>
             </c:forEach>
         </table>

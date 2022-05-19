@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.typograf.functionPack.ClientOrder;
 import org.typograf.functionPack.MyData;
 import org.typograf.functionPack.WorkDay;
 
@@ -86,6 +87,11 @@ public class MyConfig implements WebMvcConfigurer {
     @Bean
     public MyData myDataBean(){
         return new MyData();
+    }
+
+    @Bean
+    public ClientOrder clientOrderBean(){
+        return new ClientOrder();
     }
 
 

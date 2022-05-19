@@ -13,10 +13,7 @@ import org.typograf.Services.MapsFromDBService;
 import org.typograf.Services.SaveOrUpdateService;
 import org.typograf.TestPack.Fighter;
 import org.typograf.entity.*;
-import org.typograf.functionPack.EmployeeLinkedHashMap;
-import org.typograf.functionPack.MyData;
-import org.typograf.functionPack.WorkDay;
-import org.typograf.functionPack.WorkHours;
+import org.typograf.functionPack.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -34,6 +31,9 @@ public class MyController {
 
     @Autowired
     private MyData myDataBean;
+
+    @Autowired
+    private ClientOrder clientOrder;
 
     @RequestMapping("/")
     String NavigateMethod(){
@@ -114,17 +114,23 @@ public class MyController {
     }
 
 
-    @RequestMapping("/updateinfo")
-    String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest, Model model){
-        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(idClientRequest);
-        model.addAttribute("ClientOrderUpdate",singleClientRequest);
+    @RequestMapping("/interlayerlink")
+    String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest){
 
-        return "updateOrderPage";
+        clientOrder.setId(idClientRequest);
+
+        return "redirect:/updateinfo";
     }
 
-    @RequestMapping("/updateOrder")
-    String updateClientResult(@ModelAttribute("clientOrderUpdate") ClientRequest singleClientRequest, Model model){
-        saveOrUpdateService.updateClientRequest(singleClientRequest);
+    @RequestMapping("/updateinfo")
+    String updateClientResult(@ModelAttribute ClientRequest singleClientRequest, Model model){
+        if (clientOrder.isLock()==true){
+            singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
+            clientOrder.setLock(false);
+        }
+        else {
+            saveOrUpdateService.updateClientRequest(singleClientRequest);
+        }
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
@@ -133,7 +139,7 @@ public class MyController {
         List<EmployeeLinkedHashMap> workingCoverageOfDates=
                 dataBaseTypographService.fillWorkingCoverageOfDates(SuitableEmployees,singleClientRequest.getDataWish());
 
-        model.addAttribute("ClientOrderUpdate",singleClientRequest);
+        model.addAttribute("сlientOrderUpdate",singleClientRequest);
         model.addAttribute("Employee",SuitableEmployees);
         model.addAttribute("WorkingCoverage",workingCoverageOfDates.iterator());
 

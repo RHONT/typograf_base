@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<form:form modelAttribute="ClientOrderUpdate" action="updateOrder">
+<form:form modelAttribute="сlientOrderUpdate" action="updateOrder">
     <form:hidden path="id"/>
     <form:hidden path="innFirm"/>
     <form:hidden path="firm"/>
