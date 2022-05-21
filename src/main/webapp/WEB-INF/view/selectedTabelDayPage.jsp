@@ -37,7 +37,7 @@
 </table>
 
 <br>
-    <form:form modelAttribute="newWorkDay" action="updateWorkDay">
+    <form:form modelAttribute="newWorkDay" action="/typograf_base_war/admin/adminorder/updateinfo/tableinfo/updateWorkDay">
         <form:hidden path="id"/>
         Time for start:
         <form:select path="timeStart">
