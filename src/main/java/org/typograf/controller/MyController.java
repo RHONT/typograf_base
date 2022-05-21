@@ -32,19 +32,24 @@ public class MyController {
     @Autowired
     private ClientOrder clientOrder;
 
-    @RequestMapping("/")
+    @RequestMapping("/admin")
     String NavigateMethod(){
-        return "navigatePage";
+        return "AdminPage";
     }
 
-    @RequestMapping("/emp")
+    @RequestMapping("/engineer")
+    String engineerOption(){
+        return "EngineerPage";
+    }
+
+    @RequestMapping("/admin/emp")
     String ShowAllEmps(Model model){
         List<Employee> allEmployees=dataBaseTypographService.getAllEmp();
         model.addAttribute("allEmps",allEmployees);
         return "showAllEmpsPage";
     }
 
-    @RequestMapping("/typemachine")
+    @RequestMapping("/admin/typemachine")
     String ShowAllMachine(Model model){
         List<TypeMachine> allTypeMachines= dataBaseTypographService.getAllTypeMachines();
         model.addAttribute("allType",allTypeMachines);
@@ -59,14 +64,14 @@ public class MyController {
         return "redirect:/typemachine";
     }
 
-    @RequestMapping("/quality")
+    @RequestMapping("/admin/quality")
     String ShowQuery(Model model){
         List<Qualification> allQualities=dataBaseTypographService.getAllQualities();
         model.addAttribute("qualEmps",allQualities);
         return "qualityEmployeesPage";
     }
 
-    @RequestMapping("/order")
+    @RequestMapping("/")
     String ShowOrder(Model model){
         Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
         Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
@@ -100,10 +105,10 @@ public class MyController {
 
         saveOrUpdateService.saveClientRequest(cr);
 
-        return "redirect:/order";
+        return "redirect:/";
     }
 
-    @RequestMapping("/adminorder")
+    @RequestMapping("/admin/adminorder")
     String openListOrder(Model model){
         List<ClientRequest> allClientRequest = dataBaseTypographService.getAllClientRequest();
         model.addAttribute("allClientRequests",allClientRequest);
@@ -114,10 +119,10 @@ public class MyController {
     @RequestMapping("/interlayerlink")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest){
         clientOrder.setId(idClientRequest);
-        return "redirect:/updateinfo";
+        return "redirect:/admin/adminorder/updateinfo";
     }
 
-    @RequestMapping("/updateinfo")
+    @RequestMapping("/admin/adminorder/updateinfo")
     String updateClientResult(@ModelAttribute ClientRequest singleClientRequest, Model model){
         //Если бин заходит сюда впревый раз, то он передает id, если повторно(а значит ModelAttribute уже не пустая)
         //то обновляет значение поля
@@ -145,7 +150,7 @@ public class MyController {
     }
 
 
-    @RequestMapping("/tableinfo")
+    @RequestMapping("/admin/adminorder/updateinfo/tableinfo")
     String ShowOneDayTabelEmpl(@ModelAttribute("clientOrderUpdate") ClientRequest clientRequest,
                                @RequestParam("id_empl") Integer id_emp,
                                @RequestParam("data_work") String selectedDate,
@@ -180,7 +185,7 @@ public class MyController {
         return "selectedTabelDayPage";
     }
 
-    @RequestMapping("/updateWorkDay")
+    @RequestMapping("/admin/adminorder/updateinfo/tableinfo/updateWorkDay")
     String updateNewWorkDay(@ModelAttribute("newWorkDay") Work work){
         saveOrUpdateService.saveWork(
                                     work,
@@ -190,7 +195,7 @@ public class MyController {
                                     myDataBean.getTimeForecast()
                             );
 
-        return "redirect:/adminorder";
+        return "redirect:/admin/adminorder";
     }
 
 }

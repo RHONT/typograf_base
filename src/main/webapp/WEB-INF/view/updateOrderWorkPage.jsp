@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form:form modelAttribute="сlientOrderUpdate" action="updateinfo">
+<form:form modelAttribute="сlientOrderUpdate" action="/typograf_base_war/admin/adminorder/updateinfo">
 
     <form:hidden path="id"/>
     <form:hidden path="innFirm"/>
@@ -49,7 +49,7 @@
 
             <c:forEach var="tr" items="${WorkingCoverage.next().workSession}" >
 
-                <c:url var="TabelButton" value="/tableinfo">
+                <c:url var="TabelButton" value="/admin/adminorder/updateinfo/tableinfo">
                     <c:param name="id_empl" value="${emp.id}"/>
                     <c:param name="data_work" value="${tr.key}"/>
                     <c:param name="arrayHours" value="${tr.value.returnArrayString()}"/>
