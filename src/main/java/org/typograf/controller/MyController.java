@@ -32,6 +32,9 @@ public class MyController {
     @Autowired
     private ClientOrder clientOrder;
 
+    @Autowired
+    private KeyStorage keyStorage;
+
     @RequestMapping("/admin")
     String NavigateMethod(){
         return "AdminPage";
@@ -44,13 +47,19 @@ public class MyController {
 
     @RequestMapping("/engineer/updateWork")
     String engineerUpdateWork(@RequestParam ("numb_work") Integer id_work, Model model){
+
         Work works=dataBaseTypographService.getSingleReportDay(id_work);
         ClientRequest clientRequest=dataBaseTypographService.getSingleClientRequest(works.getIdClientRequest().getId());
+        Employee employee=dataBaseTypographService.getSingleEmployee(works.getIdEmployee().getId());
+        Machine machine=dataBaseTypographService.getSingleMachine(clientRequest.getIdMachine().getId());
+        TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(clientRequest.getIdTypeMachine().getId());
+        SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequest.getIdSerialNumber().getId());
+
         CompletedOrder completedOrder=new CompletedOrder();
 
         completedOrder.setDescProblem(clientRequest.getDescProblem());
         completedOrder.setDifficilty(clientRequest.getDifficilty());
-        completedOrder.setIdClientRequest(clientRequest.getId());
+        completedOrder.setIdClientRequest(clientRequest);
         completedOrder.setIdEmployee(works.getIdEmployee());
         completedOrder.setFirm(clientRequest.getFirm());
         completedOrder.setIdMachine(clientRequest.getIdMachine());
@@ -59,16 +68,34 @@ public class MyController {
         completedOrder.setInnFirm(clientRequest.getInnFirm());
         completedOrder.setNameClient(clientRequest.getNameClient());
         completedOrder.setPhoneClient(clientRequest.getPhoneClient());
-        System.out.println(completedOrder.toString());
 
-        model.addAttribute("completedOrder",completedOrder);
+        saveOrUpdateService.saveOrUpdateCompletedOrder(completedOrder);
+
+        model.addAttribute("id_completedOrder",completedOrder.getId());
+        model.addAttribute("employee",employee);
+        model.addAttribute("machine",machine);
+        model.addAttribute("typeMachine",typeMachine);
+        model.addAttribute("serialNumber",serialNumber);
+        model.addAttribute("clientRequest",clientRequest);
+
         return "enUpPage";
     }
 
     @RequestMapping("/engineer/updateWork/update")
-    String UpdateReportWork(@ModelAttribute("completedOrder") CompletedOrder completedOrder){
-        System.out.println(completedOrder.toString());
+    String UpdateReportWork(@RequestParam("id_Complete") Integer id_complete ,
+                            @RequestParam("jadgmentCompany") String  jadgmentCompany ,
+                            @RequestParam("ratingFirm") Integer ratingFirm,
+                            @RequestParam("expertOpinion") String expertOpinion,
+                            @RequestParam("factDifficilty") Integer factDifficilty ){
+
+        CompletedOrder completedOrder=dataBaseTypographService.getSingleCompletedOrder(id_complete);
+        completedOrder.setJadgmentCompany(jadgmentCompany);
+        completedOrder.setRatingFirm(ratingFirm);
+        completedOrder.setExpertOpinion(expertOpinion);
+        completedOrder.setFactDifficilty(factDifficilty);
+
         saveOrUpdateService.saveOrUpdateCompletedOrder(completedOrder);
+
         return "redirect:/";
     }
 

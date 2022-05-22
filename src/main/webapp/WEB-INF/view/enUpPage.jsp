@@ -6,8 +6,6 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,60 +13,50 @@
 </head>
 
 <body>
-<form:form modelAttribute="completedOrder" action="/typograf_base_war/engineer/updateWork/update">
-    <form:hidden path="id"/>
-    <form:hidden path="idClientRequest"/>
-    <form:hidden path="idEmployee"/>
-    <form:hidden path="idMachine"/>
-    <form:hidden path="idTypeMachine"/>
-    <form:hidden path="idSerialNumber"/>
-<%--    <form:hidden path="innFirm"/>--%>
-<%--    <form:hidden path="firm"/>--%>
-<%--    <form:hidden path="nameClient"/>--%>
-<%--    <form:hidden path="descProblem"/>--%>
-<%--    <form:hidden path="engineerAssessment"/>--%>
 
-    <p th:each="phone,stat:${person.getPhoneNumbers()}">
-        <input type="text" th:name="phoneNumbers[__${stat.index}__].type" th:value="${phone.getType()}">
-        <input type="text" th:name="phoneNumbers[__${stat.index}__].number" th:value="${phone.getNumber()}">
-    </p>
+
 
 <table>
-
     <tr>
         <td>
-            ${completedOrder.firm}
+            ${clientRequest.firm}
         </td>
         <td>
-            ${completedOrder.idTypeMachine.nameType}
+            ${typeMachine.nameType}
         </td>
         <td>
-            ${completedOrder.idMachine.modelMachine}
-            ${completedOrder.idEmployee.name}
+            ${machine.modelMachine}
+            ${employee.name}
         </td>
         <td>
-                ${completedOrder.nameClient}
+                ${clientRequest.nameClient}
         </td>
         <td>
-                ${completedOrder.phoneClient}
+                ${clientRequest.phoneClient}
         </td>
     </tr>
     <tr>
-        <td>${completedOrder.descProblem}</td>
+        <td>${clientRequest.descProblem}</td>
     </tr>
-    <tr>
-        <td>Оценка инженера<form:textarea path="jadgmentCompany" rows="20" cols="40"/></td>
+<tr>
 
-        <td>Сложность по факту:<form:input path="factDifficilty"/></td>
-        <td>Рейтинг фирмы:<form:input path="ratingFirm"/></td>
-        <td>Заключение эксперта:<form:textarea path="expertOpinion"/></td>
-        <td></td>
-        <td></td>
-
-    </tr>
 </table>
-    <input type="submit" value="Update">
-</form:form>
+
+<br>
+<form action="/typograf_base_war/engineer/updateWork/update">
+    <input name="id_Complete" value="${id_completedOrder}">
+    <br>
+    Оценка инженера<textarea name="jadgmentCompany"></textarea>
+    <br>
+    Сложность по факту:<input name="factDifficilty"/>
+    <br>
+    Рейтинг фирмы:<input name="ratingFirm"/>
+    <br>
+    Заключение эксперта:<textarea name="expertOpinion"></textarea>
+    <br>
+    <input type="submit" value="Обновить" />
+
+</form>
 
 </body>
 </html>

@@ -24,7 +24,5 @@ public interface SaveOrUpdateDAO {
             Integer idEmployee,
             Integer idMachine,
             Integer idTypeMachine,
-            Integer idSerialNumber);
-
-
+            String idSerialNumber);
 }

@@ -41,6 +41,22 @@ public class SaveOrUpdateServiceImpl implements SaveOrUpdateService{
     @Override
     public void saveOrUpdateCompletedOrder(CompletedOrder completedOrder) {
         saveOrUpdate.saveOrUpdateCompletedOrder(completedOrder);
+    }
+
+    @Override
+    public void saveOrUpdateCompletedOrder(CompletedOrder completedOrder,
+                                           Integer idClientRequest,
+                                           Integer idEmployee,
+                                           Integer idMachine,
+                                           Integer idTypeMachine,
+                                           String idSerialNumber) {
+
+        saveOrUpdate.saveOrUpdateCompletedOrder(completedOrder,
+                                                idClientRequest,
+                                                idEmployee,
+                                                idMachine,
+                                                idTypeMachine,
+                                                idSerialNumber);
 
     }
 }

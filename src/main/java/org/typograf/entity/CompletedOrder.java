@@ -10,8 +10,9 @@ public class CompletedOrder {
     @Column(name = "id_completed_orders", nullable = false)
     private Integer id;
 
-    @Column(name = "id_client_request", nullable = false)
-    private Integer idClientRequest;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_client_request")
+    private ClientRequest idClientRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_employee")
@@ -41,7 +42,7 @@ public class CompletedOrder {
     @Column(name = "phone_client", length = 30)
     private String phoneClient;
 
-    @Lob
+
     @Column(name = "desc_problem")
     private String descProblem;
 
@@ -51,11 +52,11 @@ public class CompletedOrder {
     @Column(name = "fact_difficilty")
     private Integer factDifficilty;
 
-    @Lob
+
     @Column(name = "expert_opinion")
     private String expertOpinion;
 
-    @Lob
+
     @Column(name = "jadgment_company")
     private String jadgmentCompany;
 
@@ -73,11 +74,11 @@ public class CompletedOrder {
         this.id = id;
     }
 
-    public Integer getIdClientRequest() {
+    public ClientRequest getIdClientRequest() {
         return idClientRequest;
     }
 
-    public void setIdClientRequest(Integer idClientRequest) {
+    public void setIdClientRequest(ClientRequest idClientRequest) {
         this.idClientRequest = idClientRequest;
     }
 

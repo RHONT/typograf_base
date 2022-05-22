@@ -18,12 +18,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.typograf.functionPack.ClientOrder;
+import org.typograf.functionPack.KeyStorage;
 import org.typograf.functionPack.MyData;
 import org.typograf.functionPack.WorkDay;
 
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
+import java.security.KeyStore;
 import java.util.Properties;
 
 @Configuration
@@ -93,6 +95,9 @@ public class MyConfig implements WebMvcConfigurer {
     public ClientOrder clientOrderBean(){
         return new ClientOrder();
     }
+
+    @Bean
+    public KeyStorage keyStorageBean(){return new KeyStorage();};
 
 
 

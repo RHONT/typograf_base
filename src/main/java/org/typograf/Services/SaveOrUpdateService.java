@@ -16,4 +16,12 @@ public interface SaveOrUpdateService {
     void saveWork(Work work, Integer id_employee, Integer id_clientRequest, LocalDate dateWork, Integer timeForecast);
 
     void saveOrUpdateCompletedOrder(CompletedOrder completedOrder);
+
+    void saveOrUpdateCompletedOrder(
+            CompletedOrder completedOrder,
+            Integer idClientRequest,
+            Integer idEmployee,
+            Integer idMachine,
+            Integer idTypeMachine,
+            String idSerialNumber);
 }
