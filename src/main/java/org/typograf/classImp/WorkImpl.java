@@ -81,4 +81,12 @@ public class WorkImpl implements WorkDAO {
         }
         return workingCoverageOfDates;
     }
+
+    @Override
+    public Work getSingleReportDay(Integer id_work) {
+        Session session=sessionFactory.getCurrentSession();
+        Work work=session.get(Work.class,id_work);
+
+        return work;
+    }
 }

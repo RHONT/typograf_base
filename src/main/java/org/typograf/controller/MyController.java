@@ -39,7 +39,36 @@ public class MyController {
 
     @RequestMapping("/engineer")
     String engineerOption(){
-        return "EngineerPage";
+        return "enPage";
+    }
+
+    @RequestMapping("/engineer/updateWork")
+    String engineerUpdateWork(@RequestParam ("numb_work") Integer id_work, Model model){
+        Work works=dataBaseTypographService.getSingleReportDay(id_work);
+        ClientRequest clientRequest=dataBaseTypographService.getSingleClientRequest(works.getIdClientRequest().getId());
+        CompletedOrder completedOrder=new CompletedOrder();
+
+        completedOrder.setDescProblem(clientRequest.getDescProblem());
+        completedOrder.setDifficilty(clientRequest.getDifficilty());
+        completedOrder.setIdClientRequest(clientRequest.getId());
+        completedOrder.setIdEmployee(works.getIdEmployee());
+        completedOrder.setFirm(clientRequest.getFirm());
+        completedOrder.setIdMachine(clientRequest.getIdMachine());
+        completedOrder.setIdSerialNumber(clientRequest.getIdSerialNumber());
+        completedOrder.setIdTypeMachine(clientRequest.getIdTypeMachine());
+        completedOrder.setInnFirm(clientRequest.getInnFirm());
+        completedOrder.setNameClient(clientRequest.getNameClient());
+        completedOrder.setPhoneClient(clientRequest.getPhoneClient());
+
+        model.addAttribute("completedOrder",completedOrder);
+        return "enUpPage";
+    }
+
+    @RequestMapping("/engineer/updateWork/update")
+    String UpdateReportWork(@ModelAttribute("completedOrder") CompletedOrder completedOrder){
+
+
+        return "redirect:/";
     }
 
     @RequestMapping("/admin/emp")
@@ -197,5 +226,6 @@ public class MyController {
 
         return "redirect:/admin/adminorder";
     }
+
 
 }

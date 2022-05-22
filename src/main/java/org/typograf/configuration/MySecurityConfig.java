@@ -9,16 +9,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        User.UserBuilder userBuilder=User.withDefaultPasswordEncoder();
-        auth.inMemoryAuthentication().withUser(userBuilder.username("Evgen").password("Evgen").roles("FIRST","ENGINEER")).
-                withUser(userBuilder.username("Gena").password("Gena").roles("ENGINEER")).
-                withUser(userBuilder.username("Ivan").password("Ivan").roles("ENGINEER"));
+        auth.jdbcAuthentication().dataSource(dataSource);
+
+
+
+
+//        User.UserBuilder userBuilder=User.withDefaultPasswordEncoder();
+//        auth.inMemoryAuthentication().withUser(userBuilder.username("Evgen").password("Evgen").roles("FIRST","ENGINEER")).
+//                withUser(userBuilder.username("Gena").password("Gena").roles("ENGINEER")).
+//                withUser(userBuilder.username("Ivan").password("Ivan").roles("ENGINEER"));
     }
 
     @Override

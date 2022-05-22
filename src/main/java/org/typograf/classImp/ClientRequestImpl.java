@@ -25,6 +25,10 @@ public class ClientRequestImpl implements ClientOrderDAO {
     @Override
     public ClientRequest getSingleClientRequest(Integer idClientRequest) {
         Session session= sessionFactory.getCurrentSession();
-        return session.get(ClientRequest.class,idClientRequest);
+        ClientRequest clientRequest=session.get(ClientRequest.class,idClientRequest);
+        clientRequest.getIdMachine().getId();
+        clientRequest.getIdSerialNumber();
+        clientRequest.getIdTypeMachine();
+        return clientRequest;
     }
 }

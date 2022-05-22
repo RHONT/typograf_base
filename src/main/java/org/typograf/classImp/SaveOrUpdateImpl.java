@@ -5,10 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.typograf.DAO.SaveOrUpdateDAO;
-import org.typograf.entity.ClientRequest;
-import org.typograf.entity.Employee;
-import org.typograf.entity.TypeMachine;
-import org.typograf.entity.Work;
+import org.typograf.entity.*;
 
 import java.time.LocalDate;
 
@@ -56,5 +53,11 @@ public class SaveOrUpdateImpl implements SaveOrUpdateDAO {
         work.setDateVisit(dateWork);
         work.setLaidDownTime(timeForecast);
         session.save(work);
+    }
+
+    @Override
+    public void saveOrUpdateCompletedOrder(CompletedOrder completedOrder) {
+        Session session=sessionFactory.getCurrentSession();
+        session.saveOrUpdate(completedOrder);
     }
 }

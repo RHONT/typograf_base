@@ -15,6 +15,7 @@ public interface DataBaseTypographService {
     List getWorkReportForOneEmp(int id_employee);
     List<Work> getOneReportDay(Integer id_employee, LocalDate selectDate);
     List<Work> getAllReportEmployees();
+    Work getSingleReportDay(Integer id_work);
     List<EmployeeLinkedHashMap> fillWorkingCoverageOfDates(List<Employee> suitableEmployees, LocalDate wishDate);
 
     List<TypeMachine> getAllTypeMachines();
@@ -28,4 +29,7 @@ public interface DataBaseTypographService {
     ClientRequest getSingleClientRequest(Integer idClientRequest);
 
     List<Qualification> getAllQualities();
+
+    CompletedOrder getSingleCompletedOrder(Integer id_CompletedOrder);
+    List<CompletedOrder> getAllCompletedOrder();
 }

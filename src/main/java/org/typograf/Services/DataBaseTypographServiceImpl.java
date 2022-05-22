@@ -29,6 +29,9 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
     @Autowired
     private QualificationDAO qualificationDAO;
 
+    @Autowired
+    private CompletedOrderDAO completedOrderDAO;
+
     @Override
     public List<Employee> getAllEmp() {
         return employeeDAO.getAllEmp();
@@ -52,6 +55,11 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
     @Override
     public List<Work> getOneReportDay(Integer id_employee, LocalDate selectDate) {
         return workDAO.getSingleReportDay(id_employee,selectDate);
+    }
+
+    @Override
+    public Work getSingleReportDay(Integer id_work) {
+        return workDAO.getSingleReportDay(id_work);
     }
 
     @Override
@@ -102,5 +110,15 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
     @Override
     public List<Qualification> getAllQualities() {
         return qualificationDAO.getAllQualities();
+    }
+
+    @Override
+    public CompletedOrder getSingleCompletedOrder(Integer id_CompletedOrder) {
+        return completedOrderDAO.getSingleCompletedOrder(id_CompletedOrder);
+    }
+
+    @Override
+    public List<CompletedOrder> getAllCompletedOrder() {
+        return completedOrderDAO.getAllCompletedOrder();
     }
 }
