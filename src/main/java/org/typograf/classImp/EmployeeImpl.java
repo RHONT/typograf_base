@@ -25,6 +25,9 @@ public class EmployeeImpl implements EmployeeDAO {
     @Override
     public Employee getSingleEmployee(Integer id_Employee) {
         Session session=sessionFactory.getCurrentSession();
-        return session.get(Employee.class,id_Employee);
+        Employee employee=session.get(Employee.class,id_Employee);
+        employee.getQualificationList();
+        employee.getWorkReports();
+        return employee;
     }
 }

@@ -76,4 +76,5 @@ public class Machine {
         this.modelMachine = modelMachine;
     }
 
+
 }

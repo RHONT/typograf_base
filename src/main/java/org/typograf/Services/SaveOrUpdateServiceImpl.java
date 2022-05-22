@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.typograf.classImp.SaveOrUpdateImpl;
 import org.typograf.entity.ClientRequest;
+import org.typograf.entity.CompletedOrder;
 import org.typograf.entity.TypeMachine;
 import org.typograf.entity.Work;
 
@@ -35,5 +36,11 @@ public class SaveOrUpdateServiceImpl implements SaveOrUpdateService{
     public void saveWork(Work work, Integer id_employee, Integer id_clientRequest, LocalDate dateWork, Integer timeForecast) {
 
         saveOrUpdate.saveWork(work,id_employee,id_clientRequest, dateWork,timeForecast);
+    }
+
+    @Override
+    public void saveOrUpdateCompletedOrder(CompletedOrder completedOrder) {
+        saveOrUpdate.saveOrUpdateCompletedOrder(completedOrder);
+
     }
 }

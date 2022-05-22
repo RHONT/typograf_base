@@ -59,6 +59,7 @@ public class MyController {
         completedOrder.setInnFirm(clientRequest.getInnFirm());
         completedOrder.setNameClient(clientRequest.getNameClient());
         completedOrder.setPhoneClient(clientRequest.getPhoneClient());
+        System.out.println(completedOrder.toString());
 
         model.addAttribute("completedOrder",completedOrder);
         return "enUpPage";
@@ -66,8 +67,8 @@ public class MyController {
 
     @RequestMapping("/engineer/updateWork/update")
     String UpdateReportWork(@ModelAttribute("completedOrder") CompletedOrder completedOrder){
-
-
+        System.out.println(completedOrder.toString());
+        saveOrUpdateService.saveOrUpdateCompletedOrder(completedOrder);
         return "redirect:/";
     }
 

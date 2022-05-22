@@ -15,17 +15,24 @@
 </head>
 
 <body>
-<form:form modelAttribute="completedOrder" action="">
+<form:form modelAttribute="completedOrder" action="/typograf_base_war/engineer/updateWork/update">
     <form:hidden path="id"/>
     <form:hidden path="idClientRequest"/>
     <form:hidden path="idEmployee"/>
     <form:hidden path="idMachine"/>
     <form:hidden path="idTypeMachine"/>
     <form:hidden path="idSerialNumber"/>
-    <form:hidden path="innFirm"/>
-    <form:hidden path="firm"/>
-    <form:hidden path="nameClient"/>
-    <form:hidden path="descProblem"/>
+<%--    <form:hidden path="innFirm"/>--%>
+<%--    <form:hidden path="firm"/>--%>
+<%--    <form:hidden path="nameClient"/>--%>
+<%--    <form:hidden path="descProblem"/>--%>
+<%--    <form:hidden path="engineerAssessment"/>--%>
+
+    <p th:each="phone,stat:${person.getPhoneNumbers()}">
+        <input type="text" th:name="phoneNumbers[__${stat.index}__].type" th:value="${phone.getType()}">
+        <input type="text" th:name="phoneNumbers[__${stat.index}__].number" th:value="${phone.getNumber()}">
+    </p>
+
 <table>
 
     <tr>
@@ -37,6 +44,7 @@
         </td>
         <td>
             ${completedOrder.idMachine.modelMachine}
+            ${completedOrder.idEmployee.name}
         </td>
         <td>
                 ${completedOrder.nameClient}
@@ -49,8 +57,7 @@
         <td>${completedOrder.descProblem}</td>
     </tr>
     <tr>
-        <td>Оценка инженера<form:textarea path="engineerAssessment" rows="20" cols="40"/></td>
-        <td>Мнение о компании<form:input path="jadgmentCompany" size="40"/></td>
+        <td>Оценка инженера<form:textarea path="jadgmentCompany" rows="20" cols="40"/></td>
 
         <td>Сложность по факту:<form:input path="factDifficilty"/></td>
         <td>Рейтинг фирмы:<form:input path="ratingFirm"/></td>
@@ -59,9 +66,8 @@
         <td></td>
 
     </tr>
-
-
 </table>
+    <input type="submit" value="Update">
 </form:form>
 
 </body>

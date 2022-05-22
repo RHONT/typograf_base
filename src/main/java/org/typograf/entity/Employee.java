@@ -26,7 +26,8 @@ public class Employee {
 
     @OneToMany(
             mappedBy = "idEmployee",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     private List<Qualification> qualificationList;
 
@@ -107,15 +108,4 @@ public class Employee {
         this.workReports = workReprorts;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", qualificationList=" + qualificationList +
-                '}';
-    }
 }

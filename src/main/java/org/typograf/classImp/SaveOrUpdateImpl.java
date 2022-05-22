@@ -60,4 +60,9 @@ public class SaveOrUpdateImpl implements SaveOrUpdateDAO {
         Session session=sessionFactory.getCurrentSession();
         session.saveOrUpdate(completedOrder);
     }
+
+    @Override
+    public void saveOrUpdateCompletedOrder(CompletedOrder completedOrder, Integer idClientRequest, Integer idEmployee, Integer idMachine, Integer idTypeMachine, Integer idSerialNumber) {
+
+    }
 }

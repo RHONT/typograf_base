@@ -175,19 +175,5 @@ public class ClientRequest {
         this.difficilty = difficilty;
     }
 
-    @Override
-    public String toString() {
-        return "ClientRequest{" +
-                "id=" + id +
-                ", firm='" + firm + '\'' +
-                ", innFirm='" + innFirm + '\'' +
-                ", idTypeMachine=" + idTypeMachine +
-                ", idMachine=" + idMachine +
-                ", idSerialNumber=" + idSerialNumber +
-                ", nameClient='" + nameClient + '\'' +
-                ", phoneClient='" + phoneClient + '\'' +
-                ", descProblem='" + descProblem + '\'' +
-                ", difficilty=" + difficilty +
-                '}';
-    }
+
 }

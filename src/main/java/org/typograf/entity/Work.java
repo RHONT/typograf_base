@@ -92,4 +92,6 @@ public class Work {
         if (!(o instanceof Work )) return false;
         return id != null && id.equals(((Work) o).getId());
     }
+
+
 }

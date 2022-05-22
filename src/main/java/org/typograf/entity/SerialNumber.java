@@ -44,4 +44,5 @@ public class SerialNumber {
         this.machine = idMachine;
     }
 
+
 }

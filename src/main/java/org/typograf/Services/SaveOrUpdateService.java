@@ -1,6 +1,7 @@
 package org.typograf.Services;
 
 import org.typograf.entity.ClientRequest;
+import org.typograf.entity.CompletedOrder;
 import org.typograf.entity.TypeMachine;
 import org.typograf.entity.Work;
 
@@ -13,4 +14,6 @@ public interface SaveOrUpdateService {
     void saveTypeMachine(TypeMachine typeMachine);
 
     void saveWork(Work work, Integer id_employee, Integer id_clientRequest, LocalDate dateWork, Integer timeForecast);
+
+    void saveOrUpdateCompletedOrder(CompletedOrder completedOrder);
 }

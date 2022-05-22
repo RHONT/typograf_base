@@ -47,11 +47,4 @@ public class QualificationId implements Serializable {
         return Objects.hash(idEmployee, idTypeMachine);
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "serialVersionUID = " + serialVersionUID + ", " +
-                "idEmployee = " + idEmployee + ", " +
-                "idTypeMachine = " + idTypeMachine + ")";
-    }
 }
