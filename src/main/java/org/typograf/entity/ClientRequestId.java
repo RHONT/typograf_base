@@ -1,16 +1,24 @@
 package org.typograf.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ClientRequestId {
+
     private Integer idTypeMachine;
     private Integer idMachine;
     private String idSerialNumber;
+    @Size(min = 2, message = " Минимум 2 символа")
     private String firm;
     private String innFirm;
     private String nameClient;
+    @NotBlank(message = " Введите номер телефона")
     private String phoneClient;
     private String descProblem;
+    @NotNull(message = " Укажите желаемую дату")
     private LocalDate dataWish;
     private String adress;
 

@@ -1,6 +1,9 @@
 package org.typograf.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -36,10 +39,11 @@ public class ClientRequest {
     @Column(name = "phone_client", length = 30)
     private String phoneClient;
 
-
+    @NotBlank(message = "Проблема должна быть описана")
     @Column(name = "desc_problem")
     private String descProblem;
-
+    @Min(value = 1, message = "Диапазон от 1 до 10")
+    @Max(value = 10, message = "Диапазон от 1 до 10")
     @Column(name = "difficilty")
     private Integer difficilty;
 

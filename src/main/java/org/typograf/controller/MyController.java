@@ -3,6 +3,7 @@ package org.typograf.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.typograf.Services.SaveOrUpdateService;
 import org.typograf.entity.*;
 import org.typograf.functionPack.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -143,7 +145,11 @@ public class MyController {
     }
 
     @RequestMapping("/saveorder")
-    String SaveOrder(@ModelAttribute("ClientRequestId") ClientRequestId clientRequestId){
+    String SaveOrder(@Valid @ModelAttribute("ClientRequestId") ClientRequestId clientRequestId, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return "clientOrderPage";
+        }
 
         TypeMachine typeMachine= dataBaseTypographService.getSingleTypeMachine(clientRequestId.getIdTypeMachine());
         Machine machine=dataBaseTypographService.getSingleMachine(clientRequestId.getIdMachine());
@@ -180,7 +186,10 @@ public class MyController {
     }
 
     @RequestMapping("/admin/adminorder/updateinfo")
-    String updateClientResult(@ModelAttribute ClientRequest singleClientRequest, Model model){
+    String updateClientResult(@Valid @ModelAttribute ClientRequest singleClientRequest, Model model, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "updateOrderWorkPage";
+        }
         //Если бин заходит сюда впревый раз, то он передает id, если повторно(а значит ModelAttribute уже не пустая)
         //то обновляет значение поля
         if (clientOrder.isLock()==true){

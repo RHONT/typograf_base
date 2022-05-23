@@ -15,6 +15,8 @@
 </head>
 <body>
 
+
+
 <form:form modelAttribute="сlientOrderUpdate" action="/typograf_base_war/admin/adminorder/updateinfo">
 
     <form:hidden path="id"/>
@@ -31,7 +33,7 @@
     <br>
     <form:textarea path="descProblem" cols="60" rows="10"/>
     <br>
-    difficulty: <form:input path="difficilty" size="2"/> time_forecast: <form:input path="timeForecast" size="2"/>
+    difficulty: <form:input path="difficilty" size="2"/><form:errors path="difficilty"/> time_forecast: <form:input path="timeForecast" size="2"/>
     data_wish: <form:input path="dataWish" size="11"/>
 
     <br>
