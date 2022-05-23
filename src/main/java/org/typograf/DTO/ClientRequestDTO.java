@@ -1,12 +1,9 @@
-package org.typograf.entity;
+package org.typograf.DTO;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class ClientRequestId {
+public class ClientRequestDTO {
 
     private Integer idTypeMachine;
     private Integer idMachine;
@@ -17,12 +14,16 @@ public class ClientRequestId {
     private String nameClient;
     @NotBlank(message = " Введите номер телефона")
     private String phoneClient;
+    @NotBlank(message = "Проблема должна быть описана")
     private String descProblem;
-    @NotNull(message = " Укажите желаемую дату")
+    // в будущем завалидировать дату
     private LocalDate dataWish;
     private String adress;
 
-    public ClientRequestId() {
+
+
+
+    public ClientRequestDTO() {
     }
 
     public String getAdress() {

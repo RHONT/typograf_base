@@ -25,9 +25,12 @@
     <form:hidden path="nameClient"/>
     <form:hidden path="phoneClient"/>
     <form:hidden path="adress"/>
+<%--    <form:hidden path="idMachine"/>--%>
+<%--    <form:hidden path="idTypeMachine"/>--%>
 
-    type_machine: <form:input size="7" path="idTypeMachine.id"/>
-    machine: <form:input size="7" path="idMachine.id"/> serial: <form:input size="7" path="idSerialNumber.id"/>
+
+    type_machine: <form:input size="7" path="idTypeMachine.id" title="${typeMachine.nameType}"/>
+    machine: <form:input size="7" path="idMachine.id" title="${machine.modelMachine}"/> serial: <form:input size="7" path="idSerialNumber.id"/>
     <br>
     problem:
     <br>

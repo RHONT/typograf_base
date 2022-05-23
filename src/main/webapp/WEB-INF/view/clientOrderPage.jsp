@@ -9,42 +9,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-          crossorigin="anonymous">
     <title>Client Order</title>
 </head>
+
 <body bgcolor="#d0d0d0">
-
-
-<div class="col-md-10 mx-auto col-lg-5">
-    <form class="p-4 p-md-5 border rounded-3 bg-light">
-
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-        <hr class="my-4">
-        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-    </form>
-</div>
-
-
-
-
-
 <table align="right">
     <tr>
         <td>
@@ -83,11 +51,11 @@
                 <form:options items="${SerialNumberMachine}"/>
             </form:select>
         </td></tr>
-        <tr><td> Имя Фамилия:</td><td><form:input path="nameClient"/></td></tr>
-        <tr><td>Номер телефона:</td><td><form:input path="phoneClient"/></td></tr>
+        <tr><td> Имя Фамилия:</td><td><form:input path="nameClient"/><form:errors path="nameClient"/></td></tr>
+        <tr><td>Номер телефона:</td><td><form:input path="phoneClient"/><form:errors path="phoneClient"/></td></tr>
         <tr><td>Желаемая дата:</td><td><form:input path="dataWish"/></td></tr>
         <tr><td>Адрес:</td><td><form:input path="adress"/></td></tr>
-        <tr><td>Описание проблемы:</td><td><form:input path="descProblem" /></td></tr>
+        <tr><td>Описание проблемы:</td><td><form:input path="descProblem" /><form:errors path="descProblem"/></td></tr>
         <tr><td><td><input type="submit" value="Отправить"></td></tr>
     </table>
 </form:form>

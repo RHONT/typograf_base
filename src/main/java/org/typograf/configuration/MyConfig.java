@@ -76,15 +76,15 @@ public class MyConfig implements WebMvcConfigurer {
         return transactionManager;
     }
 
-    @Bean
-    public MessageSource messageSource() {
-        final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-
-        messageSource.setBasenames("messages");
-        messageSource.setDefaultEncoding("UTF-8");
-
-        return messageSource;
-    }
+//    @Bean
+//    public MessageSource messageSource() {
+//        final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//
+//        messageSource.setBasenames("messages");
+//        messageSource.setDefaultEncoding("UTF-8");
+//
+//        return messageSource;
+//    }
 
     @Bean
     public MyData myDataBean(){

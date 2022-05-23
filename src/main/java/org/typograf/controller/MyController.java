@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.typograf.DTO.ClientRequestDTO;
 import org.typograf.Services.DataBaseTypographService;
 import org.typograf.Services.MapsFromDBService;
 import org.typograf.Services.SaveOrUpdateService;
@@ -132,39 +133,39 @@ public class MyController {
 
     @RequestMapping("/")
     String ShowOrder(Model model){
-        Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
-        Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
-        List<String> listSerial=mapsFromDBService.getSerialNumber();
+//        Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
+//        Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
+//        List<String> listSerial=mapsFromDBService.getSerialNumber();
 
-        ClientRequestId crId=new ClientRequestId();
+        ClientRequestDTO crId=new ClientRequestDTO();
         model.addAttribute("ClientRequestId",crId);
-        model.addAttribute("typeMachine",mapTypeMachine);
-        model.addAttribute("modelMachine",mapMachine);
-        model.addAttribute("SerialNumberMachine",listSerial);
+//        model.addAttribute("typeMachine",mapTypeMachine);
+//        model.addAttribute("modelMachine",mapMachine);
+//        model.addAttribute("SerialNumberMachine",listSerial);
         return "clientOrderPage";
     }
 
     @RequestMapping("/saveorder")
-    String SaveOrder(@Valid @ModelAttribute("ClientRequestId") ClientRequestId clientRequestId, BindingResult bindingResult){
+    String SaveOrder(@Valid @ModelAttribute("ClientRequestId") ClientRequestDTO clientRequestDTO, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return "clientOrderPage";
         }
 
-        TypeMachine typeMachine= dataBaseTypographService.getSingleTypeMachine(clientRequestId.getIdTypeMachine());
-        Machine machine=dataBaseTypographService.getSingleMachine(clientRequestId.getIdMachine());
-        SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequestId.getIdSerialNumber());
+        TypeMachine typeMachine= dataBaseTypographService.getSingleTypeMachine(clientRequestDTO.getIdTypeMachine());
+        Machine machine=dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine());
+        SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequestDTO.getIdSerialNumber());
 
         ClientRequest cr=new ClientRequest(
-                clientRequestId.getFirm(),
-                clientRequestId.getInnFirm(),
+                clientRequestDTO.getFirm(),
+                clientRequestDTO.getInnFirm(),
                 typeMachine,
                 machine,
                 serialNumber,
-                clientRequestId.getNameClient(),
-                clientRequestId.getPhoneClient(),
-                clientRequestId.getDescProblem(),
-                clientRequestId.getDataWish());
+                clientRequestDTO.getNameClient(),
+                clientRequestDTO.getPhoneClient(),
+                clientRequestDTO.getDescProblem(),
+                clientRequestDTO.getDataWish());
 
         saveOrUpdateService.saveClientRequest(cr);
 
@@ -185,6 +186,8 @@ public class MyController {
         return "redirect:/admin/adminorder/updateinfo";
     }
 
+    //Вопрос: почему в поле я могу вводить только ключ, почему я не могу вывести название машины к примеру
+    // если так делаю то выдается ошибка об transient данных
     @RequestMapping("/admin/adminorder/updateinfo")
     String updateClientResult(@Valid @ModelAttribute ClientRequest singleClientRequest, Model model, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -195,10 +198,14 @@ public class MyController {
         if (clientOrder.isLock()==true){
             singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
             clientOrder.setLock(false);
+            System.out.println("Сработал бин clientOrder");
         }
         else {
             saveOrUpdateService.updateClientRequest(singleClientRequest);
         }
+
+        TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(singleClientRequest.getIdTypeMachine().getId());
+        Machine machine=dataBaseTypographService.getSingleMachine(singleClientRequest.getIdMachine().getId());
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
@@ -211,6 +218,8 @@ public class MyController {
         model.addAttribute("сlientOrderUpdate",singleClientRequest);
         model.addAttribute("Employee",SuitableEmployees);
         model.addAttribute("WorkingCoverage",workingCoverageOfDates.iterator());
+        model.addAttribute("typeMachine",typeMachine);
+        model.addAttribute("machine",machine);
 
         return "updateOrderWorkPage";
     }
@@ -263,6 +272,21 @@ public class MyController {
 
         return "redirect:/admin/adminorder";
     }
+
+    @ModelAttribute
+    public void addAttributes(Model model) {
+
+        Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
+        Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
+        List<String> listSerial=mapsFromDBService.getSerialNumber();
+
+        model.addAttribute("typeMachine",mapTypeMachine);
+        model.addAttribute("modelMachine",mapMachine);
+        model.addAttribute("SerialNumberMachine",listSerial);
+
+    }
+
+
 
 
 }
