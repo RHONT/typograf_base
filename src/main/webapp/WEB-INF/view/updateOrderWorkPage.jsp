@@ -15,7 +15,7 @@
 
 
 
-<form:form modelAttribute="сlientOrderDTO" action="/typograf_base_war/admin/adminorder/updateinfo">
+<form:form modelAttribute="сlientOrderDTO" action="/typograf_base_war/saveАFullOrder">
 
 <%--    <form:hidden path="id"/>--%>
     <form:hidden path="innFirm"/>
@@ -23,8 +23,7 @@
     <form:hidden path="nameClient"/>
     <form:hidden path="phoneClient"/>
     <form:hidden path="adress"/>
-<%--    <form:hidden path="idMachine"/>--%>
-<%--    <form:hidden path="idTypeMachine"/>--%>
+
 
 
     type_machine: <form:input size="7" path="idTypeMachine" title="${typeMachine.nameType}"/>
@@ -70,6 +69,8 @@
     </c:forEach>
 
     </table>
+    <form:errors path="timeForecast"/>
+    <form:errors path="difficilty"/>f
 
 </form:form>
 

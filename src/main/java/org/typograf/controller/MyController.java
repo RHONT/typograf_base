@@ -183,39 +183,15 @@ public class MyController {
     @RequestMapping("/interlayerlink")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest){
         clientOrder.setId(idClientRequest);
-//        clientRequestDTO.fillDTO(dataBaseTypographService.getSingleClientRequest(idClientRequest));
 
         return "redirect:/admin/adminorder/updateinfo";
     }
 
-    //Вопрос: почему в поле я могу вводить только ключ, почему я не могу вывести название машины к примеру
-    // если так делаю то выдается ошибка об transient данных
     @RequestMapping("/admin/adminorder/updateinfo")
-    String updateClientResult(@Valid @ModelAttribute ClientRequestDTO clientRequestDTO, Model model, BindingResult bindingResult){
+    String updateClientResult(Model model){
 
-
-        if (bindingResult.hasErrors()){
-            return "updateOrderWorkPage";
-        }
-
-        ClientRequest singleClientRequest=null;
-        //Если бин заходит сюда впревый раз, то он передает id, если повторно(а значит ModelAttribute уже не пустая)
-        //то обновляет значение поля
-        if (clientOrder.isLock()){
-            singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
-            clientOrder.setLock(false);
-            clientRequestDTO.fillDTO(singleClientRequest);
-        }
-        else {
-            singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
-            clientRequestDTO.fillData(singleClientRequest,
-                    dataBaseTypographService.getSingleTypeMachine(clientRequestDTO.getIdTypeMachine()),
-                    dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine()),
-                    dataBaseTypographService.getSingleSerialNumber(clientRequestDTO.getIdSerialNumber())
-                    );
-            saveOrUpdateService.updateClientRequest(singleClientRequest);
-        }
-
+        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
+        clientRequestDTO.fillDTO(singleClientRequest);
 
         TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(singleClientRequest.getIdTypeMachine().getId());
         Machine machine=dataBaseTypographService.getSingleMachine(singleClientRequest.getIdMachine().getId());
@@ -235,6 +211,24 @@ public class MyController {
         model.addAttribute("machine",machine);
 
         return "updateOrderWorkPage";
+    }
+
+    @RequestMapping("/saveАFullOrder")
+    String SaveOrder(@Valid @ModelAttribute("сlientOrderDTO") ClientRequestDTO clientRequestDTO, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "updateOrderWorkPage";
+        }
+
+        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
+        clientRequestDTO.fillData(singleClientRequest,
+                dataBaseTypographService.getSingleTypeMachine(clientRequestDTO.getIdTypeMachine()),
+                dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine()),
+                dataBaseTypographService.getSingleSerialNumber(clientRequestDTO.getIdSerialNumber())
+        );
+        saveOrUpdateService.updateClientRequest(singleClientRequest);
+
+        return "redirect:/admin/adminorder/updateinfo";
     }
 
 

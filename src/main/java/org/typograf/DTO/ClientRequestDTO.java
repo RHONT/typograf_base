@@ -5,6 +5,10 @@ import org.typograf.entity.Machine;
 import org.typograf.entity.SerialNumber;
 import org.typograf.entity.TypeMachine;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ClientRequestDTO {
@@ -12,26 +16,26 @@ public class ClientRequestDTO {
     private Integer idTypeMachine;
     private Integer idMachine;
     private String idSerialNumber;
-//    @Size(min = 3, message = " Минимум 2 символа")
-//    @NotBlank(message = " Введите название организации")
+    @Size(min = 3, message = " Минимум 2 символа")
+    @NotBlank(message = " Введите название организации")
     private String firm;
-//    @NotBlank(message = " Введите ИНН")
+    @NotBlank(message = " Введите ИНН")
     private String innFirm;
-//    @NotBlank(message = " Введите имя")
+    @NotBlank(message = " Введите имя")
     private String nameClient;
-//    @NotBlank(message = " Введите номер телефона")
+    @NotBlank(message = " Введите номер телефона")
     private String phoneClient;
-//    @NotBlank(message = "Проблема должна быть описана")
+    @NotBlank(message = "Проблема должна быть описана")
     private String descProblem;
-//    @Min(value = 1, message = "Минимум 1 час")
-//    @Max(value = 10, message = "Максимум 10")
+    @Min(value = 1, message = "Минимум 1 час")
+    @Max(value = 10, message = "Максимум 10")
     private Integer timeForecast;
-    // в будущем завалидировать дату
+//     в будущем завалидировать дату
     private LocalDate dataWish;
-//    @NotBlank(message = " Введите адрес")
+    @NotBlank(message = " Введите адрес")
     private String adress;
-//    @Min(value = 1, message = "Мин. сложность 1")
-//    @Max(value = 10, message = "Макс. сложность 10")
+    @Min(value = 1, message = "Мин. сложность 1")
+    @Max(value = 10, message = "Макс. сложность 10")
     private Integer difficilty;
 
     public ClientRequestDTO() {
