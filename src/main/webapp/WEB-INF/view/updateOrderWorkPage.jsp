@@ -17,9 +17,9 @@
 
 
 
-<form:form modelAttribute="сlientOrderUpdate" action="/typograf_base_war/admin/adminorder/updateinfo">
+<form:form modelAttribute="сlientOrderDTO" action="/typograf_base_war/admin/adminorder/updateinfo">
 
-    <form:hidden path="id"/>
+<%--    <form:hidden path="id"/>--%>
     <form:hidden path="innFirm"/>
     <form:hidden path="firm"/>
     <form:hidden path="nameClient"/>
@@ -29,14 +29,14 @@
 <%--    <form:hidden path="idTypeMachine"/>--%>
 
 
-    type_machine: <form:input size="7" path="idTypeMachine.id" title="${typeMachine.nameType}"/>
-    machine: <form:input size="7" path="idMachine.id" title="${machine.modelMachine}"/> serial: <form:input size="7" path="idSerialNumber.id"/>
+    type_machine: <form:input size="7" path="idTypeMachine" title="${typeMachine.nameType}"/>
+    machine: <form:input size="7" path="idMachine" title="${machine.modelMachine}"/> serial: <form:input size="7" path="idSerialNumber"/>
     <br>
     problem:
     <br>
     <form:textarea path="descProblem" cols="60" rows="10"/>
     <br>
-    difficulty: <form:input path="difficilty" size="2"/><form:errors path="difficilty"/> time_forecast: <form:input path="timeForecast" size="2"/>
+    difficulty: <form:input path="difficilty" size="2"/> time_forecast: <form:input path="timeForecast" size="2"/>
     data_wish: <form:input path="dataWish" size="11"/>
 
     <br>
@@ -58,13 +58,13 @@
                     <c:param name="id_empl" value="${emp.id}"/>
                     <c:param name="data_work" value="${tr.key}"/>
                     <c:param name="arrayHours" value="${tr.value.returnArrayString()}"/>
-                    <c:param name="id_clientOrder" value="${сlientOrderUpdate.id}"/>
-                    <c:param name="time_forecast" value="${сlientOrderUpdate.timeForecast}"/>
+                    <c:param name="id_clientOrder" value="${сlientOrderDTO.id}"/>
+                    <c:param name="time_forecast" value="${сlientOrderDTO.timeForecast}"/>
 
                 </c:url>
 
                 <td>${tr.value.index}</td>
-                <td>${tr.value.ReturnDayForWorkStatus(сlientOrderUpdate.timeForecast)}</td>
+                <td>${tr.value.ReturnDayForWorkStatus(сlientOrderDTO.timeForecast)}</td>
                 <td><td><input type="button" value="go" onclick="window.location.href='${TabelButton}'"/></td></td>
             </c:forEach>
         </table>

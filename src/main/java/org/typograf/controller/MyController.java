@@ -38,6 +38,9 @@ public class MyController {
     @Autowired
     private KeyStorage keyStorage;
 
+    @Autowired
+    private ClientRequestDTO clientRequestDTO;
+
     @RequestMapping("/admin")
     String NavigateMethod(){
         return "AdminPage";
@@ -133,15 +136,10 @@ public class MyController {
 
     @RequestMapping("/")
     String ShowOrder(Model model){
-//        Map<Integer,String> mapTypeMachine=mapsFromDBService.getListTypeMachines();
-//        Map<Integer,String> mapMachine=mapsFromDBService.getListMachines();
-//        List<String> listSerial=mapsFromDBService.getSerialNumber();
 
         ClientRequestDTO crId=new ClientRequestDTO();
         model.addAttribute("ClientRequestId",crId);
-//        model.addAttribute("typeMachine",mapTypeMachine);
-//        model.addAttribute("modelMachine",mapMachine);
-//        model.addAttribute("SerialNumberMachine",listSerial);
+
         return "clientOrderPage";
     }
 
@@ -176,6 +174,7 @@ public class MyController {
     String openListOrder(Model model){
         List<ClientRequest> allClientRequest = dataBaseTypographService.getAllClientRequest();
         model.addAttribute("allClientRequests",allClientRequest);
+
         return "adminOrderPage";
     }
 
@@ -183,26 +182,39 @@ public class MyController {
     @RequestMapping("/interlayerlink")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest){
         clientOrder.setId(idClientRequest);
+//        clientRequestDTO.fillDTO(dataBaseTypographService.getSingleClientRequest(idClientRequest));
+
         return "redirect:/admin/adminorder/updateinfo";
     }
 
     //Вопрос: почему в поле я могу вводить только ключ, почему я не могу вывести название машины к примеру
     // если так делаю то выдается ошибка об transient данных
     @RequestMapping("/admin/adminorder/updateinfo")
-    String updateClientResult(@Valid @ModelAttribute ClientRequest singleClientRequest, Model model, BindingResult bindingResult){
+    String updateClientResult(@Valid @ModelAttribute ClientRequestDTO clientRequestDTO, Model model, BindingResult bindingResult){
+
+
         if (bindingResult.hasErrors()){
             return "updateOrderWorkPage";
         }
+
+        ClientRequest singleClientRequest=null;
         //Если бин заходит сюда впревый раз, то он передает id, если повторно(а значит ModelAttribute уже не пустая)
         //то обновляет значение поля
-        if (clientOrder.isLock()==true){
+        if (clientOrder.isLock()){
             singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
             clientOrder.setLock(false);
-            System.out.println("Сработал бин clientOrder");
+            clientRequestDTO.fillDTO(singleClientRequest);
         }
         else {
+            singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
+            clientRequestDTO.fillData(singleClientRequest,
+                    dataBaseTypographService.getSingleTypeMachine(clientRequestDTO.getIdTypeMachine()),
+                    dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine()),
+                    dataBaseTypographService.getSingleSerialNumber(clientRequestDTO.getIdSerialNumber())
+                    );
             saveOrUpdateService.updateClientRequest(singleClientRequest);
         }
+
 
         TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(singleClientRequest.getIdTypeMachine().getId());
         Machine machine=dataBaseTypographService.getSingleMachine(singleClientRequest.getIdMachine().getId());
@@ -215,7 +227,7 @@ public class MyController {
         List<EmployeeLinkedHashMap> workingCoverageOfDates=
                 dataBaseTypographService.fillWorkingCoverageOfDates(SuitableEmployees,singleClientRequest.getDataWish());
 
-        model.addAttribute("сlientOrderUpdate",singleClientRequest);
+        model.addAttribute("сlientOrderDTO",clientRequestDTO);
         model.addAttribute("Employee",SuitableEmployees);
         model.addAttribute("WorkingCoverage",workingCoverageOfDates.iterator());
         model.addAttribute("typeMachine",typeMachine);

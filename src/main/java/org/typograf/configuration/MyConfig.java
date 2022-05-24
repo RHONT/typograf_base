@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.typograf.DTO.ClientRequestDTO;
 import org.typograf.functionPack.ClientOrder;
 import org.typograf.functionPack.KeyStorage;
 import org.typograf.functionPack.MyData;
@@ -97,7 +98,10 @@ public class MyConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public KeyStorage keyStorageBean(){return new KeyStorage();};
+    public KeyStorage keyStorageBean(){return new KeyStorage();}
+
+    @Bean
+    public ClientRequestDTO clientRequestDTO(){return new ClientRequestDTO();}
 
 
 
