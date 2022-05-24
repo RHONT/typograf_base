@@ -5,8 +5,6 @@ import org.typograf.entity.Machine;
 import org.typograf.entity.SerialNumber;
 import org.typograf.entity.TypeMachine;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class ClientRequestDTO {

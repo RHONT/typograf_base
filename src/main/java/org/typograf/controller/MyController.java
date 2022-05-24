@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.typograf.DTO.ClientRequestDTO;
+import org.typograf.DTO.OrderDTO;
 import org.typograf.Services.DataBaseTypographService;
 import org.typograf.Services.MapsFromDBService;
 import org.typograf.Services.SaveOrUpdateService;
@@ -137,35 +138,35 @@ public class MyController {
     @RequestMapping("/")
     String ShowOrder(Model model){
 
-        ClientRequestDTO crId=new ClientRequestDTO();
-        model.addAttribute("ClientRequestId",crId);
+        OrderDTO orderDTO=new OrderDTO();
+        model.addAttribute("orderDTO",orderDTO);
 
         return "clientOrderPage";
     }
 
     @RequestMapping("/saveorder")
-    String SaveOrder(@Valid @ModelAttribute("ClientRequestId") ClientRequestDTO clientRequestDTO, BindingResult bindingResult){
+    String SaveOrder(@Valid @ModelAttribute("orderDTO") OrderDTO orderDTO, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return "clientOrderPage";
         }
 
-        TypeMachine typeMachine= dataBaseTypographService.getSingleTypeMachine(clientRequestDTO.getIdTypeMachine());
-        Machine machine=dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine());
-        SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequestDTO.getIdSerialNumber());
+        TypeMachine typeMachine= dataBaseTypographService.getSingleTypeMachine(orderDTO.getIdTypeMachine());
+        Machine machine=dataBaseTypographService.getSingleMachine(orderDTO.getIdMachine());
+        SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(orderDTO.getIdSerialNumber());
 
-        ClientRequest cr=new ClientRequest(
-                clientRequestDTO.getFirm(),
-                clientRequestDTO.getInnFirm(),
+        ClientRequest order=new ClientRequest(
+                orderDTO.getFirm(),
+                orderDTO.getInnFirm(),
                 typeMachine,
                 machine,
                 serialNumber,
-                clientRequestDTO.getNameClient(),
-                clientRequestDTO.getPhoneClient(),
-                clientRequestDTO.getDescProblem(),
-                clientRequestDTO.getDataWish());
+                orderDTO.getNameClient(),
+                orderDTO.getPhoneClient(),
+                orderDTO.getDescProblem(),
+                orderDTO.getDataWish());
 
-        saveOrUpdateService.saveClientRequest(cr);
+        saveOrUpdateService.saveClientRequest(order);
 
         return "redirect:/";
     }
