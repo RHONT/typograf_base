@@ -1,5 +1,7 @@
 package org.typograf.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import java.util.*;
 
 @Controller
 public class MyController {
+    private static final Logger log= LoggerFactory.getLogger(MyController.class);
+
     @Autowired
     private DataBaseTypographService dataBaseTypographService;
 
@@ -56,6 +60,12 @@ public class MyController {
     String engineerUpdateWork(@RequestParam ("numb_work") Integer id_work, Model model){
 
         Work works=dataBaseTypographService.getSingleReportDay(id_work);
+        if (works==null){
+            log.error("Ошибка с вводом номера отчета:{}",id_work);
+            System.err.println("Отчет не найден");
+            return "redirect:/engineer";
+        }
+
         ClientRequest clientRequest=dataBaseTypographService.getSingleClientRequest(works.getIdClientRequest().getId());
         Employee employee=dataBaseTypographService.getSingleEmployee(works.getIdEmployee().getId());
         Machine machine=dataBaseTypographService.getSingleMachine(clientRequest.getIdMachine().getId());

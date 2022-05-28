@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class OrderDTO {
+
     private Integer idTypeMachine;
     private Integer idMachine;
     private String idSerialNumber;
@@ -26,6 +27,8 @@ public class OrderDTO {
 
     public OrderDTO() {
     }
+
+
 
     public Integer getIdTypeMachine() {
         return idTypeMachine;

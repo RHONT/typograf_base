@@ -2,6 +2,8 @@ package org.typograf.classImp;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.typograf.DAO.SaveOrUpdateDAO;
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 @Repository
 public class SaveOrUpdateImpl implements SaveOrUpdateDAO {
 
+    private static final Logger log= LoggerFactory.getLogger(SaveOrUpdateImpl.class);
+
     @Autowired
     SessionFactory sessionFactory;
 
@@ -19,6 +23,7 @@ public class SaveOrUpdateImpl implements SaveOrUpdateDAO {
     public void saveClientRequest(ClientRequest clientRequest) {
         Session session= sessionFactory.getCurrentSession();
         session.save(clientRequest);
+        log.info("Объект clientRequest сохранен");
     }
 
     @Override
