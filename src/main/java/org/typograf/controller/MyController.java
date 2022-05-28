@@ -208,9 +208,10 @@ public class MyController {
 
         Integer levelDifficulty = singleClientRequest.getDifficilty();
         Integer idTypeMachine = singleClientRequest.getIdTypeMachine().getId();
+        // Находим сотрудников компетентных по уровню сложности ремонта и типу машины.
         List<Employee> SuitableEmployees= dataBaseTypographService.
                 getListEmployeeForReportWork(levelDifficulty,idTypeMachine);
-
+        //
         List<EmployeeLinkedHashMap> workingCoverageOfDates=
                 dataBaseTypographService.fillWorkingCoverageOfDates(SuitableEmployees,singleClientRequest.getDataWish());
 

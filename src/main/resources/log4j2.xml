@@ -12,6 +12,12 @@
             </PatternLayout>
         </File>
 
+        <File name="CalculatingDays" fileName="logs/app.logForCalculatingDays.log" append="false">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+        </File>
+
     </Appenders>
 
     <Loggers>
@@ -20,8 +26,12 @@
             <AppenderRef ref="LogToConsole"/>
         </Logger>
 
-        <Logger name="org.typograf.controller.MyController" level="error" additivity="false">
+        <Logger name="org.typograf" level="error" additivity="false">
             <AppenderRef ref="LogToFile"/>
+        </Logger>
+
+        <Logger name="org.typograf.functionPack" level="info" additivity="false">
+            <AppenderRef ref="CalculatingDays"/>
         </Logger>
 
         <Root level="error">

@@ -60,7 +60,7 @@
 
                 </c:url>
 
-                <td>${tr.value.index}</td>
+                <td>${tr.value.dayOfMonth}</td>
                 <td>${tr.value.ReturnDayForWorkStatus(сlientOrderDTO.timeForecast)}</td>
                 <td><td><input type="button" value="go" onclick="window.location.href='${TabelButton}'"/></td></td>
             </c:forEach>

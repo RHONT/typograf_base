@@ -75,8 +75,9 @@ public class WorkImpl implements WorkDAO {
             workingCoverageOfDates.add(new EmployeeLinkedHashMap(wishDate));
 
             for(Work w:ReportsWorkForOneSuitableEmp) {
-                if (workingCoverageOfDates.get(incrementFor).workSession.containsKey(w.getDateVisit()))
-                {workingCoverageOfDates.get(incrementFor).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());}
+                if (workingCoverageOfDates.get(incrementFor).workSession.containsKey(w.getDateVisit())) {
+                    workingCoverageOfDates.get(incrementFor).workSession.get(w.getDateVisit()).byWorkNow(w.getTimeStart(),w.getLaidDownTime());
+                }
             }
         }
         return workingCoverageOfDates;
