@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,34 +13,39 @@
     <title>Document</title>
 </head>
 
-<body>
+<body bgcolor="#d0d0d0">
 
+<table border="1" cellspacing="0" bgcolor="#fff8dc" align="center" width=70%>
 
-
-<table>
-    <tr>
-        <td>
-            ${clientRequest.firm}
-        </td>
-        <td>
-            ${typeMachine.nameType}
-        </td>
-        <td>
-            ${machine.modelMachine}
-            ${employee.name}
-        </td>
-        <td>
-                ${clientRequest.nameClient}
-        </td>
-        <td>
-                ${clientRequest.phoneClient}
-        </td>
+    <tr align="left" valign="middle">
+        <td width=15%>Организация:</td>
+        <td width=85%>${clientRequest.firm}</td>
     </tr>
     <tr>
+        <td>Тип оборудования:</td>
+        <td>${typeMachine.nameType}</td>
+    </tr>
+    <tr>
+        <td>Модель:</td>
+        <td>${machine.modelMachine}</td>
+    </tr>
+    <tr>
+        <td>Имя сотрудника:</td>
+        <td>${employee.name}</td>
+    </tr>
+    <tr>
+        <td>Имя клиента:</td>
+        <td>${clientRequest.nameClient}</td>
+    </tr>
+    <tr>
+        <td>Телефон клиента:</td>
+        <td>${clientRequest.phoneClient}</td>
+    </tr>
+    <tr>
+        <td>Описание проблемы:</td>
         <td>${clientRequest.descProblem}</td>
     </tr>
 <tr>
-
 </table>
 
 <br>
@@ -57,6 +63,14 @@
     <input type="submit" value="Обновить" />
 
 </form>
+
+<security:authorize access="hasRole('ENGINEER')">
+
+</security:authorize>
+
+<security:authorize access="hasRole('FIRST')">
+
+</security:authorize>
 
 </body>
 </html>

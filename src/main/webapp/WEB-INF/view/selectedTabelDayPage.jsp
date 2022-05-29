@@ -24,7 +24,7 @@
         <th>Время работы</th>
     </tr>
 
-
+<%--Выводим расипсание сотрудника--%>
     <c:forEach var="listTabel" items="${listWork}">
         <tr align="left">
             <td>${listTabel.idClientRequest.firm}</td>
@@ -37,6 +37,7 @@
 </table>
 
 <br>
+<%--Заполняем необходимые поля сущности Work, для внесения новой строки в таблицу--%>
     <form:form modelAttribute="newWorkDay" action="/typograf_base_war/admin/adminorder/updateinfo/tableinfo/updateWorkDay">
         <form:hidden path="id"/>
         Time for start:
@@ -45,16 +46,15 @@
         </form:select>
         ${clientOrderUpdate.timeForecast}
         <br>
-
         <input type="submit" value="Update">
     </form:form>
 <br>
 
-    <c:forEach var="elementMaps" items="${hours}">
-        <${elementMaps.key}>
-        <br>
-        <${elementMaps.value}>
-    </c:forEach>
+<%--    <c:forEach var="elementMaps" items="${hours}">--%>
+<%--        <${elementMaps.key}>--%>
+<%--        <br>--%>
+<%--        <${elementMaps.value}>--%>
+<%--    </c:forEach>--%>
 
 <br>
 

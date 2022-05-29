@@ -118,6 +118,11 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
     }
 
     @Override
+    public CompletedOrder getSingleCompletedOrder(Integer id_clientRequest, Integer id_employee) {
+        return completedOrderDAO.getSingleCompletedOrder(id_clientRequest, id_employee);
+    }
+
+    @Override
     public List<CompletedOrder> getAllCompletedOrder() {
         return completedOrderDAO.getAllCompletedOrder();
     }

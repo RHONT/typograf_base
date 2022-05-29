@@ -1,17 +1,17 @@
 package org.typograf.functionPack;
 
-import java.time.LocalDate;
+
 import java.time.LocalTime;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class WorkHours {
 
     public LinkedHashMap<LocalTime,String> fillHours(WorkDay selectHourseDay,Integer timeForecast){
 
         LinkedHashMap<LocalTime,String> hours=new LinkedHashMap<>();
+        // наращиваем инкремент, цель- совпадение с требуемым количеством часов для работы(timeForecast)
         int tempIncrement = 0;
+        // Запоминаем стартовую позицию. "-1" произвольное значение, которого точно не будет индексе массива
         int startPos=-1;
 
         for (int i = 0; i < 10; i++){
@@ -28,7 +28,7 @@ public class WorkHours {
                         tempIncrement=0;
                         startPos=-1;
                 }
-                // если нет, то обнуляем инкремент и начинаем его копить заново
+                // если нет, то обнуляем инкремент и стартовую позицию и начинаем его копить заново
 
             }else {
                 tempIncrement = 0;
@@ -40,16 +40,3 @@ public class WorkHours {
     }
 }
 
-//    public String ReturnDayForWorkStatus(int timeForecast) {
-//        byte tempIncrement = 0;
-//        for (int i = 0; i < 10; i++) {
-//            if (work[i] == 1) {
-//                //копим инкремент
-//                tempIncrement += 1;
-//                //если совпадает с требуемым временем, то "+"
-//                if (tempIncrement == timeForecast) return "(+)";
-//                // если нет, то обнуляем инкремент и начинаем его копить заново
-//            } else tempIncrement = 0;
-//        }
-//        return "(-)";
-//    }

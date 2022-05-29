@@ -32,4 +32,6 @@ public interface DataBaseTypographService {
 
     CompletedOrder getSingleCompletedOrder(Integer id_CompletedOrder);
     List<CompletedOrder> getAllCompletedOrder();
+
+    CompletedOrder getSingleCompletedOrder(Integer id_clientRequest, Integer id_employee);
 }

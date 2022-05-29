@@ -56,39 +56,45 @@ public class MyController {
         return "enPage";
     }
 
+    //таблица ClientReques - промежуточная. Из нее мы дергаем значения для формирования новой таблицы CompletedOrder
     @RequestMapping("/engineer/updateWork")
     String engineerUpdateWork(@RequestParam ("numb_work") Integer id_work, Model model){
 
-        Work works=dataBaseTypographService.getSingleReportDay(id_work);
-        if (works==null){
+        // Проверяем существует ли введенная заявка, если нет совершаем откат назад
+        Work singleWork=dataBaseTypographService.getSingleReportDay(id_work);
+
+        if (singleWork==null){
             log.error("Ошибка с вводом номера отчета:{}",id_work);
             System.err.println("Отчет не найден");
             return "redirect:/engineer";
         }
+        CompletedOrder singleCompletedOrder=dataBaseTypographService.getSingleCompletedOrder
+                (singleWork.getIdClientRequest().getId(),
+                        singleWork.getIdEmployee().getId());
 
-        ClientRequest clientRequest=dataBaseTypographService.getSingleClientRequest(works.getIdClientRequest().getId());
-        Employee employee=dataBaseTypographService.getSingleEmployee(works.getIdEmployee().getId());
+        // Создаем сущности, для отображения информации во View
+        ClientRequest clientRequest=dataBaseTypographService.getSingleClientRequest(singleWork.getIdClientRequest().getId());
+        Employee employee=dataBaseTypographService.getSingleEmployee(singleWork.getIdEmployee().getId());
         Machine machine=dataBaseTypographService.getSingleMachine(clientRequest.getIdMachine().getId());
         TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(clientRequest.getIdTypeMachine().getId());
         SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequest.getIdSerialNumber().getId());
 
-        CompletedOrder completedOrder=new CompletedOrder();
+        if (singleCompletedOrder.getId()==null){
+            singleCompletedOrder.setDescProblem(clientRequest.getDescProblem());
+            singleCompletedOrder.setDifficilty(clientRequest.getDifficilty());
+            singleCompletedOrder.setIdClientRequest(clientRequest);
+            singleCompletedOrder.setIdEmployee(singleWork.getIdEmployee());
+            singleCompletedOrder.setFirm(clientRequest.getFirm());
+            singleCompletedOrder.setIdMachine(clientRequest.getIdMachine());
+            singleCompletedOrder.setIdSerialNumber(clientRequest.getIdSerialNumber());
+            singleCompletedOrder.setIdTypeMachine(clientRequest.getIdTypeMachine());
+            singleCompletedOrder.setInnFirm(clientRequest.getInnFirm());
+            singleCompletedOrder.setNameClient(clientRequest.getNameClient());
+            singleCompletedOrder.setPhoneClient(clientRequest.getPhoneClient());
+            saveOrUpdateService.saveOrUpdateCompletedOrder(singleCompletedOrder);
+        }
 
-        completedOrder.setDescProblem(clientRequest.getDescProblem());
-        completedOrder.setDifficilty(clientRequest.getDifficilty());
-        completedOrder.setIdClientRequest(clientRequest);
-        completedOrder.setIdEmployee(works.getIdEmployee());
-        completedOrder.setFirm(clientRequest.getFirm());
-        completedOrder.setIdMachine(clientRequest.getIdMachine());
-        completedOrder.setIdSerialNumber(clientRequest.getIdSerialNumber());
-        completedOrder.setIdTypeMachine(clientRequest.getIdTypeMachine());
-        completedOrder.setInnFirm(clientRequest.getInnFirm());
-        completedOrder.setNameClient(clientRequest.getNameClient());
-        completedOrder.setPhoneClient(clientRequest.getPhoneClient());
-
-        saveOrUpdateService.saveOrUpdateCompletedOrder(completedOrder);
-
-        model.addAttribute("id_completedOrder",completedOrder.getId());
+        model.addAttribute("id_completedOrder",singleCompletedOrder.getId());
         model.addAttribute("employee",employee);
         model.addAttribute("machine",machine);
         model.addAttribute("typeMachine",typeMachine);
@@ -252,34 +258,36 @@ public class MyController {
                                @RequestParam("time_forecast") Integer timeForecast,
                                Model model){
         // создаю пустой экземпляр рабочего дня
-         WorkDay workDay1=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
+         WorkDay workDayForFilling=new WorkDay(LocalDate.parse(selectedDate).getDayOfMonth());
 
         // вношу в него изменения соответствующие выбранному дню, вынужден гонять числа в строки,
         // так как RequestParam не может передавать массивы чисел.
-         workDay1.returnArrayInteger(arrayHours);
+         workDayForFilling.returnArrayInteger(arrayHours);
 
-         //создаю мапу для хранения доступных часов для начала работы
+         //создаю мапу для хранения доступных часов для начала работы в выбранный день
          WorkHours workHours=new WorkHours();
 
+         // заполняем Bean теми полями, которые понадобятся нам для сохранение сущности Work
          myDataBean.setId_employee(id_emp);
          myDataBean.setId_clientRequest(id_clientOrderUpdate);
          myDataBean.setDataTemp(LocalDate.parse(selectedDate));
          myDataBean.setTimeForecast(timeForecast);
 
         Work newWork=new Work();
-
+        // вызываем график работы одного дня, для выбранного сотрудника
         List<Work> reportDay=dataBaseTypographService.getOneReportDay(id_emp,LocalDate.parse(selectedDate));
 
         model.addAttribute("listWork",reportDay);
         model.addAttribute("newWorkDay",newWork);
-        // заполняю пустую мапу на основании рабочего дня
-        model.addAttribute("hours",workHours.fillHours(workDay1,timeForecast));
+        // заполняю пустую мапу на основании рабочего дня и требуемого времени для ремонта
+        model.addAttribute("hours",workHours.fillHours(workDayForFilling,timeForecast));
 
         return "selectedTabelDayPage";
     }
 
     @RequestMapping("/admin/adminorder/updateinfo/tableinfo/updateWorkDay")
     String updateNewWorkDay(@ModelAttribute("newWorkDay") Work work){
+        // достаем из Bean нужные параметры
         saveOrUpdateService.saveWork(
                                     work,
                                     myDataBean.getId_employee(),
@@ -291,6 +299,7 @@ public class MyController {
         return "redirect:/admin/adminorder";
     }
 
+    //глобальные Beans, для того, чтобы дергать их из любого места.
     @ModelAttribute
     public void addAttributes(Model model) {
 
