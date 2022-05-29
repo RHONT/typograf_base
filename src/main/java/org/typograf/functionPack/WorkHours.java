@@ -8,17 +8,34 @@ import java.util.Map;
 
 public class WorkHours {
 
-    public LinkedHashMap<LocalTime,String> fillHours(WorkDay selectHourseDay){
+    public LinkedHashMap<LocalTime,String> fillHours(WorkDay selectHourseDay,Integer timeForecast){
 
         LinkedHashMap<LocalTime,String> hours=new LinkedHashMap<>();
+        int tempIncrement = 0;
+        int startPos=-1;
 
-        for (int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++){
             if (selectHourseDay.work[i]==1) {
+                if (startPos==-1)
+                {
+                    startPos=i;
+                }
 
-                hours.put(LocalTime.parse((String.valueOf(10+i)+":00")),String.valueOf(10+i)+":00");
+                tempIncrement += 1;
+                if (tempIncrement == timeForecast) {
+                        hours.put(LocalTime.parse((10 + (i+1)-tempIncrement +":00")), (10 + (i+1)-tempIncrement +":00"));
+                        i=startPos;
+                        tempIncrement=0;
+                        startPos=-1;
+                }
+                // если нет, то обнуляем инкремент и начинаем его копить заново
 
+            }else {
+                tempIncrement = 0;
+                startPos=-1;
             }
         }
+
         return hours;
     }
 }

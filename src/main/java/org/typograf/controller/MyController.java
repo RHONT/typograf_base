@@ -273,7 +273,7 @@ public class MyController {
         model.addAttribute("listWork",reportDay);
         model.addAttribute("newWorkDay",newWork);
         // заполняю пустую мапу на основании рабочего дня
-        model.addAttribute("hours",workHours.fillHours(workDay1));
+        model.addAttribute("hours",workHours.fillHours(workDay1,timeForecast));
 
         return "selectedTabelDayPage";
     }
