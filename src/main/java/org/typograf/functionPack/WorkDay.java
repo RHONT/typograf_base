@@ -11,6 +11,7 @@ public class WorkDay {
     int dayOfMonth = 0;
     int[] work = new int[10];
 
+    // заполняем массив "1" и присваиваем dayOfMonth значение дня месяца
     public WorkDay(Integer dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
         for (int i = 0; i < work.length; i++) {
@@ -18,7 +19,7 @@ public class WorkDay {
         }
     }
 
-    // Проверка и изменеие: Необходимое время для работы может ли вписаться в конкретный рабочий день.
+    // Проверка и изменение: Необходимое время для работы может ли вписаться в конкретный рабочий день.
     public void byWorkNow(LocalTime selectedTimeForWork, int timeForecast) {
 
             int selectedHour = selectedTimeForWork.getHour();
@@ -35,19 +36,17 @@ public class WorkDay {
                 log.warn("(Выход за предел рабочего времени) День: {}",dayOfMonth);
                 System.err.println("ArrayIndexOutOfBoundsException. День ошибки:" + dayOfMonth);
             }
-
-
     }
 
     // "Полезная" функция, но не нашедшая применения. Пожалуй на релизе удалю.
     // Проверяет вписываеться ли отведенное количество на ремонт часов в текущий день.
     public Boolean checkDayForWork(int hourseForWork) {
-        byte attr = 0;
+        byte tempIncrement = 0;
         for (int i = 0; i < 10; i++) {
             if (work[i] == 1) {
-                attr += 1;
-                if (attr == hourseForWork) return true;
-            } else attr = 0;
+                tempIncrement += 1;
+                if (tempIncrement == hourseForWork) return true;
+            } else tempIncrement = 0;
         }
         return false;
     }
@@ -62,15 +61,12 @@ public class WorkDay {
                 tempIncrement += 1;
                 //если совпадает с требуемым временем, то "+"
                 if (tempIncrement == timeForecast) return "(+)";
-                // если нет, то "-"
+                // если нет, то обнуляем инкремент и начинаем его копить заново
             } else tempIncrement = 0;
         }
         return "(-)";
     }
 
-    public int getDayOfMonth() {
-        return dayOfMonth;
-    }
 
     // переводим числовой вид массива в строку(Handler передающий со View чтобы не ругался на "не строку")
     public String returnArrayString(){
@@ -79,7 +75,6 @@ public class WorkDay {
         for(int i=0;i<work.length;i++){
             hoursArray=hoursArray.concat(String.valueOf(work[i])).concat(" ");
         }
-
         return hoursArray;
     }
 
@@ -91,6 +86,10 @@ public class WorkDay {
         for(int i=0;i<work.length;i++){
             work[i]=Integer.valueOf(arrayHours[i]);
         }
+    }
+
+    public int getDayOfMonth() {
+        return dayOfMonth;
     }
 
     public int[] getWork() {

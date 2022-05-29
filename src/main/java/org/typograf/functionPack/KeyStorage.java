@@ -1,5 +1,7 @@
 package org.typograf.functionPack;
 
+
+// Кандидат на удаление. Пока оставляю, вдруг пригодиться.
 public class KeyStorage {
 
     private Integer id_employee;

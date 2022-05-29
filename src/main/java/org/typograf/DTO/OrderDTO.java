@@ -9,7 +9,7 @@ public class OrderDTO {
     private Integer idTypeMachine;
     private Integer idMachine;
     private String idSerialNumber;
-    @Size(min = 3, message = " Минимум 2 символа")
+    @Size(min = 3, message = " Минимум 3 символа")
     @NotBlank(message = " Введите название организации")
     private String firm;
     @NotBlank(message = " Введите ИНН")
@@ -24,11 +24,8 @@ public class OrderDTO {
     @NotBlank(message = " Введите адрес")
     private String adress;
 
-
     public OrderDTO() {
     }
-
-
 
     public Integer getIdTypeMachine() {
         return idTypeMachine;

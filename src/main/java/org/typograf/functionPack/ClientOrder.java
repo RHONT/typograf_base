@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.typograf.Services.DataBaseTypographService;
 import org.typograf.entity.ClientRequest;
 
-
+// просто хранит ключ от объекта ClientRequest (Наверное можно удалить уже lock)
 public class ClientOrder {
 
     private Integer id;

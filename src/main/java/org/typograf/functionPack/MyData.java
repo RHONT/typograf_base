@@ -3,6 +3,8 @@ package org.typograf.functionPack;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+    // Хранилище ключей. Этот образец для Bean
 public class MyData {
     private Integer id_employee;
     private Integer id_clientRequest;

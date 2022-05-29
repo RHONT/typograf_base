@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+// Client
 public class ClientRequestDTO {
     private Integer id;
     private Integer idTypeMachine;
