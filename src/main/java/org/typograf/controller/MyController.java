@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.typograf.DTO.ClientRequestDTO;
+import org.typograf.DTO.CompletedOrderForExpertDTO;
 import org.typograf.DTO.OrderDTO;
 import org.typograf.Services.DataBaseTypographService;
 import org.typograf.Services.MapsFromDBService;
@@ -79,6 +80,9 @@ public class MyController {
         TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(clientRequest.getIdTypeMachine().getId());
         SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequest.getIdSerialNumber().getId());
 
+        //Создаем DTO для формы. Валидация полей и дальнейший перенос в поля обекта сущности CompletedOrder
+        CompletedOrderForExpertDTO completedOrderForExpertDTO = null;
+
         if (singleCompletedOrder.getId()==null){
             singleCompletedOrder.setDescProblem(clientRequest.getDescProblem());
             singleCompletedOrder.setDifficilty(clientRequest.getDifficilty());
@@ -92,9 +96,23 @@ public class MyController {
             singleCompletedOrder.setNameClient(clientRequest.getNameClient());
             singleCompletedOrder.setPhoneClient(clientRequest.getPhoneClient());
             saveOrUpdateService.saveOrUpdateCompletedOrder(singleCompletedOrder);
+            completedOrderForExpertDTO=new CompletedOrderForExpertDTO();
+            completedOrderForExpertDTO.setIdCompletedOrder(singleCompletedOrder.getId());
+        }
+        else{
+            completedOrderForExpertDTO=new CompletedOrderForExpertDTO();
+            completedOrderForExpertDTO.setIdCompletedOrder(singleCompletedOrder.getId());
+            completedOrderForExpertDTO.setExpertOpinion(singleCompletedOrder.getExpertOpinion());
+            completedOrderForExpertDTO.setFactDifficilty(singleCompletedOrder.getFactDifficilty());
+            completedOrderForExpertDTO.setJadgmentCompany(singleCompletedOrder.getJadgmentCompany());
+            completedOrderForExpertDTO.setRatingFirm(singleCompletedOrder.getRatingFirm());
         }
 
-        model.addAttribute("id_completedOrder",singleCompletedOrder.getId());
+        //Если мы имеет дело с существующим объектом, то заполняем DTO
+
+
+//        model.addAttribute("id_completedOrder",singleCompletedOrder.getId());
+        model.addAttribute("completedOrderForExpertDTO",completedOrderForExpertDTO);
         model.addAttribute("employee",employee);
         model.addAttribute("machine",machine);
         model.addAttribute("typeMachine",typeMachine);
@@ -105,17 +123,17 @@ public class MyController {
     }
 
     @RequestMapping("/engineer/updateWork/update")
-    String UpdateReportWork(@RequestParam("id_Complete") Integer id_complete ,
-                            @RequestParam("jadgmentCompany") String  jadgmentCompany ,
-                            @RequestParam("ratingFirm") Integer ratingFirm,
-                            @RequestParam("expertOpinion") String expertOpinion,
-                            @RequestParam("factDifficilty") Integer factDifficilty ){
+    String UpdateReportWork(@ Valid @ModelAttribute("completedOrderForExpertDTO") CompletedOrderForExpertDTO completedOrderForExpertDTO,
+                            BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "enUpPage";
+        }
 
-        CompletedOrder completedOrder=dataBaseTypographService.getSingleCompletedOrder(id_complete);
-        completedOrder.setJadgmentCompany(jadgmentCompany);
-        completedOrder.setRatingFirm(ratingFirm);
-        completedOrder.setExpertOpinion(expertOpinion);
-        completedOrder.setFactDifficilty(factDifficilty);
+        CompletedOrder completedOrder=dataBaseTypographService.getSingleCompletedOrder(completedOrderForExpertDTO.getIdCompletedOrder());
+        completedOrder.setJadgmentCompany(completedOrderForExpertDTO.getJadgmentCompany());
+        completedOrder.setRatingFirm(completedOrderForExpertDTO.getRatingFirm());
+        completedOrder.setExpertOpinion(completedOrderForExpertDTO.getExpertOpinion());
+        completedOrder.setFactDifficilty(completedOrderForExpertDTO.getFactDifficilty());
 
         saveOrUpdateService.saveOrUpdateCompletedOrder(completedOrder);
 

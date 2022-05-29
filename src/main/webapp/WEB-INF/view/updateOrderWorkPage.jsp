@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body bgcolor="#fff8dc">
 
 
 
@@ -57,7 +57,6 @@
                     <c:param name="arrayHours" value="${tr.value.returnArrayString()}"/>
                     <c:param name="id_clientOrder" value="${сlientOrderDTO.id}"/>
                     <c:param name="time_forecast" value="${сlientOrderDTO.timeForecast}"/>
-
                 </c:url>
 
                 <td>${tr.value.dayOfMonth}</td>
@@ -70,7 +69,7 @@
 
     </table>
     <form:errors path="timeForecast"/>
-    <form:errors path="difficilty"/>f
+    <form:errors path="difficilty"/>
 
 </form:form>
 
