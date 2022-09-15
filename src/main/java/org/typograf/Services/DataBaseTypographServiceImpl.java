@@ -48,7 +48,7 @@ public class DataBaseTypographServiceImpl implements DataBaseTypographService {
     }
 
     @Override
-    public List getWorkReportForOneEmp(int id_employee) {
+    public List<Work> getWorkReportForOneEmp(int id_employee) {
         return workDAO.getSingleWorkReportForEmp(id_employee);
     }
 

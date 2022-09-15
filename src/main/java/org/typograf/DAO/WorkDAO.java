@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface WorkDAO {
     List<Employee> getEmployeesForReportWork(Integer qualification, Integer idTypeMachine);
-    List getSingleWorkReportForEmp(int id_employee);
+    List<Work> getSingleWorkReportForEmp(int id_employee);
     List<Work> getSingleReportDay(Integer id_employee, LocalDate selectDate);
     Work getSingleReportDay(Integer id_work);
     List<Work> getAllReportEmployees();
