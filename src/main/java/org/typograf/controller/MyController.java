@@ -2,7 +2,6 @@ package org.typograf.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,23 +25,31 @@ import java.util.*;
 public class MyController {
     private static final Logger log= LoggerFactory.getLogger(MyController.class);
 
-    @Autowired
-    private DataBaseTypographService dataBaseTypographService;
+    private final DataBaseTypographService dataBaseTypographService;
 
-    @Autowired
-    private SaveOrUpdateService saveOrUpdateService;
+    private final SaveOrUpdateService saveOrUpdateService;
 
-    @Autowired
-    private MapsFromDBService mapsFromDBService;
+    private final MapsFromDBService mapsFromDBService;
 
-    @Autowired
-    private MyData myDataBean;
+    private final MyData myDataBean;
 
-    @Autowired
-    private ClientOrderID clientOrderID;
+    private final ClientOrderID clientOrderID;
 
-    @Autowired
-    private ClientRequestDTO clientRequestDTO;
+    private final ClientRequestDTO clientRequestDTO;
+
+    public MyController(DataBaseTypographService dataBaseTypographService,
+                        SaveOrUpdateService saveOrUpdateService,
+                        MapsFromDBService mapsFromDBService,
+                        MyData myDataBean,
+                        ClientOrderID clientOrderID,
+                        ClientRequestDTO clientRequestDTO) {
+        this.dataBaseTypographService = dataBaseTypographService;
+        this.saveOrUpdateService = saveOrUpdateService;
+        this.mapsFromDBService = mapsFromDBService;
+        this.myDataBean = myDataBean;
+        this.clientOrderID = clientOrderID;
+        this.clientRequestDTO = clientRequestDTO;
+    }
 
     @RequestMapping("/admin")
     String NavigateMethod(){
@@ -78,8 +85,8 @@ public class MyController {
         TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(clientRequest.getIdTypeMachine().getId());
         SerialNumber serialNumber=dataBaseTypographService.getSingleSerialNumber(clientRequest.getIdSerialNumber().getId());
 
-        //Создаем DTO для формы. Валидация полей и дальнейший перенос в поля обекта сущности CompletedOrder
-        CompletedOrderForExpertDTO completedOrderForExpertDTO = null;
+        //Создаем DTO для формы. Валидация полей и дальнейший перенос в поля объекта сущности CompletedOrder
+        CompletedOrderForExpertDTO completedOrderForExpertDTO;
 
         if (singleCompletedOrder.getId()==null){
             singleCompletedOrder.setDescProblem(clientRequest.getDescProblem());
@@ -149,15 +156,7 @@ public class MyController {
     String ShowAllMachine(Model model){
         List<TypeMachine> allTypeMachines= dataBaseTypographService.getAllTypeMachines();
         model.addAttribute("allType",allTypeMachines);
-        model.addAttribute("new_type_machine",new TypeMachine());
         return "ShowAllMachineTypePage";
-    }
-
-    @RequestMapping("/save_new_type_machine")
-    String SaveNewTypeMachine(@ModelAttribute("new_type_machine")
-                                      TypeMachine typeMachine){
-        saveOrUpdateService.saveTypeMachine(typeMachine);
-        return "redirect:/typemachine";
     }
 
     @RequestMapping("/admin/quality")
@@ -285,7 +284,7 @@ public class MyController {
          //создаю мапу для хранения доступных часов для начала работы в выбранный день
          WorkHours workHours=new WorkHours();
 
-         // заполняем Bean теми полями, которые понадобятся нам для сохранение сущности Work
+         // заполняем Bean теми полями, которые понадобятся нам для сохранения сущности Work
          myDataBean.setId_employee(id_emp);
          myDataBean.setId_clientRequest(id_clientOrderUpdate);
          myDataBean.setDataTemp(LocalDate.parse(selectedDate));

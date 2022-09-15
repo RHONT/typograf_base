@@ -2,19 +2,20 @@ package org.typograf.classImp;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.typograf.DAO.ClientOrderDAO;
 import org.typograf.entity.ClientRequest;
-import org.typograf.entity.SerialNumber;
+
 
 import java.util.List;
 
 @Repository
 public class ClientRequestImpl implements ClientOrderDAO {
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public ClientRequestImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<ClientRequest> getAllClientRequest() {
@@ -25,10 +26,6 @@ public class ClientRequestImpl implements ClientOrderDAO {
     @Override
     public ClientRequest getSingleClientRequest(Integer idClientRequest) {
         Session session= sessionFactory.getCurrentSession();
-        ClientRequest clientRequest=session.get(ClientRequest.class,idClientRequest);
-        clientRequest.getIdMachine().getId();
-        clientRequest.getIdSerialNumber();
-        clientRequest.getIdTypeMachine();
-        return clientRequest;
+        return session.get(ClientRequest.class,idClientRequest);
     }
 }

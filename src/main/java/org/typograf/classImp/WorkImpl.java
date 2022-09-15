@@ -2,21 +2,22 @@ package org.typograf.classImp;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.typograf.DAO.WorkDAO;
 import org.typograf.entity.Employee;
 import org.typograf.entity.Work;
 import org.typograf.functionPack.EmployeeLinkedHashMap;
-
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.*;
 
 @Repository
 public class WorkImpl implements WorkDAO {
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public WorkImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<Employee> getEmployeesForReportWork(Integer qualification, Integer idTypeMachine) {
@@ -86,8 +87,6 @@ public class WorkImpl implements WorkDAO {
     @Override
     public Work getSingleReportDay(Integer id_work) {
         Session session=sessionFactory.getCurrentSession();
-        Work work=session.get(Work.class,id_work);
-
-        return work;
+        return session.get(Work.class,id_work);
     }
 }

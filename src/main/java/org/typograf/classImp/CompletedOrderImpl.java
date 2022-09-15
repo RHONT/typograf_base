@@ -2,7 +2,6 @@ package org.typograf.classImp;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.typograf.DAO.CompletedOrderDAO;
@@ -16,14 +15,16 @@ import java.util.List;
 @Transactional
 public class CompletedOrderImpl implements CompletedOrderDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public CompletedOrderImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public CompletedOrder getSingleCompletedOrder(Integer id_CompletedOrder) {
         Session session=sessionFactory.getCurrentSession();
-        CompletedOrder completedOrder=session.get(CompletedOrder.class,id_CompletedOrder);
-        return completedOrder;
+        return session.get(CompletedOrder.class,id_CompletedOrder);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class CompletedOrderImpl implements CompletedOrderDAO {
                             ("from CompletedOrder where idClientRequest.id=:id_clientRequest and idEmployee.id=:id_employee").
                     setParameter("id_clientRequest",id_clientRequest).setParameter("id_employee",id_employee).getSingleResult();
         } catch (NoResultException e){
-
+            // исключение нам обрабатывать и не нужно.
         }
         if (completedOrder==null) return new CompletedOrder();
 
@@ -45,7 +46,6 @@ public class CompletedOrderImpl implements CompletedOrderDAO {
     @Override
     public List<CompletedOrder> getAllCompletedOrder() {
         Session session=sessionFactory.getCurrentSession();
-        List<CompletedOrder> completedOrders=session.createQuery("from CompletedOrder").getResultList();
-        return completedOrders;
+        return (List<CompletedOrder>) session.createQuery("from CompletedOrder").getResultList();
     }
 }
