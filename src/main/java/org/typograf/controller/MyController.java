@@ -198,7 +198,9 @@ public class MyController {
                 orderDTO.getNameClient(),
                 orderDTO.getPhoneClient(),
                 orderDTO.getDescProblem(),
-                orderDTO.getDataWish());
+                orderDTO.getDataWish(),
+                orderDTO.getAdress());
+
 
         saveOrUpdateService.saveClientRequest(order);
 

@@ -64,7 +64,7 @@ public class ClientRequest {
 
     public ClientRequest(String firm, String innFirm, TypeMachine idTypeMachine, Machine idMachine,
                          SerialNumber idSerialNumber, String nameClient, String phoneClient,
-                         String descProblem, LocalDate dataWish) {
+                         String descProblem, LocalDate dataWish, String adress) {
         this.firm = firm;
         this.innFirm = innFirm;
         this.idTypeMachine = idTypeMachine;
@@ -74,6 +74,7 @@ public class ClientRequest {
         this.phoneClient = phoneClient;
         this.descProblem = descProblem;
         this.dataWish=dataWish;
+        this.adress=adress;
     }
 
     public void setTimeForecast(Integer timeForecast) {

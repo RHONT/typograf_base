@@ -62,7 +62,7 @@
 </form:form>
 <br>
 <footer>
-    <div style="text-align:left;">Наши инженеры всегда для вас допступны!</div>
+    <div style="text-align:left;">Наши инженеры всегда для вас доступны!</div>
 </footer>
 </body>
 </html>
