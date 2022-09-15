@@ -7,16 +7,15 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 public class WorkDay {
+
     private static final Logger log= LoggerFactory.getLogger(WorkDay.class);
-    int dayOfMonth = 0;
+    int dayOfMonth;
     int[] work = new int[10];
 
     // заполняем массив "1" и присваиваем dayOfMonth значение дня месяца
     public WorkDay(Integer dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
-        for (int i = 0; i < work.length; i++) {
-            work[i] = 1;
-        }
+        Arrays.fill(work, 1);
     }
 
     // Проверка и изменение: Необходимое время для работы может ли вписаться в конкретный рабочий день.
@@ -24,7 +23,7 @@ public class WorkDay {
 
             int selectedHour = selectedTimeForWork.getHour();
             // Отнимаем сразу 10 часов, чтобы синхронизировать часы с началом рабочего дня
-            // Рабочий день начинаеться с 10:00
+            // Рабочий день начинается с 10:00
             selectedHour -= 10;
             // График с 10:00-20:00. Если требуемое время заставляет перерабатывать сотрудника
             // значит такая работа порочна. И массив не заполняется по такой заявке.
@@ -38,21 +37,8 @@ public class WorkDay {
             }
     }
 
-    // "Полезная" функция, но не нашедшая применения. Пожалуй на релизе удалю.
-    // Проверяет вписываеться ли отведенное количество на ремонт часов в текущий день.
-    public Boolean checkDayForWork(int hourseForWork) {
-        byte tempIncrement = 0;
-        for (int i = 0; i < 10; i++) {
-            if (work[i] == 1) {
-                tempIncrement += 1;
-                if (tempIncrement == hourseForWork) return true;
-            } else tempIncrement = 0;
-        }
-        return false;
-    }
-
-    // возвращаем символ, который будет выведен во view, "+" сотрудник может, "-" сотрудник занят.
-    // Еденица в массиве означает свободный час. Если заполнен еденицами весь, значит день полностью свободен.
+    // Возвращаем символ, который будет выведен во view, "+" сотрудник может, "-" сотрудник занят.
+    // Единица в массиве означает свободный час. Если заполнен единицами весь, значит день полностью свободен.
     public String ReturnDayForWorkStatus(int timeForecast) {
         byte tempIncrement = 0;
         for (int i = 0; i < 10; i++) {
@@ -70,21 +56,20 @@ public class WorkDay {
 
     // переводим числовой вид массива в строку(Handler передающий со View чтобы не ругался на "не строку")
     public String returnArrayString(){
-        String hoursArray = new String();
+        String hoursArray = "";
 
-        for(int i=0;i<work.length;i++){
-            hoursArray=hoursArray.concat(String.valueOf(work[i])).concat(" ");
+        for (int j : work) {
+            hoursArray = hoursArray.concat(String.valueOf(j)).concat(" ");
         }
         return hoursArray;
     }
 
     // Обратный перевод из строки в числовое значение массива
     public void returnArrayInteger(String returnedStringArray){
-        String[] arrayHours=new String[10];
-        arrayHours=returnedStringArray.split(" ");
+        String[] arrayHours = returnedStringArray.split(" ");
 
         for(int i=0;i<work.length;i++){
-            work[i]=Integer.valueOf(arrayHours[i]);
+            work[i]=Integer.parseInt(arrayHours[i]);
         }
     }
 
@@ -94,10 +79,6 @@ public class WorkDay {
 
     public int[] getWork() {
         return work;
-    }
-
-    public void setDayOfMonth(int dayOfMonth) {
-        this.dayOfMonth = dayOfMonth;
     }
 
     public void setWork(int[] work) {

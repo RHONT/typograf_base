@@ -2,13 +2,10 @@ package org.typograf.configuration;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,15 +15,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.typograf.DTO.ClientRequestDTO;
-import org.typograf.functionPack.ClientOrder;
-import org.typograf.functionPack.KeyStorage;
+import org.typograf.functionPack.ClientOrderID;
 import org.typograf.functionPack.MyData;
-import org.typograf.functionPack.WorkDay;
 
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
-import java.security.KeyStore;
 import java.util.Properties;
 
 @Configuration
@@ -77,32 +71,17 @@ public class MyConfig implements WebMvcConfigurer {
         return transactionManager;
     }
 
-//    @Bean
-//    public MessageSource messageSource() {
-//        final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//
-//        messageSource.setBasenames("messages");
-//        messageSource.setDefaultEncoding("UTF-8");
-//
-//        return messageSource;
-//    }
-
     @Bean
     public MyData myDataBean(){
         return new MyData();
     }
 
     @Bean
-    public ClientOrder clientOrderBean(){
-        return new ClientOrder();
+    public ClientOrderID clientOrderBean(){
+        return new ClientOrderID();
     }
 
     @Bean
-    public KeyStorage keyStorageBean(){return new KeyStorage();}
-
-    @Bean
     public ClientRequestDTO clientRequestDTO(){return new ClientRequestDTO();}
-
-
 
 }

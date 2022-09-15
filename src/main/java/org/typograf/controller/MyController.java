@@ -3,7 +3,6 @@ package org.typograf.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,10 +39,7 @@ public class MyController {
     private MyData myDataBean;
 
     @Autowired
-    private ClientOrder clientOrder;
-
-    @Autowired
-    private KeyStorage keyStorage;
+    private ClientOrderID clientOrderID;
 
     @Autowired
     private ClientRequestDTO clientRequestDTO;
@@ -56,7 +52,7 @@ public class MyController {
     @RequestMapping("/engineer")
     String engineerOption(){
 
-        return "enPage";
+        return "engineerPage";
     }
 
     //таблица ClientReques - промежуточная. Из нее мы дергаем значения для формирования новой таблицы CompletedOrder
@@ -121,14 +117,14 @@ public class MyController {
         model.addAttribute("serialNumber",serialNumber);
         model.addAttribute("clientRequest",clientRequest);
 
-        return "enUpPage";
+        return "engineerUpPage";
     }
 
     @RequestMapping("/engineer/updateWork/update")
     String UpdateReportWork(@ Valid @ModelAttribute("completedOrderForExpertDTO") CompletedOrderForExpertDTO completedOrderForExpertDTO,
                             BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "enUpPage";
+            return "engineerUpPage";
         }
 
         CompletedOrder completedOrder=dataBaseTypographService.getSingleCompletedOrder(completedOrderForExpertDTO.getIdCompletedOrder());
@@ -220,7 +216,7 @@ public class MyController {
 
     @RequestMapping("/interlayerlink")
     String openListEmpForWork(@RequestParam("ClientOrderID") Integer idClientRequest){
-        clientOrder.setId(idClientRequest);
+        clientOrderID.setId(idClientRequest);
 
         return "redirect:/admin/adminorder/updateinfo";
     }
@@ -228,7 +224,7 @@ public class MyController {
     @RequestMapping("/admin/adminorder/updateinfo")
     String updateClientResult(Model model){
 
-        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
+        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrderID.getId());
         clientRequestDTO.fillDTO(singleClientRequest);
 
         TypeMachine typeMachine=dataBaseTypographService.getSingleTypeMachine(singleClientRequest.getIdTypeMachine().getId());
@@ -259,7 +255,7 @@ public class MyController {
             return "updateOrderWorkPage";
         }
 
-        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrder.getId());
+        ClientRequest singleClientRequest=dataBaseTypographService.getSingleClientRequest(clientOrderID.getId());
         clientRequestDTO.fillData(singleClientRequest,
                 dataBaseTypographService.getSingleTypeMachine(clientRequestDTO.getIdTypeMachine()),
                 dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine()),

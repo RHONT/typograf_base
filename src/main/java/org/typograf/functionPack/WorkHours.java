@@ -9,7 +9,7 @@ public class WorkHours {
     public LinkedHashMap<LocalTime,String> fillHours(WorkDay selectHourseDay,Integer timeForecast){
 
         LinkedHashMap<LocalTime,String> hours=new LinkedHashMap<>();
-        // наращиваем инкремент, цель- совпадение с требуемым количеством часов для работы(timeForecast)
+        // наращиваем инкремент, цель-совпадение с требуемым количеством часов для работы(timeForecast)
         int tempIncrement = 0;
         // Запоминаем стартовую позицию. "-1" произвольное значение, которого точно не будет индексе массива
         int startPos=-1;

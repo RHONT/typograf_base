@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 
-// Вычисляем и заполняем мапу днями и пустыми значениями WorkDay(из мы будем изменять позже)
+// Вычисляем и заполняем map днями и пустыми значениями WorkDay(из мы будем изменять позже)
 public class EmployeeLinkedHashMap {
     private static final Logger log= LoggerFactory.getLogger(EmployeeLinkedHashMap.class);
     //для вычисления количества дней до желаемой даты
@@ -30,16 +30,16 @@ public class EmployeeLinkedHashMap {
             }
             log.info("От текущего дня, менее 10 дней, а именно: {}",incrSearch);
         }
-        // Если не больше 10 дней, то начинаем заполнят мапу от текущего дня
+        // Если не больше 10 дней, то начинаем заполнят map от текущего дня
         if (incrSearch <= 10) {
             copyNow = now;
             for (int i = 0; i < 20; i++) {
                 workSession.put(copyNow, new WorkDay(copyNow.getDayOfMonth()));
                 copyNow = copyNow.plusDays(1);
             }
-            log.info("Мапа успешно заполнилась, начиная с текущего дня");
+            log.info("Maps успешно заполнилась, начиная с текущего дня");
         }
-        // Если нет, то отнимает от желаем даты 10 дней, чтобы до желаемой даты были дни(10) и после(тоже 10)
+        // Если нет, то отнимает от желаемой даты 10 дней, чтобы до желаемой даты были дни(10) и после(тоже 10)
         else {
             copyNow = wishDate.minusDays(10);
 
@@ -47,7 +47,7 @@ public class EmployeeLinkedHashMap {
                 workSession.put(copyNow, new WorkDay(copyNow.getDayOfMonth()));
                 copyNow = copyNow.plusDays(1);
             }
-            log.info("Мапа успешно заполнилась, от желаемой даты");
+            log.info("Maps успешно заполнилась, от желаемой даты");
         }
         
     }
