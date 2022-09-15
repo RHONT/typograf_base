@@ -28,5 +28,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
         http.authorizeRequests().antMatchers("/admin/**").hasRole("FIRST").and().formLogin();
         http.authorizeRequests().antMatchers("/engineer/**").hasRole("ENGINEER").and().formLogin();
+        http.logout(logout->logout.logoutUrl("/logout").logoutSuccessUrl("/"));
     }
+
 }

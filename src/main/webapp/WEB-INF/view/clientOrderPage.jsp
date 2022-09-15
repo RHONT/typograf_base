@@ -22,6 +22,9 @@
         <td>
             <a href="/typograf_base_war/engineer">Инженеры</a>
         </td>
+        <td>
+            <a href="/typograf_base_war/logout">logOut</a>
+        </td>
     </tr>
 </table>
 
