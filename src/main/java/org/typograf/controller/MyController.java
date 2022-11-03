@@ -51,6 +51,11 @@ public class MyController {
         this.clientRequestDTO = clientRequestDTO;
     }
 
+    @RequestMapping("/new")
+    String ShowMain(Model model){
+        return "/WEB-INF/view/main.html";
+    }
+
     @RequestMapping("/admin")
     String NavigateMethod(){
         return "AdminPage";
