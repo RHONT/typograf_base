@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <div class="bg-dark collapse show" id="navbarHeader" style="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-9">
+                    <h4 class="text-white">О проекте</h4>
+                    <p class="text-muted">Сервис создан для поддержки типографий. Оборудование нередко выходит из строя.
+                        На этот случай есть мастера, готовые устранить проблему за короткий срок.
+                    Заполните заявку и ждите звонка от администратора. </p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <ul class="list-unstyled">
+                        <li><a href="/typograf_base_war/admin" class="text-white">Администратор</a></li>
+                        <li><a href="/typograf_base_war/engineer" class="text-white">Инженер</a></li>
+                        <li><a href="/typograf_base_war/logout" class="text-white">Выход</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="row justify-content-md-center g-5">
+    <div class="col-md-8 col-lg-6 col-sm-10">
+        <h4 class="mb-3" align="center">Billing address</h4>
+        <form class="needs-validation" novalidate="">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="organization" class="form-label">Ваша организация</label>
+                    <input type="text" class="form-control" id="organization" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Напишите пожалуйста вашу организацию. Иначе диалога не получится.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="INN" class="form-label">ИНН</label>
+                    <input type="text" class="form-control" id="INN" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Нам очень важно, чтобы ваша организация попала к нам в нашу базу данных.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="typeMachine" class="form-label">Тип вашего станка</label>
+                    <select class="form-select" id="typeMachine" required="">
+                        <option value="">Choose...</option>
+                        <option>United States</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid country.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="modelMachine" class="form-label">Модель станка</label>
+                    <select class="form-select" id="modelMachine" required="">
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="serialNumber" class="form-label">Серийный номер</label>
+                    <select class="form-select" id="serialNumber" required="">
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="Name" class="form-label">Имя и фамилия</label>
+                    <input type="text" class="form-control" id="Name" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Нам очень важно ваше имя. Даже важнее чем ваше сломанное оборудование.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="tel" class="form-label">Телефон</label>
+                    <input type="text" class="form-control" id="tel" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Как же нам с вами связаться?
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="data" class="form-label">Желаемая дата</label>
+                    <input type="text" class="form-control" id="data" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Неужели вам неважно?
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="address" class="form-label">Адрес</label>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                    <div class="invalid-feedback">
+                        Мы не можем выезжать не ведомом куда.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="email" class="form-label">Описание проблемы <span class="text-muted">(подробно)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="Все пропало!">
+                    <div class="invalid-feedback">
+                        Без описания проблемы нам сложно будет вам помочь.
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>
