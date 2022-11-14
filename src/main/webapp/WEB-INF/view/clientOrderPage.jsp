@@ -25,13 +25,31 @@
                         На этот случай есть мастера, готовые устранить проблему за короткий срок.
                         Заполните заявку и ждите звонка от администратора. </p>
                 </div>
+
                 <div class="col-sm-4 offset-md-1 py-4">
-                    <ul class="list-unstyled">
-                        <li><a href="/typograf_base_war/admin" class="text-white">Администратор</a></li>
-                        <li><a href="/typograf_base_war/engineer" class="text-white">Инженер</a></li>
-                        <li><a href="/typograf_base_war/logout" class="text-white">Выход</a></li>
-                    </ul>
+                    <p>
+                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Администратор
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="window.location.href='engineer'" >
+                            Инженер
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="window.location.href='logout'" >
+                            LogOut
+                        </button>
+                    </p>
+
+                    <div class="collapse" id="collapseExample">
+                        <div class="col-7">
+                            <button class="btn btn-primary col-7" onclick="window.location.href='admin/emp'">Сотрудники</button>
+                            <button class="btn btn-primary col-7" onclick="window.location.href='admin/typemachine'">Тип машины</button>
+                            <button class="btn btn-primary col-7" onclick="window.location.href='admin/quality'">Квалификация</button>
+                            <button class="btn btn-primary col-7" onclick="window.location.href='admin/adminorder'">Список работ</button>
+                        </div>
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -124,5 +142,8 @@
 
 </form:form>
 <br>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

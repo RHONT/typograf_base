@@ -52,20 +52,11 @@ public class MyController {
         this.clientRequestDTO = clientRequestDTO;
     }
 
-    @RequestMapping("/new")
-    String ShowMain(Model model){
-        return "/WEB-INF/view/main.html";
-    }
-
-    @RequestMapping("/admin")
-    String NavigateMethod(){
-        return "AdminPage";
-    }
 
     @RequestMapping("/engineer")
     String engineerOption(){
 
-        return "engineerPage";
+        return "engineerPagee";
     }
 
     //таблица ClientReques - промежуточная. Из нее мы дергаем значения для формирования новой таблицы CompletedOrder
