@@ -9,46 +9,66 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <title>Document</title>
 </head>
-<body bgcolor="#fff8dc">
+<body>
 
+<div class="container-fluid col-6">
+<table class="table table-striped">
+    <form:form modelAttribute="сlientOrderDTO" action="/typograf_base_war/saveАFullOrder">
 
-
-<form:form modelAttribute="сlientOrderDTO" action="/typograf_base_war/saveАFullOrder">
-
-<%--    <form:hidden path="id"/>--%>
+        <%--    <form:hidden path="id"/>--%>
     <form:hidden path="innFirm"/>
     <form:hidden path="firm"/>
     <form:hidden path="nameClient"/>
     <form:hidden path="phoneClient"/>
     <form:hidden path="adress"/>
 
-
-
-    type_machine: <form:input size="7" path="idTypeMachine" title="${typeMachine.nameType}"/>
-    machine: <form:input size="7" path="idMachine" title="${machine.modelMachine}"/> serial: <form:input size="7" path="idSerialNumber"/>
-    <br>
-    problem:
-    <br>
-    <form:textarea path="descProblem" cols="60" rows="10"/>
-    <br>
-    difficulty: <form:input path="difficilty" size="2"/> time_forecast: <form:input path="timeForecast" size="2"/>
-    data_wish: <form:input path="dataWish" size="11"/>
-
-    <br>
-    <input type="submit" value="Update">
+    <thead class="table-dark col-6">
+    <tr align="center" valign="middle">
+        <th>${typeMachine.nameType}</th>
+        <th>${machine.modelMachine}</th>
+        <th>${сlientOrderDTO.idSerialNumber}</th>
     </tr>
-    <c:forEach var="emp" items="${Employee}" >
-        <table>
+    </thead>
+        <tbody>
+
             <tr>
-                <td>${emp.name}</td>
-                <td>${emp.surname}</td>
-                <td> [ ${emp.phone} ] </td>
+                <td> <form:input path="idTypeMachine" cssClass="form-control"/></td>
+                <td> <form:input path="idMachine" cssClass="form-control"/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                <form:textarea path="descProblem"  rows="5" cssClass="form-control"/>
+                </td>
+            </tr>
+
+            <tr>
+                    <td>Сложность: <form:input path="difficilty" cssClass="form-control"/><form:errors path="difficilty"/></td>
+                    <td>Труд-Время: <form:input path="timeForecast" cssClass="form-control"/><form:errors path="timeForecast"/></td>
+                    <td>Желаемая дата: <form:input path="dataWish" cssClass="form-control"/></td>
+            </tr>
+                <td>
+                    <input type="submit" value="Update" class="btn btn-success">
+                </td>
+    </tbody>
+    </form:form>
+</table>
+
+
+    <c:forEach var="emp" items="${Employee}" >
+        <br>
+        <table class="table table-secondary col-2">
+            <tr>
+                <td class="col-1">${emp.name} ${emp.surname} </td>
+                <td align="right" class="col-2"> [ ${emp.phone} ] </td>
             </tr>
         </table>
-        <table>
 
+        <div class="container">
+            <div class="row row-cols-12 g-1">
             <c:forEach var="tr" items="${WorkingCoverage.next().workSession}" >
 
                 <c:url var="TabelButton" value="/admin/adminorder/updateinfo/tableinfo">
@@ -59,23 +79,16 @@
                     <c:param name="time_forecast" value="${сlientOrderDTO.timeForecast}"/>
                 </c:url>
 
-                <td>${tr.value.dayOfMonth}</td>
-                <td>${tr.value.ReturnDayForWorkStatus(сlientOrderDTO.timeForecast)}</td>
-                <td><td><input type="button" value="go" onclick="window.location.href='${TabelButton}'"/></td></td>
+                <div class="col-1">${tr.value.dayOfMonth}</div>
+                <div class="col-1">${tr.value.ReturnDayForWorkStatus(сlientOrderDTO.timeForecast)}</div>
+                <div class="col-1"><input type="button" class="btn btn-secondary" value="go" onclick="window.location.href='${TabelButton}'"/></div>
+
             </c:forEach>
-        </table>
+            </div>
+        </div>
 
     </c:forEach>
 
-    </table>
-    <form:errors path="timeForecast"/>
-    <form:errors path="difficilty"/>
-
-</form:form>
-
-<br>
-
-
-
+</div>
 </body>
 </html>

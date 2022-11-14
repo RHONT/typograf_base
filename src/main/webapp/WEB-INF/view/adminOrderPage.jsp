@@ -5,46 +5,49 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 
 <body>
 
-<table border="1" cellspacing="0" bgcolor="#fff8dc">
-    <tr align="left" valign="middle" bgcolor="#add8e6">
-        <th width=10%>Machine</th>
-        <th width=20%>Client</th>
-        <th width=58%>Description of the problem</th>
-        <th width=4%>Dfclt</th>
-        <th width=4%>TFST</th>
-        <th width=4%></th>
+<table class="table table-striped table-sm table-bordered border-secondary"  width="100%">
+    <thead class="table-dark">
+    <tr align="center" valign="middle">
+        <th width=5%>Оборудование</th>
+        <th width=20%>Инф. о клиенте</th>
+        <th width=58%>Описание проблемы</th>
+        <th width=6%>Сложность</th>
+        <th width=6%>Время ремонта</th>
+        <th width=6% align="center"></th>
     </tr>
 
-    <c:forEach var="allClentRequestPage" items="${allClientRequests}">
+    </thead>
+    <tbody class="table-bordered border-secondary">
+        <c:forEach var="allClentRequestPage" items="${allClientRequests}">
 
-        <c:url var="UpdateButton" value="/interlayerlink">
-            <c:param name="ClientOrderID" value="${allClentRequestPage.id}"/>
-        </c:url>
-        <tr align="left" valign="top">
+            <c:url var="UpdateButton" value="/interlayerlink">
+                <c:param name="ClientOrderID" value="${allClentRequestPage.id}"/>
+            </c:url>
+            <tr align="left" valign="top">
 
-            <td>${allClentRequestPage.idTypeMachine.nameType}<br>${allClentRequestPage.idMachine.modelMachine}
-                <br>${allClentRequestPage.idSerialNumber.id}</td>
+                <td>${allClentRequestPage.idTypeMachine.nameType}<br>${allClentRequestPage.idMachine.modelMachine}
+                    <br>${allClentRequestPage.idSerialNumber.id}</td>
 
-            <td>${allClentRequestPage.id}<br>${allClentRequestPage.firm}<br>${allClentRequestPage.innFirm}<br>${allClentRequestPage.nameClient}<br>
-                    ${allClentRequestPage.phoneClient}<br>${allClentRequestPage.adress}<br>${allClentRequestPage.dataWish}</td>
+                <td>${allClentRequestPage.id}<br>${allClentRequestPage.firm}<br>${allClentRequestPage.innFirm}<br>${allClentRequestPage.nameClient}<br>
+                        ${allClentRequestPage.phoneClient}<br>${allClentRequestPage.adress}<br>${allClentRequestPage.dataWish}</td>
 
-            <td>${allClentRequestPage.descProblem}</td>
-            <td align="center" valign="middle">${allClentRequestPage.difficilty}</td>
-            <td align="center" valign="middle">${allClentRequestPage.timeForecast}</td>
+                <td>${allClentRequestPage.descProblem}</td>
+                <td align="center" valign="middle">${allClentRequestPage.difficilty}</td>
+                <td align="center" valign="middle">${allClentRequestPage.timeForecast}</td>
 
-            <td align="center" valign="middle"><input type="button" value="Render" onclick="window.location.href='${UpdateButton}'"/></td>
-        </tr>
-    </c:forEach>
+                <td align="center" valign="middle"><input type="button" value="Обработать" class="btn btn-secondary" onclick="window.location.href='${UpdateButton}'"/></td>
+            </tr>
+        </c:forEach>
+    </tbody>
 
 </table>
 
