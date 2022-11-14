@@ -263,6 +263,7 @@ public class MyController {
                 dataBaseTypographService.getSingleMachine(clientRequestDTO.getIdMachine()),
                 dataBaseTypographService.getSingleSerialNumber(clientRequestDTO.getIdSerialNumber())
         );
+        System.out.println("Удалить");
         saveOrUpdateService.updateClientRequest(singleClientRequest);
 
         return "redirect:/admin/adminorder/updateinfo";

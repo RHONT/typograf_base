@@ -9,54 +9,75 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-<table border="1" cellspacing="0" bgcolor="#fff8dc">
-    <tr align="left" valign="middle" bgcolor="#add8e6">
-        <th>Фирма</th>
-        <th>Имя</th>
-        <th>Дата визита</th>
-        <th>Старт работы</th>
-        <th>Время работы</th>
-    </tr>
 
-<%--Выводим расипсание сотрудника--%>
-    <c:forEach var="listTabel" items="${listWork}">
-        <tr align="left">
-            <td>${listTabel.idClientRequest.firm}</td>
-            <td>${listTabel.idEmployee.name}</td>
-            <td>${listTabel.dateVisit}</td>
-            <td>${listTabel.timeStart}</td>
-            <td>${listTabel.laidDownTime}</td>
+<header>
+    <div class="bg-dark collapse show" id="navbarHeader" style="">
+        <div class="row col-md-12 justify-content-center pt-3 " align="center">
+            <p>
+                <button class="btn btn-secondary " type="button" onclick="window.location.href='/typograf_base_war/'" >
+                    Main
+                </button>
+                <button class="btn btn-secondary" type="button" onclick="window.location.href='logout'" >
+                    LogOut
+                </button>
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid col-6">
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr align="left" valign="middle">
+                <th>Фирма</th>
+                <th>Имя</th>
+                <th>Дата визита</th>
+                <th>Старт работы</th>
+                <th>Время работы</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <%--Выводим расипсание сотрудника--%>
+            <c:forEach var="listTabel" items="${listWork}">
+                <tr align="left">
+                    <td>${listTabel.idClientRequest.firm}</td>
+                    <td>${listTabel.idEmployee.name}</td>
+                    <td>${listTabel.dateVisit}</td>
+                    <td>${listTabel.timeStart}</td>
+                    <td>${listTabel.laidDownTime}</td>
+                </tr>
+            </c:forEach>
+        <%--Заполняем необходимые поля сущности Work, для внесения новой строки в таблицу--%>
+        <form:form modelAttribute="newWorkDay" action="/typograf_base_war/admin/adminorder/updateinfo/tableinfo/updateWorkDay">
+            <form:hidden path="id"/>
+        <tr>
+            <td>
+                Time for start:
+            </td>
+            <td>
+                <form:select path="timeStart" cssClass="form-select">
+                    <form:options items="${hours}"/>
+                </form:select>
+            </td>
+            <td>
+                <input type="submit" value="Update" class="btn btn-secondary col-12">
+            </td>
         </tr>
-    </c:forEach>
-</table>
+        </form:form>
 
-<br>
-<%--Заполняем необходимые поля сущности Work, для внесения новой строки в таблицу--%>
-    <form:form modelAttribute="newWorkDay" action="/typograf_base_war/admin/adminorder/updateinfo/tableinfo/updateWorkDay">
-        <form:hidden path="id"/>
-        Time for start:
-        <form:select path="timeStart">
-            <form:options items="${hours}"/>
-        </form:select>
-        ${clientOrderUpdate.timeForecast}
-        <br>
-        <input type="submit" value="Update">
-    </form:form>
-<br>
+<%--            ${clientOrderUpdate.timeForecast}--%>
+        </tbody>
+    </table>
 
-<%--    <c:forEach var="elementMaps" items="${hours}">--%>
-<%--        <${elementMaps.key}>--%>
-<%--        <br>--%>
-<%--        <${elementMaps.value}>--%>
-<%--    </c:forEach>--%>
 
-<br>
+</div>
 
 </body>
 </html>

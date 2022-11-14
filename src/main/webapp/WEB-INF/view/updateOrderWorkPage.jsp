@@ -17,13 +17,12 @@
 <div class="container-fluid col-6">
 <table class="table table-striped">
     <form:form modelAttribute="сlientOrderDTO" action="/typograf_base_war/saveАFullOrder">
-
-        <%--    <form:hidden path="id"/>--%>
-    <form:hidden path="innFirm"/>
-    <form:hidden path="firm"/>
-    <form:hidden path="nameClient"/>
-    <form:hidden path="phoneClient"/>
-    <form:hidden path="adress"/>
+        <form:hidden path="innFirm"/>
+        <form:hidden path="firm"/>
+        <form:hidden path="nameClient"/>
+        <form:hidden path="phoneClient"/>
+        <form:hidden path="adress"/>
+        <form:hidden path="idSerialNumber"/>
 
     <thead class="table-dark col-6">
     <tr align="center" valign="middle">
